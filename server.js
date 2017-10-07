@@ -4,9 +4,11 @@ const path = require('path');
 const port = process.env.PORT || 3000
 const db = require('./db')
 const seed = require('./db/seed')
+const api = require('./api')
 
 
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
+app.use('/api', api)
 
 app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, 'index.html')));
 
