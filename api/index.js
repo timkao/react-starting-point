@@ -5,6 +5,7 @@ const router = require('express').Router();
 // router.use('/categories', require('./categories'));
 router.use('/users', require('./users'));
 router.use('/orders', require('./orders'));
+router.use('/lineItems', require('./lineItems'));
 // router.use('/admin', require('./admin'));
 
 

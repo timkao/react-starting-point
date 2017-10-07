@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const {Order, Product, LineItem, User} = require('../db').models;
 
-router.get('/:orderId', (req, res, next)=>{
+router.get('/all/:orderId', (req, res, next)=>{
 	Order.findById(req.params.orderId*1, {
 		include: { 
 			model: LineItem,
@@ -14,6 +14,7 @@ router.get('/:orderId', (req, res, next)=>{
 		})
 		.catch(next)
 });
+
 
 router.get('/', (req, res, next)=>{
 	Order.findAll(
@@ -30,5 +31,34 @@ router.get('/', (req, res, next)=>{
 		})
 });
 
+//get all orders by user id
+router.get('/user/:userId', (req, res, next) => {
+	Order.findAll({
+		where: {userId: req.params.userId*1}
+	})
+		.then(orders => {
+			res.send(orders)
+		})
+		.catch(next)
+});
+
+
+//when we have extra time...
+
+//find all orders with common product
+
+//move line item's product and add to savedlist
+
+//move product from savedlist to order's lineitem
+
+
 
 module.exports = router;
+
+
+
+
+
+
+
+
