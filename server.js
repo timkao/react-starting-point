@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000
 const db = require('./db')
 const seed = require('./db/seed')
 const api = require('./api')
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
 app.use('/api', api)
@@ -21,3 +24,5 @@ db.sync()
   });
 
 })
+
+module.exports = app;
