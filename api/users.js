@@ -12,6 +12,8 @@ router.get('/', (req, res, next)=>{
 		.catch(next)
 });
 
+
+// someone might not have any order....
 router.put('/:userId', (req, res, next)=>{
 	User.findById(req.params.userId*1, {
 		include: [Order]

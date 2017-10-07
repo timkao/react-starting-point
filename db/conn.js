@@ -1,4 +1,6 @@
 const Sequelize = require('sequelize');
-const conn = new Sequelize(process.env.DATABASE_URL, { logging: false });
+const dataBaseUrl = process.env.DATABASE_URL || 'postgres://localhost/graceshopper'
+const conn = new Sequelize(dataBaseUrl, { logging: false });
+
 
 module.exports = conn;
