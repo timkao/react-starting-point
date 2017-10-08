@@ -53,14 +53,7 @@ const Order = conn.define('order', {
 		type: Sequelize.STRING,
 		defaultValue: 'Open'
 	},
-<<<<<<< HEAD
 
 });
 
 module.exports = Order;
-=======
-
-});
-
-module.exports = Order;
->>>>>>> 30e971ab3d585b983e1e6a4567692c0768c05c6a
