@@ -6,7 +6,9 @@ router.get('/', (req, res, next) => {
 	Category.findAll({
 		include: [Product] 
 	})
-	.then(categories =>	res.send(categories))
+	.then(categories =>	{
+		res.send(categories)
+	})
 	.catch(next)
 })
 
