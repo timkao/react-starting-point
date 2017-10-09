@@ -35,7 +35,18 @@ router.post('/', (req, res, next) => {
 router.put('/:id', (req, res, next) => {
 	Category.findById(req.params.id*1)
 	.then(category => {
-		category.update(req.body)
+		category.name = req.body.name
+		category.description = req.body.description
+		if(req.body.active){
+			category.active = req.body.active
+		}
+		if(req.body.featured){
+			category.featured = req.body.featured
+		}
+		return category.save()
+	})
+	.then(category => {
+		res.send(category)
 	})
 	.catch(next)
 })
