@@ -4,7 +4,6 @@ import Home from './Home';
 import Navbar from './Navbar'
 // import store from '../store';
 // import {thunk actions come here later} from '../store';
-import { connect } from 'react-router'
 
 export default class Main extends Component {
 
@@ -19,6 +18,5 @@ export default class Main extends Component {
 
 				</div>
 			)
-
 	}
 }
