@@ -2,8 +2,18 @@ var supertest = require('supertest');
 var app = require('../server.js');
 var agent = supertest.agent(app);
 const expect = require('chai').expect;
+const seed = require('../db/seed')
+const db = require('../db')
 
-describe('http requests', function () {
+describe('User requests', function () {
+
+  // beforeEach(function(done){
+  //   return db.sync()
+  //   .then(seed)
+  //   .then(function(){
+  //     done()
+  //   })
+  // })
 
   describe('GET /users/', function () {
     it('responds with 200', function(done){
