@@ -19,6 +19,7 @@
     "babel-preset-react": "^6.24.1",
     "body-parser": "^1.18.2",
     "express": "^4.15.4",
+    "express-session": "^1.15.6",
     "faker": "^4.1.0",
     "pg": "^7.3.0",
     "react": "^15.6.1",
