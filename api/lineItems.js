@@ -3,11 +3,9 @@ const {Order, Product, LineItem, User} = require('../db').models;
 
 //update lineItem quantity in cart view
 router.put('/:lineItemId', (req, res, next) => {
-	const newVolume = req.body.quantity;
-
-	LineItem.findById(req.params.lineItemId*1)
+	LineItem.findById(req.params.lineItemId * 1)
 		.then(lineItem => {
-			lineItem.quantity = newVolume
+			lineItem.quantity = req.body.quantity
 			return lineItem.save()
 		})
 		.then(lineItem => {
@@ -18,7 +16,7 @@ router.put('/:lineItemId', (req, res, next) => {
 
 //delete line item
 router.delete('/:lineItemId', (req, res, next) => {
-	LineItem.findById(req.params.lineItemId*1)
+	LineItem.findById(req.params.lineItemId * 1)
 		.then(lineItem => {
 			return lineItem.destroy()
 		})
@@ -26,23 +24,20 @@ router.delete('/:lineItemId', (req, res, next) => {
 		.catch(next)
 });
 
-//adding product to a session.
+//adding product to a cart.
 router.post('/:orderId/:productId', (req, res, next) => {
-	const newVolume = req.body.quantity;
 	let currentItem
-	LineItem.create({
-		quantity: newVolume
-	})
+	LineItem.create(req.body)
 	.then(lineItem => {
 		currentItem = lineItem
-		return Product.findById(req.params.productId*1)
+		return Product.findById(req.params.productId * 1)
 	})
 	.then(product => {
 		return currentItem.setProduct(product)
 	})
 	.then(lineItem => {
 		currentItem = lineItem
-		return Order.findById(req.params.orderId*1)
+		return Order.findById(req.params.orderId * 1)
 	})
 	.then(order => {
 		return currentItem.setOrder(order)
@@ -52,7 +47,5 @@ router.post('/:orderId/:productId', (req, res, next) => {
 	})
 	.catch(next)
 });
-
-
 
 module.exports = router;

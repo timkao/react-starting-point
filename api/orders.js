@@ -3,13 +3,12 @@ const {Order, Product, LineItem, User} = require('../db').models;
 
 router.get('/all/:orderId', (req, res, next)=>{
 	Order.findById(req.params.orderId*1, {
-		include: { 
+		include: {
 			model: LineItem,
 			include: Product
 		 }
 	})
 		.then(order => {
-			console.log(order.lineitems)
 			res.send(order)
 		})
 		.catch(next)
@@ -18,13 +17,14 @@ router.get('/all/:orderId', (req, res, next)=>{
 
 router.get('/', (req, res, next)=>{
 	Order.findAll(
-		{include: User}
-	// {
-		// include:{
-		// 	model: LineItem,
-		// 	include: Product
-		// }
-	// }
+		{
+			include: [{
+				model: LineItem,
+				include: [Product]
+			}, {
+				model: User
+			}]
+		}
 	)
 		.then(orders => {
 			res.send(orders)

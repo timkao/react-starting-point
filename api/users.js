@@ -7,6 +7,7 @@ router.get('/', (req, res, next)=>{
 		include:[Order]
 	})
 		.then(users => {
+			console.log('hit users')
 			res.send(users)
 		})
 		.catch(next)

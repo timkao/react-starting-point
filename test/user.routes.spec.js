@@ -1,5 +1,5 @@
 var supertest = require('supertest');
-var app = require('../server.js');
+var app = require('../testApp.js');
 var agent = supertest.agent(app);
 const expect = require('chai').expect;
 const seed = require('../db/seed')
@@ -7,13 +7,10 @@ const db = require('../db')
 
 describe('User requests', function () {
 
-  // beforeEach(function(done){
-  //   return db.sync()
-  //   .then(seed)
-  //   .then(function(){
-  //     done()
-  //   })
-  // })
+  beforeEach(function(){
+    return db.sync()
+    .then(() => seed());
+  })
 
   describe('GET /users/', function () {
     it('responds with 200', function(done){
@@ -33,6 +30,5 @@ describe('User requests', function () {
       })
     });
   });
-
 
 });
