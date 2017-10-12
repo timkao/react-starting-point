@@ -14,7 +14,8 @@ export default class Main extends Component {
 					<Navbar />
 					<Switch>
 						<Route exact path="/" component={Home} />
-						<Route exact path="/auth" component={Auth} />
+						<Route exact path="/signup" component={Auth} />
+						<Route exact path="/login" component={Auth} />
 					</Switch>
 
 				</div>

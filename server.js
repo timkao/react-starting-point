@@ -20,25 +20,38 @@ app.use(session({
 
 // auth -- login
 app.post('/login', (req, res, next) => {
-  User.findOne({where: req.body})
-  .then( user => {
-    if (user) {
-      req.session.userId = user.id
-      res.send(user)
-    }
-    else {
-      res.sendStatus(401)
-    }
-  })
-  .catch(next)
+  User.findOne({ where: {email: req.body.email} })
+    .then(user => {
+      if (user) {
+        if (user.verifyPassword(req.body.password)) {
+          req.session.userId = user.id
+          res.send(user)
+        }
+        else {
+          res.send("Incorrect Password")
+        }
+      }
+      else {
+        res.send('Email does not exist')
+      }
+    })
+    .catch(next)
 })
 
 // auth -- signup
 app.post('/signup', (req, res, next) => {
-  User.create(req.body)
+  User.findOne({ where: { email: req.body.email } })
     .then(user => {
-      req.session.userId = user.id
-      res.send(user)
+      if (user) {
+        return res.send('already exist')
+      }
+      else {
+        User.create(req.body)
+          .then(user => {
+            req.session.userId = user.id
+            res.send(user)
+          })
+      }
     })
     .catch(next)
 })
@@ -66,12 +79,12 @@ app.use(function (err, req, res, next) {
 })
 
 db.sync()
-.then(seed)
-.then( () => {
+  .then(seed)
+  .then(() => {
 
-  app.listen(port, () => {
-    console.log(`listening on port ${port}`)
-  });
+    app.listen(port, () => {
+      console.log(`listening on port ${port}`)
+    });
 
-})
+  })
 

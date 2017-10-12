@@ -1,23 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { keyinEmail, keyinPassword } from '../store'
+import { keyinEmail, keyinPassword, signupUser, logoutUser, loginUser } from '../store'
 
 function Auth(props) {
 
-  const { emailInput, handleChange, passwordInput } = props
+  const { emailInput, handleChange, passwordInput, submitUser, leaveApp } = props
+  const authPath = props.location.pathname === '/signup' ? 'sign up' : 'log in'
 
   return (
     <div className="row">
       <div className="col-lg-6">
-        <form>
+        <form onSubmit={submitUser}>
           <label>Email: </label>
           <input name="email" type="email" onChange={handleChange} value={emailInput} /><br></br>
           <label>Password: </label>
           <input name="password" type="password" onChange={handleChange} value={passwordInput} /><br></br>
-          <input type="submit" />
+          <button className="btn btn-default">{authPath}</button>
         </form>
       </div>
-      <div className="col-lg-6">Third Party</div>
+      <div className="col-lg-6">Third Party
+        <button onClick={leaveApp} className="btn btn-default">logout</button>
+      </div>
     </div>
   )
 }
@@ -29,15 +32,31 @@ const mapToState = (state) => {
   }
 }
 
-const mapToDispatch = (dispatch) => {
+const mapToDispatch = (dispatch, ownProps) => {
   return {
     handleChange(evt) {
-      if (evt.target.name === 'email'){
+      if (evt.target.name === 'email') {
         dispatch(keyinEmail(evt.target.value))
       }
       else if (evt.target.name === 'password') {
         dispatch(keyinPassword(evt.target.value))
       }
+    },
+    submitUser(evt) {
+      evt.preventDefault();
+      const userInfo = {
+        email: evt.target.email.value,
+        password: evt.target.password.value
+      };
+      const thunk = ownProps.location.pathname === '/signup'
+      ? signupUser(userInfo) : loginUser(userInfo);
+
+      dispatch(thunk);
+    },
+    leaveApp(evt) {
+      evt.preventDefault()
+      const thunk = logoutUser()
+      dispatch(thunk)
     }
   }
 }
