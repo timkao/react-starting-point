@@ -4,6 +4,7 @@ import Home from './Home';
 import Navbar from './Navbar'
 // import store from '../store';
 // import {thunk actions come here later} from '../store';
+import Auth from './Auth'
 
 export default class Main extends Component {
 
@@ -13,7 +14,7 @@ export default class Main extends Component {
 					<Navbar />
 					<Switch>
 						<Route exact path="/" component={Home} />
-
+						<Route exact path="/auth" component={Auth} />
 					</Switch>
 
 				</div>
