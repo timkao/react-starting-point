@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { keyinEmail, keyinPassword, signupUser, logoutUser, loginUser } from '../store'
+import { keyinEmail, keyinPassword, signupUser, logoutUser, loginUser, authGoogle } from '../store'
 
 function Auth(props) {
 
-  const { emailInput, handleChange, passwordInput, submitUser, leaveApp } = props
+  const { emailInput, handleChange, passwordInput, submitUser, leaveApp, signInGoogle } = props
   const authPath = props.location.pathname === '/signup' ? 'sign up' : 'log in'
 
   return (
@@ -18,7 +18,8 @@ function Auth(props) {
           <button className="btn btn-default">{authPath}</button>
         </form>
       </div>
-      <div className="col-lg-6">Third Party
+      <div className="col-lg-6">
+        <button onClick={signInGoogle} className="btn btn-primary">{authPath} with Google</button>
         <button onClick={leaveApp} className="btn btn-default">logout</button>
       </div>
     </div>
@@ -56,6 +57,11 @@ const mapToDispatch = (dispatch, ownProps) => {
     leaveApp(evt) {
       evt.preventDefault()
       const thunk = logoutUser()
+      dispatch(thunk)
+    },
+    signInGoogle(evt) {
+      evt.preventDefault()
+      const thunk = authGoogle()
       dispatch(thunk)
     }
   }

@@ -20,14 +20,7 @@ const Product = conn.define('product', {
 		type: Sequelize.BOOLEAN
 	},
 	inventory: {
-		type: Sequelize.INTEGER,
-		allowNull: false
-	},
-	color: {
-		type: Sequelize.STRING
-	},
-	size: {
-		type: Sequelize.STRING
+		type: Sequelize.ARRAY(Sequelize.JSON)  // {"red": {"size8": 10}}
 	}
 });
 

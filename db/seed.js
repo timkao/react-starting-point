@@ -19,9 +19,7 @@ const seed = () => {
 			name: faker.random.word(),
 			price: faker.commerce.price(),
 			pictureUrl: faker.image.imageUrl(),
-			inventory: parseInt((Math.random() * 100), 10),
-			color: faker.commerce.color(),
-			size: faker.lorem.word()
+			inventory: [{"red": {"8": 20}}],
 		}))
 	}
 

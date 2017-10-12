@@ -50,6 +50,14 @@ export const logoutUser = () => {
   }
 };
 
+export const authGoogle = () => {
+  return function(dispatch) {
+    axios.get('/auth/google')
+    .then(result => {
+      console.log('hits google thunk')
+    })
+  }
+};
 
 const reducer = (state = '', action) => {
   switch (action.type) {
