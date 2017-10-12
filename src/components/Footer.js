@@ -20,7 +20,7 @@ function Footer(){
 				</div>
 				<div className="footer-copyright">
 					<div className="container-fluid">
-					&copy; 2017 Copyright: TBMJ
+						&copy; 2017 Copyright: TBMJ
 					</div>
 				</div>
 			</div> 
