@@ -23,7 +23,7 @@ Review.belongsTo(User);
 // Product.hasMany(User);
 
 const sync = ()=>{
-	return conn.sync({ force: true})
+	return conn.sync({ force: true })
 }
 
 module.exports = {
@@ -34,5 +34,5 @@ module.exports = {
     User,
     Order,
     LineItem
-  }
+  },
 }

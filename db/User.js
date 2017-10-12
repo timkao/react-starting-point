@@ -4,7 +4,7 @@ const conn = require('./conn');
 const User = conn.define('user', {
 	name: {
 		type: Sequelize.STRING,
-		allowNull: false
+		allowNull: false    // for login, maybe we should remove this restriction
 	},
 	email: {
 		type: Sequelize.STRING,
