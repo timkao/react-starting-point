@@ -45,6 +45,10 @@ const User = conn.define('user', {
 	},
 	salt: {
 		type: Sequelize.STRING
+	},
+	savedList: {
+		type: Sequelize.ARRAY(Sequelize.JSON),
+		defaultValue: []
 	}
 });
 

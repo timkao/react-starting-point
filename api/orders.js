@@ -1,8 +1,14 @@
 const router = require('express').Router();
 const {Order, Product, LineItem, User} = require('../db').models;
 
-router.get('/all/:orderId', (req, res, next)=>{
-	Order.findById(req.params.orderId*1, {
+
+// /api/users
+
+router.get('/all/:orderId', (req, res, next)=> {
+	// need to verify user first
+
+	// how to sort in "include"?
+	Order.findById(req.params.orderId, {
 		include: {
 			model: LineItem,
 			include: Product
@@ -14,7 +20,7 @@ router.get('/all/:orderId', (req, res, next)=>{
 		.catch(next)
 });
 
-
+// get all the orders
 router.get('/', (req, res, next)=>{
 	Order.findAll(
 		{

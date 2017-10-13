@@ -1,3 +1,22 @@
-body {
-  background-color: lightblue
+#cartList img {
+  height: 10vh;
+  width: 10vh
+}
+
+#savedList img {
+  height: 10vh;
+  width: 10vh
+}
+
+.cart-quantity {
+  width: 5vh;
+  text-align: center;
+}
+
+.cart-action {
+  font-size: 1.2vh
+}
+
+.cart-action:hover {
+  cursor: pointer
 }

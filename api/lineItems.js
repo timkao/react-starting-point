@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const {Order, Product, LineItem, User} = require('../db').models;
 
+// /api/lineitems
 //update lineItem quantity in cart view
-router.put('/:lineItemId', (req, res, next) => {
-	LineItem.findById(req.params.lineItemId * 1)
+router.put('/', (req, res, next) => {
+	LineItem.findById(req.body.itemId)
 		.then(lineItem => {
 			lineItem.quantity = req.body.quantity
 			return lineItem.save()
@@ -16,7 +17,7 @@ router.put('/:lineItemId', (req, res, next) => {
 
 //delete line item
 router.delete('/:lineItemId', (req, res, next) => {
-	LineItem.findById(req.params.lineItemId * 1)
+	LineItem.findById(req.params.lineItemId)
 		.then(lineItem => {
 			return lineItem.destroy()
 		})

@@ -3,15 +3,21 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import products from './products';
+import currentOrder from './currentOrder'
 import emailInput from './auth';
 import passwordInput from './password';
-import product from './product';
+import savedProducts from './savedProducts';
+import crossList from './crossPurchase';
+
 
 const reducer = combineReducers(
 	{
     products,
     emailInput,
-    passwordInput
+    passwordInput,
+    currentOrder,
+    savedProducts,
+    crossList
 	}
 );
 
@@ -26,6 +32,8 @@ const store = createStore(
 export default store;
 
 export * from './products';
-export * from './product';
 export * from './auth';
 export * from './password';
+export * from './currentOrder';
+export * from './savedProducts';
+export * from './crossPurchase';
