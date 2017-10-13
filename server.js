@@ -71,10 +71,10 @@ app.get('/auth/google/callback', passport.authenticate('google', {
 );
 
 
-app.use(function (req, res, next) {
-  console.log('session', req.session, req.user);
-  next();
-});
+// app.use(function (req, res, next) {
+//   console.log('session', req.session, req.user);
+//   next();
+// });
 
 app.use(function (req, res, next) {
   if (req.user) {

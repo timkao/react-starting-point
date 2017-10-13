@@ -5,7 +5,7 @@ function Navbar(props){
 
 
 	return (
-		<div>{props.products[0]}</div>
+		<div>NavBar holder</div>
 	)
 }
 
