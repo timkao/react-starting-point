@@ -9,24 +9,32 @@ class CrossItems extends Component {
   }
 
   componentDidMount() {
-    this.props.pullCrossList(this.props.id)
+    this.props.pullList(this.props.id)
   }
 
   render() {
-
-    const items = this.props.crossList
-    console.log(items)
-
+    let items = [];
+    let format, id;
+    if (this.props.id) {
+      items = this.props.crossList;
+      format = "col-lg-2";
+      id = "crossList";
+    }
+    else {
+      items = this.props.repeatList
+      format = "col-lg-12";
+      id = "historyList";
+    }
     return (
-      <div id="crossList" className="row">
+      <div id={id} className="row">
         {
           items.map( item => {
             return (
-              <div key={item.id} className="col-lg-2">
-                <img src={item.pictureUrl} /><br></br>
+              <div key={item.id} className={format}>
+                <img src={item.pictureUrl} />
                 {item.name}<br></br>
                 $ {item.price}<br></br>
-                In Stock
+                <div className="cart-action"><a>Add to Cart</a></div>
               </div>
             )
           })
@@ -44,7 +52,7 @@ const mapToState = (state) => {
 
 const mapToDispatch = (dispatch, ownProps) => {
   return {
-    pullCrossList(productId) {
+    pullList(productId) {
       if (productId) {
         const thunk = fetchCrossPurchase(productId)
         dispatch(thunk)

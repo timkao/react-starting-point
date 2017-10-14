@@ -1,16 +1,22 @@
 #cartList img {
   height: 10vh;
-  width: 10vh
+  width: 12vh
 }
 
 #savedList img {
   height: 10vh;
-  width: 10vh
+  width: 12vh
 }
 
 #crossList img {
-  height: 12vh;
+  height: 10vh;
   width: 12vh
+}
+
+#historyList img {
+  height: 15vh;
+  width: 18vh;
+  margin-top: 2vh
 }
 
 .cart-quantity {
@@ -19,9 +25,11 @@
 }
 
 .cart-action {
-  font-size: 1.2vh
+  font-size: 1.1vh
 }
 
 .cart-action:hover {
   cursor: pointer
 }
+
+

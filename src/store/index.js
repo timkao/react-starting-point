@@ -8,6 +8,7 @@ import emailInput from './auth';
 import passwordInput from './password';
 import savedProducts from './savedProducts';
 import crossList from './crossPurchase';
+import historyList from './historyPurchase';
 
 
 const reducer = combineReducers(
@@ -17,7 +18,8 @@ const reducer = combineReducers(
     passwordInput,
     currentOrder,
     savedProducts,
-    crossList
+    crossList,
+    historyList
 	}
 );
 
@@ -37,3 +39,4 @@ export * from './password';
 export * from './currentOrder';
 export * from './savedProducts';
 export * from './crossPurchase';
+export * from './historyPurchase';

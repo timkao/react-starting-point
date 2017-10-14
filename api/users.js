@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {User, Order} = require('../db').models;
+const {User, Order, LineItem, Product} = require('../db').models;
 
 // /api/users
 
@@ -54,6 +54,24 @@ router.put('/savelist/:productId', (req, res, next) => {
 			})
 			.catch(next)
 	})
+
+// get all orders of the user
+router.get('/history', (req, res, next) => {
+	const id = 3 // from req.session.userId
+	User.findById(id, {
+		include:{
+			model: Order,
+			include: [{
+				model: LineItem,
+				include: [Product]
+			}]
+		}
+	})
+	.then( user => {
+		res.send(user.orders)
+	})
+	.catch(next)
+})
 
 
 // someone might not have any order....
