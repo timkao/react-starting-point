@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getCurrentOrder, fetchSaveProducts, fetchCrossPurchase } from '../store';
 import ProductItem from './ProductItem';
 import SavedItem from './SavedItem'
+import CrossItems from './CrossItems'
 
 class Cart extends Component {
 
@@ -10,10 +11,11 @@ class Cart extends Component {
     super(props)
   }
 
+  // cannot use this.props.currentOrder here. evenif i use componentWillMount and componentDidMount together
+  // seems like "connect" runs after all lifecycle method...
   componentDidMount() {
     this.props.getOrder(this.props.match.params.orderId)
     this.props.pullSavedProducts()
-    this.props.pullCrossList(1)
   }
 
   render() {
@@ -22,9 +24,15 @@ class Cart extends Component {
     items.sort(function (a, b) {
       return a.id - b.id
     })
+    const totalValue = items.reduce(function (acc, ele) {
+      return acc + ele.quantity * ele.product.price
+    }, 0)
+    const totalUnit = items.reduce(function (acc, ele) {
+      return acc + ele.quantity
+    }, 0)
+    const subtotalMessage = totalUnit > 1 ? `Subtotal ( ${totalUnit} items): ` : `Subtotal ( ${totalUnit} item): `;
+
     const savedProducts = this.props.savedProducts || []
-    const crossList = this.props.crossList || []
-    console.log(crossList)
 
     return (
       <div className="row">
@@ -48,6 +56,13 @@ class Cart extends Component {
             }
           </div>
           <div className="row">
+            <div className="col-lg-12">
+              <div className="pull-right">
+                {subtotalMessage}<span>$ {totalValue}</span>
+              </div>
+            </div>
+          </div>
+          <div className="row">
             <div className="col-lg-7">{`Saved for Later ( ${savedProducts.length} item(s) )`}</div>
             <div className="col-lg-3">Price</div>
           </div>
@@ -55,7 +70,7 @@ class Cart extends Component {
             {
               <ul id="savedList" className="list-group">
                 {
-                  savedProducts.map( product => {
+                  savedProducts.map(product => {
                     return (
                       <SavedItem key={product.id} item={product} />
                     )
@@ -66,11 +81,18 @@ class Cart extends Component {
           </div>
           <div className="row">
             People Also Buy <br></br>
-            {/* <ProductList products={products} /> */}
+            {
+              items[0] && <CrossItems id={items[0].productId} />
+            }
           </div>
         </div>
         <div className="col-lg-3">
-          <div className="row">Summary</div>
+          <div className="row">
+            <div className="col-lg-12">
+              {subtotalMessage}<span>$ {totalValue}</span>
+              <button className="btn btn-default">Proceed To Checkout</button>
+            </div>
+          </div>
           <div className="row">History</div>
         </div>
       </div>
@@ -95,12 +117,6 @@ const mapToDispatch = (dispatch, ownProps) => {
     pullSavedProducts() {
       const thunk = fetchSaveProducts()
       dispatch(thunk)
-    },
-    pullCrossList(productId) {
-      if (productId) {
-        const thunk = fetchCrossPurchase(productId)
-        dispatch(thunk)
-      }
     }
   }
 }

@@ -8,6 +8,11 @@
   width: 10vh
 }
 
+#crossList img {
+  height: 12vh;
+  width: 12vh
+}
+
 .cart-quantity {
   width: 5vh;
   text-align: center;

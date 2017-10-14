@@ -16,12 +16,15 @@ export const getCrossPurchase = (productList) => {
 }
 
 export const fetchCrossPurchase = (productId) => {
-  let crossList = []
+  let crossList = [];
+  const listLimit = 6;
+  const countList = {}
   return function(dispatch){
     axios.get('/api/orders')
     .then(result => result.data)
     .then( orders => {
-      console.log(orders)
+
+      // find orders with the same productId
       orders = orders.filter( order => {
         for (var i = 0; i < order.lineitems.length ; i++) {
           if (order.lineitems[i].productId === productId) {
@@ -31,17 +34,39 @@ export const fetchCrossPurchase = (productId) => {
         return false;
       })
 
-      console.log('---------------')
-      console.log(orders)
-
+      // count number of times a product shows up
       orders.forEach( order => {
         order.lineitems.forEach( item => {
           if (item.productId !== productId) {
-            crossList.push(item.product)
+            if (!countList[item.productId]){
+              countList[item.productId] = [1, item.product]
+            }
+            else {
+              countList[item.productId][0] += 1
+            }
           }
         })
 
-        const action = getCrossPurchase(crossList)
+        // from object to list
+        Object.keys(countList).forEach( key => {
+          crossList.push(countList[key])
+        })
+
+        // sort by count
+        crossList.sort(function(a, b){
+          return b[0] - a[0]
+        })
+
+        // take the top 6
+        if (crossList.length > 6) {
+          crossList = crossList.slice(0, listLimit)
+        }
+        // if I change to "crossList", then it doesn't work....
+        const crossList2 = crossList.map( pair => {
+          return pair[1]
+        })
+
+        const action = getCrossPurchase(crossList2)
         dispatch(action)
 
       })
