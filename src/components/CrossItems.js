@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCrossPurchase } from '../store';
+import { fetchCrossPurchase, addItemToOrder } from '../store';
 
 class CrossItems extends Component {
 
@@ -25,16 +25,29 @@ class CrossItems extends Component {
       format = "col-lg-12";
       id = "historyList";
     }
+
+
+
     return (
       <div id={id} className="row">
         {
-          items.map( item => {
+          items.map(item => {
             return (
               <div key={item.id} className={format}>
                 <img src={item.pictureUrl} />
                 {item.name}<br></br>
                 $ {item.price}<br></br>
-                <div className="cart-action"><a>Add to Cart</a></div>
+                {
+                  this.props.repeatList && <span>Color: {item.color}<br></br></span>
+                }
+                {
+                  this.props.repeatList && <span>Size: {item.size}<br></br></span>
+                }
+
+                {
+                  this.props.repeatList &&
+                  <div className="cart-action" onClick={() => { this.props.addItemToCart(item.id) }}><a>Add to Cart</a></div>
+                }
               </div>
             )
           })
@@ -46,7 +59,7 @@ class CrossItems extends Component {
 
 const mapToState = (state) => {
   return {
-    crossList: state.crossList
+    crossList: state.crossList,
   }
 }
 
@@ -57,6 +70,9 @@ const mapToDispatch = (dispatch, ownProps) => {
         const thunk = fetchCrossPurchase(productId)
         dispatch(thunk)
       }
+    },
+    addItemToCart(productId) {
+      // const thunk = addItemToOrder(ownProps.orderId, productId, )
     }
   }
 }

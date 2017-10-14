@@ -20,17 +20,20 @@ export const fetchHistoryPurchases = () => {
           historyList = order.lineitems.reduce(function (acc, ele) {
 
             if (acc.length) {
-
               for (var i = 0; i < acc.length; i++) {
                 if (acc[i].id == ele.productId) {
                   break
                 }
                 if (i == acc.length - 1) {
+                  ele.product.color = ele.color;
+                  ele.product.size = ele.size;
                   acc.push(ele.product)
                 }
               }
             }
             else {
+              ele.product.color = ele.color;
+              ele.product.size = ele.size;
               acc.push(ele.product)
             }
             return acc

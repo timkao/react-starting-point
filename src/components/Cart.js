@@ -31,7 +31,7 @@ class Cart extends Component {
     const totalUnit = items.reduce(function (acc, ele) {
       return acc + ele.quantity
     }, 0)
-    const subtotalMessage = totalUnit > 1 ? `Subtotal ( ${totalUnit} items): ` : `Subtotal ( ${totalUnit} item): `;
+    const subtotalMessage = totalUnit > 1 ? `Subtotal ( ${totalUnit} items): ` : `Subtotal ( ${totalUnit} item ): `;
 
     const savedProducts = this.props.savedProducts || []
 
@@ -86,21 +86,21 @@ class Cart extends Component {
           <div className="row">
             People Also Buy <br></br>
             {
-              items[0] && <CrossItems id={items[0].productId} />
+              items[0] && <CrossItems id={items[0].productId} orderId={this.props.currentOrder.id} />
             }
           </div>
         </div>
         <div className="col-lg-2">
           <div className="row">
             <div className="col-lg-12">
-              {subtotalMessage}<span>$ {totalValue}</span>
+              {subtotalMessage}<br></br><span>$ {totalValue}</span>
               <button className="btn btn-default">Proceed To Checkout</button>
             </div>
           </div>
           <div className="row">
             <div className="col-lg-12">
               Buy it Again<br></br>
-            <CrossItems repeatList={this.props.historyList} />
+            <CrossItems repeatList={this.props.historyList} orderId={this.props.currentOrder.id} />
             </div>
           </div>
         </div>

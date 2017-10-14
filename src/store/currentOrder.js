@@ -40,6 +40,15 @@ export const removeItemFromOrder = (itemId, orderId) => {
   }
 }
 
+export const addItemToOrder = (orderId, productId, itemInfo) => {
+  return function(dispatch) {
+    axios.post(`/api/lineitems/${orderId}/${productId}`, itemInfo)
+    .then(() => {
+      const thunk = getCurrentOrder(orderId)
+      dispatch(thunk)
+    })
+  }
+}
 
 const orderReducer = (state = {}, action) => {
   switch (action.type) {
