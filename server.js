@@ -10,6 +10,7 @@ const { User } = db.models;
 const session = require('express-session');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const new_seed = require('./db/new_seed');
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -211,7 +212,7 @@ app.use(function (err, req, res, next) {
 })
 
 db.sync()
-  .then(seed)
+  .then(new_seed)
   .then(() => {
 
     app.listen(port, () => {

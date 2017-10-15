@@ -16,6 +16,9 @@ const Product = conn.define('product', {
 	pictureUrl: {
 		type: Sequelize.STRING
 	},
+	pictureUrl2: {
+		type: Sequelize.STRING
+	},
 	onPromotion: {
 		type: Sequelize.BOOLEAN
 	},

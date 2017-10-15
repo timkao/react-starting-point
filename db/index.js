@@ -18,9 +18,7 @@ Product.hasMany(Review);
 Review.belongsTo(Product);
 User.hasMany(Review);
 Review.belongsTo(User);
-//added for savedlist
-// User.hasMany(Product);
-// Product.hasMany(User);
+
 
 const sync = ()=>{
 	return conn.sync({ force: true })
@@ -33,6 +31,7 @@ module.exports = {
     Category,
     User,
     Order,
-    LineItem
+    LineItem,
+    Review
   },
 }
