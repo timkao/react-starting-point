@@ -17,7 +17,7 @@ export default class Main extends Component {
 						<Route exact path="/" component={Home} />
 						<Route exact path="/signup" component={Auth} />
 						<Route exact path="/login" component={Auth} />
-						<Route path="/cart/:orderId" component={Cart} />
+						<Route path="/cart" component={Cart} />
 					</Switch>
 				</div>
 			)

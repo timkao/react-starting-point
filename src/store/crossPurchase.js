@@ -16,7 +16,6 @@ export const getCrossPurchase = (productList) => {
 }
 
 export const fetchCrossPurchase = (productId) => {
-  let crossList = [];
   const listLimit = 6;
   const countList = {}
   return function(dispatch){
@@ -39,6 +38,8 @@ export const fetchCrossPurchase = (productId) => {
         order.lineitems.forEach( item => {
           if (item.productId !== productId) {
             if (!countList[item.productId]){
+              item.product.color = item.color;
+              item.product.size = item.size;
               countList[item.productId] = [1, item.product]
             }
             else {
@@ -46,27 +47,29 @@ export const fetchCrossPurchase = (productId) => {
             }
           }
         })
-
+        console.log(countList);
+        console.log(Object.keys(countList))
         // from object to list
-        Object.keys(countList).forEach( key => {
-          crossList.push(countList[key])
+        let targetList = Object.keys(countList).map( key => {
+          return countList[key];
         })
-
-        // sort by count
-        crossList.sort(function(a, b){
+        console.log(targetList);
+        //sort by count
+        targetList.sort(function(a, b){
           return b[0] - a[0]
         })
+        console.log(targetList);
 
         // take the top 6
-        if (crossList.length > 6) {
-          crossList = crossList.slice(0, listLimit)
+        if (targetList.length > listLimit) {
+          targetList = targetList.slice(0, listLimit)
         }
         // if I change to "crossList", then it doesn't work....
-        const crossList2 = crossList.map( pair => {
+        const result = targetList.map( pair => {
           return pair[1]
         })
 
-        const action = getCrossPurchase(crossList2)
+        const action = getCrossPurchase(result)
         dispatch(action)
 
       })

@@ -9,7 +9,7 @@ function ProductItem(props) {
   return (
     <li className="list-group-item">
       <div className="row">
-        <div className="col-lg-2"><img src={item.product.pictureUrl} /></div>
+        <div className="col-lg-3"><img src={item.product.pictureUrl} /></div>
         <div className="col-lg-5">
           {item.product.name}<br></br>
           color: {item.color}<br></br>
@@ -20,7 +20,7 @@ function ProductItem(props) {
             <div className="col-lg-4 cart-action" onClick={props.moveToSaveList}><a>Saved for later</a></div>
           </div>
         </div>
-        <div className="col-lg-3">$ {item.product.price}</div>
+        <div className="col-lg-2">$ {item.product.price}</div>
         <div className="col-lg-2">
           <input name="quantity" className="pull-right cart-quantity" type="number" value={item.quantity} onChange={props.changeQuantity} />
         </div>

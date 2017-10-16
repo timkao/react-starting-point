@@ -26,27 +26,25 @@ class CrossItems extends Component {
       id = "historyList";
     }
 
-
+    let key = 0;
 
     return (
       <div id={id} className="row">
         {
           items.map(item => {
             return (
-              <div key={item.id} className={format}>
-                <img src={item.pictureUrl} />
+              <div key={key++} className={format}>
+                <img src={item.pictureUrl} /><br></br>
                 {item.name}<br></br>
                 $ {item.price}<br></br>
-                {
-                  this.props.repeatList && <span>Color: {item.color}<br></br></span>
-                }
-                {
-                  this.props.repeatList && <span>Size: {item.size}<br></br></span>
-                }
+
+                <span>Color: {item.color}<br></br></span>
+
+                <span>Size: {item.size}<br></br></span>
 
                 {
                   this.props.repeatList &&
-                  <div className="cart-action" onClick={() => { this.props.addItemToCart(item.id) }}><a>Add to Cart</a></div>
+                  <div className="cart-action" onClick={() => { this.props.addItemToCart(item) }}><a>Add to Cart</a></div>
                 }
               </div>
             )
@@ -60,6 +58,7 @@ class CrossItems extends Component {
 const mapToState = (state) => {
   return {
     crossList: state.crossList,
+    currentOrder: state.currentOrder
   }
 }
 
@@ -71,8 +70,12 @@ const mapToDispatch = (dispatch, ownProps) => {
         dispatch(thunk)
       }
     },
-    addItemToCart(productId) {
-      // const thunk = addItemToOrder(ownProps.orderId, productId, )
+    addItemToCart(product) {
+      const thunk = addItemToOrder(ownProps.orderId, product.id, {
+        color: product.color,
+        size: product.size
+      });
+      dispatch(thunk);
     }
   }
 }

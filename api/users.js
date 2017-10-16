@@ -14,6 +14,22 @@ router.get('/', (req, res, next)=>{
 		.catch(next)
 });
 
+router.get('/currentOrder', (req, res, next) => {
+	if (req.session.userId){
+		Order.findOne({
+			where: {userId: req.session.userId, status: "Open"},
+			include: {
+				model: LineItem,
+				include: Product
+			 }
+		})
+		.then( order => {
+			res.send(order);
+		})
+		.catch(next)
+	}
+})
+
 // add a product to savedList
 router.put('/savelist', (req, res, next) => {
 

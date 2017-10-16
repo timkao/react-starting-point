@@ -34,7 +34,7 @@ const seed = () => {
 	const users = []
 	const orders = []
 	const lineItems = []
-	let menC, womenC, kidsC, sockC, accessoriesC, allProducts, allUsers, allOrders, allLineItems
+	let menC, womenC, kidsC, sockC, accessoriesC, allProducts, allUsers, allOrders, allLineItems, tim, tom, david;
 
 	for (var i = 0; i < numberOfBeginProduct; i++) {
 		products.push(Product.create({
@@ -145,6 +145,9 @@ const seed = () => {
 			return Promise.all(users)
 		})
 		.then(usersArr => {
+      tim = usersArr[0];
+      tom = usersArr[1];
+      david = usersArr[2];
 			allUsers = usersArr
 			return Promise.all(orders)
 		})
@@ -185,7 +188,22 @@ const seed = () => {
 				return item.setOrder(allOrders[count])
 			})
 			return Promise.all(lineOrders)
-		})
+    })
+    .then(() => {
+      return Promise.all([
+        Order.create({}),
+        Order.create({}),
+        Order.create({})
+      ])
+    })
+    .then( ([order1, order2, order3]) => {
+      return Promise.all([
+        order1.setUser(tim),
+        order2.setUser(tom),
+        order3.setUser(david)
+      ])
+    })
+
 
 }
 

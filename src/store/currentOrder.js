@@ -9,9 +9,20 @@ export const setCurrentOrder = (order) => {
   }
 }
 
-export const getCurrentOrder = (id) => {
+// export const getCurrentOrder = (id) => {
+//   return function(dispatch) {
+//     axios.get(`/api/orders/all/${id}`)
+//     .then( result => result.data)
+//     .then( order => {
+//       const action = setCurrentOrder(order)
+//       dispatch(action)
+//     })
+//   }
+// }
+
+export const getCurrentOrder = () => {
   return function(dispatch) {
-    axios.get(`/api/orders/all/${id}`)
+    axios.get('/api/users/currentOrder')
     .then( result => result.data)
     .then( order => {
       const action = setCurrentOrder(order)

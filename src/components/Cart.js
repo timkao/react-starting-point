@@ -14,7 +14,7 @@ class Cart extends Component {
   // cannot use this.props.currentOrder here. evenif i use componentWillMount and componentDidMount together
   // seems like "connect" runs after all lifecycle method...
   componentDidMount() {
-    this.props.getOrder(this.props.match.params.orderId);
+    this.props.getOrder();
     this.props.pullSavedProducts();
     this.props.pullHistoryProducts();
   }
@@ -34,16 +34,14 @@ class Cart extends Component {
     const subtotalMessage = totalUnit > 1 ? `Subtotal ( ${totalUnit} items): ` : `Subtotal ( ${totalUnit} item ): `;
 
     const savedProducts = this.props.savedProducts || []
-
-    console.log(this.props.historyList)
-
+    let key = 0;
 
     return (
       <div className="row">
         <div className="col-lg-10">
           <div className="row">
-            <div className="col-lg-7">Shopping Cart</div>
-            <div className="col-lg-3">Price</div>
+            <div className="col-lg-8">Shopping Cart</div>
+            <div className="col-lg-2">Price</div>
             <div className="col-lg-2"><div className="pull-right">Quantity</div></div>
           </div>
           <div className="row">
@@ -67,8 +65,8 @@ class Cart extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-7">{`Saved for Later ( ${savedProducts.length} item(s) )`}</div>
-            <div className="col-lg-3">Price</div>
+            <div className="col-lg-8">{`Saved for Later ( ${savedProducts.length} item(s) )`}</div>
+            <div className="col-lg-2">Price</div>
           </div>
           <div className="row">
             {
@@ -76,7 +74,7 @@ class Cart extends Component {
                 {
                   savedProducts.map(product => {
                     return (
-                      <SavedItem key={product.id} item={product} />
+                      <SavedItem key={key++} item={product} />
                     )
                   })
                 }
@@ -120,8 +118,8 @@ const mapToState = (state) => {
 
 const mapToDispatch = (dispatch, ownProps) => {
   return {
-    getOrder(orderId) {
-      const thunk = getCurrentOrder(orderId)
+    getOrder() {
+      const thunk = getCurrentOrder()
       dispatch(thunk);
     },
     pullSavedProducts() {

@@ -1,21 +1,21 @@
 #cartList img {
   height: 10vh;
-  width: 12vh
+  width: auto
 }
 
 #savedList img {
   height: 10vh;
-  width: 12vh
+  width: auto
 }
 
 #crossList img {
-  height: 10vh;
-  width: 12vh
+  height: 7vh;
+  width: auto
 }
 
 #historyList img {
-  height: 15vh;
-  width: 18vh;
+  height: 7vh;
+  width: auto;
   margin-top: 2vh
 }
 

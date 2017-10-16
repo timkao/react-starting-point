@@ -9,7 +9,7 @@ function SavedItem(props) {
   return (
     <li className="list-group-item">
       <div className="row">
-        <div className="col-lg-2"><img src={item.pictureUrl} /></div>
+        <div className="col-lg-3"><img src={item.pictureUrl} /></div>
         <div className="col-lg-5">
           {item.name}<br></br>
           <br></br>
@@ -19,7 +19,7 @@ function SavedItem(props) {
             <div className="col-lg-4 cart-action" onClick={dropFromList}><a>Remove from List</a></div>
           </div>
         </div>
-        <div className="col-lg-3">$ {item.price}</div>
+        <div className="col-lg-2">$ {item.price}</div>
         <div className="col-lg-2">
         </div>
       </div>
