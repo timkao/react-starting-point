@@ -40,7 +40,7 @@ router.get('/', (req, res, next)=>{
 //get all orders by user id
 router.get('/user/:userId', (req, res, next) => {
 	Order.findAll({
-		where: {userId: req.params.userId*1}
+		where: {userId: req.params.userId}
 	})
 		.then(orders => {
 			res.send(orders)

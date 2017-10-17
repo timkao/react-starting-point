@@ -20,7 +20,7 @@ class Cart extends Component {
   }
 
   render() {
-
+    console.log(this.props.currentOrder);
     const items = this.props.currentOrder.lineitems || [];
     items.sort(function (a, b) {
       return a.id - b.id

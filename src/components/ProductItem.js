@@ -42,14 +42,19 @@ const mapToDispatch = (dispatch, ownProps) => {
 
   return {
     changeQuantity(evt) {
+      // if not a member, the id will be undefined
+      // if not a member, update the order on the front end
       const thunk = updateOrderQuantity(orderId, id, evt.target.value)
       dispatch(thunk)
     },
     removeItemList() {
+      // if not a member, the id will be undefined
+      // if not a memeber, update the order on the front end
       const thunk = removeItemFromOrder(id, orderId)
       dispatch(thunk)
     },
     moveToSaveList() {
+      // not showing move to save list for non-member
       const thunk = saveToList(product)
       dispatch(thunk)
       const thunk2 = removeItemFromOrder(id, orderId)

@@ -1,6 +1,26 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const GET_CURRENT_ORDER = 'GET_CURRENT_ORDER'
+const tempOrder = {
+  billingAddress1: null,
+  billingAddress2: null,
+  billingCity: null,
+  billingState: null,
+  billingZip: null,
+  debitCreditCard: null,
+  id: 'temp',
+  lineitems: [],
+  payPalData: null,
+  paymentMethod: null,
+  phoneNumber: null,
+  shippingAddress1: null,
+  shippingAddress2: null,
+  shippingCity: null,
+  shippingMethod: null,
+  shippingState: null,
+  status: 'Open',
+  userId: null
+};
 
 export const setCurrentOrder = (order) => {
   return {
@@ -21,43 +41,56 @@ export const setCurrentOrder = (order) => {
 // }
 
 export const getCurrentOrder = () => {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.get('/api/users/currentOrder')
-    .then( result => result.data)
-    .then( order => {
-      const action = setCurrentOrder(order)
-      dispatch(action)
-    })
+      .then(result => result.data)
+      .then(order => {
+        if (order !== 'not member') {
+          const action = setCurrentOrder(order)
+          dispatch(action)
+        }
+        else {
+          const action = setCurrentOrder(tempOrder);
+          dispatch(action);
+        }
+      })
   }
 }
 
 export const updateOrderQuantity = (orderId, itemId, quantity) => {
-  return function(dispatch) {
-    axios.put('/api/lineitems', {itemId, quantity})
-    .then( () => {
-      const thunk = getCurrentOrder(orderId)
-      dispatch(thunk)
-    })
+  return function (dispatch) {
+    axios.put('/api/lineitems', { itemId, quantity })
+      .then(() => {
+        const thunk = getCurrentOrder(orderId)
+        dispatch(thunk)
+      })
   }
 }
 
 export const removeItemFromOrder = (itemId, orderId) => {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.delete(`/api/lineitems/${itemId}`)
-    .then(() => {
-      const thunk = getCurrentOrder(orderId)
-      dispatch(thunk)
-    })
+      .then(() => {
+        const thunk = getCurrentOrder(orderId)
+        dispatch(thunk)
+      })
   }
 }
 
 export const addItemToOrder = (orderId, productId, itemInfo) => {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.post(`/api/lineitems/${orderId}/${productId}`, itemInfo)
-    .then(() => {
-      const thunk = getCurrentOrder(orderId)
-      dispatch(thunk)
-    })
+      .then(result => {
+        if (result.data.id !== 'temp') {
+          const thunk = getCurrentOrder(orderId)
+          dispatch(thunk)
+        }
+        else {
+          tempOrder.lineitems.push(result.data)
+          const action = setCurrentOrder(tempOrder);
+          dispatch(action);
+        }
+      })
   }
 }
 

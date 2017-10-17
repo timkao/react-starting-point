@@ -47,18 +47,15 @@ export const fetchCrossPurchase = (productId) => {
             }
           }
         })
-        console.log(countList);
-        console.log(Object.keys(countList))
+
         // from object to list
         let targetList = Object.keys(countList).map( key => {
           return countList[key];
         })
-        console.log(targetList);
         //sort by count
         targetList.sort(function(a, b){
           return b[0] - a[0]
         })
-        console.log(targetList);
 
         // take the top 6
         if (targetList.length > listLimit) {
