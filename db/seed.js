@@ -18,10 +18,13 @@ const seed = () => {
 		products.push(Product.create({
 			name: faker.random.word(),
 			price: faker.commerce.price(),
-			pictureUrl: faker.image.imageUrl(),
+			picture1Url: faker.image.imageUrl(),
+			picture2Url: faker.image.imageUrl(),
+			picture3Url: faker.image.imageUrl(),
 			inventory: parseInt((Math.random() * 100), 10),
 			color: faker.commerce.color(),
-			size: faker.lorem.word()
+			size: faker.lorem.word(),
+			description: faker.lorem.paragraph()
 		}))
 	}
 

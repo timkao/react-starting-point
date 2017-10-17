@@ -13,7 +13,13 @@ const Product = conn.define('product', {
 		type: Sequelize.FLOAT,
 		allowNull: false
 	},
-	pictureUrl: {
+	picture1Url: {
+		type: Sequelize.STRING
+	},
+	picture2Url: {
+		type: Sequelize.STRING
+	},
+	picture3Url: {
 		type: Sequelize.STRING
 	},
 	onPromotion: {
