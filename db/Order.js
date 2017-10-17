@@ -56,4 +56,21 @@ const Order = conn.define('order', {
 
 });
 
+Order.findCartId = function(id){
+	Order.findById(id,{
+		include: [{ model: LineItem, include: [ Product ] }]
+	})
+}
+
+Order.prototype.changeCartToOrder = function(id){
+	Order.findCartId(id)
+	.then(cart => {
+		Object.assign(this,
+			{ status: 'Order' }
+		)
+		return this.save();
+	})
+}
+
+
 module.exports = Order;
