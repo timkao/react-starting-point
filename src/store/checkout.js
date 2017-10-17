@@ -1,0 +1,1 @@
+const CHECKOUT = 'CHECKOUT';
