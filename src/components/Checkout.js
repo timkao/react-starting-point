@@ -22,7 +22,7 @@ class Checkout extends Component {
     	shippingState: '',
     	shippingZip: '',
     	phoneNumber: '',
-    	paymentType: '',
+    	paymentMethod: '',
       status: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -39,15 +39,16 @@ class Checkout extends Component {
     this.handleChangeShippingState = this.handleChangeShippingState.bind(this)
     this.handleChangeShippingZip = this.handleChangeShippingZip.bind(this)
     this.handleChangePhoneNumber = this.handleChangePhoneNumber.bind(this)
-    this.handleChangePaymentType = this.handleChangePaymentType.bind(this)
+    this.handleChangePaymentMethod = this.handleChangePaymentMethod.bind(this)
     this.handleChangeStatus = this.handleChangeStatus.bind(this)
   }
 	handleSubmit(evt) {
-    // ev.preventDefault();
-   	console.log(this.state)
-   	alert(this.state.name)
+    evt.preventDefault();
+   	// alert(this.state.paymentMethod)
    	axios.post('/api/orders/',
 			{
+				name: this.state.name,
+				email: this.state.email,
 				phoneNumber: this.state.phoneNumber,
 				shippingAddress1: this.state.shippingAddress1,
 				shippingAddress2: this.state.shippingAddress2,
@@ -59,10 +60,11 @@ class Checkout extends Component {
 				billingCity: this.state.billingCity,
 				billingState: this.state.billingState,
 				billingZip: this.state.billingZip,
-				paymentType: this.state.paymentType,
-				status: this.state.status
+				paymentMethod: this.state.paymentMethod,
+				status:'Placed'
 			}
 		)
+		.then(() => this.props.history.push('/'))
   }
   handleChangeName(evt){this.setState({name: evt.target.value})}
   handleChangeEmail(evt){this.setState({email: evt.target.value})}
@@ -77,14 +79,14 @@ class Checkout extends Component {
   handleChangeShippingState(evt){this.setState({shippingState: evt.target.value})}
   handleChangeShippingZip(evt){this.setState({shippingZip: evt.target.value})}
   handleChangePhoneNumber(evt){this.setState({phoneNumber: evt.target.value})}
-  handleChangePaymentType(evt){this.setState({paymentType: evt.target.value})}
+  handleChangePaymentMethod(evt){this.setState({paymentMethod: evt.target.value})}
   handleChangeStatus(evt){this.setState({status: evt.target.value})
 }
   render(){
 
 		return (
 			<div>
-				<form>
+				<form onSubmit={ this.handleSubmit }>
 					<div>
 	        	<hr />
 	        	Billing Information
@@ -100,12 +102,13 @@ class Checkout extends Component {
 	        </div>
 	        <div>
 	        	<label>Payment Type:</label>
-	        	<div><input name="paymentType" type="radio" value="Credit Card" onChange={this.handleChangePaymentType}/>Credit Card</div>
-	        	<div><input name="paymentType" type="radio" value="PayPal" onChange={this.handleChangePaymentType}/>PayPal</div>
+	        	<div><input name="paymentMethod" type="radio" value="Credit Card" onChange={this.handleChangePaymentMethod}/>Credit Card</div>
+	        	<div><input name="paymentMethod" type="radio" value="PayPal" onChange={this.handleChangePaymentMethod}/>PayPal</div>
 	        </div>
 	        <div>
 	        	<label>Phone Number:</label>
 	        	<div><input name="phoneNumber" type="text" onChange={this.handleChangePhoneNumber} /></div>
+	        </div>
 	        <div>
 		        <label>Billing Address1:</label>
 		        <div><input name="billingAddress1" type="text" onChange={this.handleChangeBillingAddress1} /></div>
@@ -154,7 +157,7 @@ class Checkout extends Component {
 		        <div><input type="text" name="shippingZip" onChange={this.handleChangeShippingZip}  /></div>
 	        </div>
 	        <div>
-		        <button type="submit" name="submitOrder" onClick={ this.handleSubmit } >Save</button>
+		        <button type="submit" name="submitOrder"  >Save</button>
 	        </div>
 		    </form>
 		    
