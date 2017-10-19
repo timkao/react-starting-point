@@ -40,8 +40,12 @@ class Product extends Component{
 		// let sizes = [].concat.apply([], intermediary2)
 		// console.log(sizes)
 		
+		var rectStyle = {
+			backgroundColor: 'red'
+		}
+
 		return(
-			<div>Hello product id {this.props.productId}
+			<div>
 				<div className='row'>
 				</div>
 				<div className='row'>
@@ -54,16 +58,29 @@ class Product extends Component{
 						<h3>Price ${product.price}.00</h3>
 						<p>{product.description}</p>
 						<h4>Color</h4>
+						<div className='colorRects'>
 						{colors.map(color => {
-							return(<div onClick=someFunction key={color}>{color}</div>)
+							var rectStyle = {
+								backgroundColor: color
+							}
+							return(<div key={color} >
+									<div style={rectStyle} className="rectangle"></div>
+								</div>)
 						})}
+						</div>
 						
 						<h4>Size</h4>
-						{sizes.map(size =>{
-							return(<div>{size}</div>)
-						})}
+						
+							{sizes.map(size =>{
+								return(
+									<div className="btn">
+									<span className="btn__label">{size}</span>
+									</div>
+									)
+							})}
+						
 						<div>{product.size}</div>
-						<div>addtocart Button</div>
+						<button className="btn btn-default">Add To Cart</button>
 					</div>
 				</div>
 			</div>
@@ -94,3 +111,12 @@ export default ProductContainer
 <Link className="thumbnail" to={`/albums/${album.id}`}>
 */
 
+// <div className="rectangle"></div>
+
+// onClick=someFunction
+
+// <div key={color}>
+// 	<div>{color}</div>
+// 	<div className="rectangle"></div>
+// </div>
+// style={`color:'${color}'`}

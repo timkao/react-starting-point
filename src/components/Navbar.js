@@ -28,7 +28,7 @@ function Navbar(props){
 		      <ul className="nav navbar-nav navbar-right">
 		        <li><Link to="/signup">Sign up</Link></li>
 		        <li><Link to="/login">Log in</Link></li>
-		        <li><Link to="/cart/orderId">Cart</Link></li>
+		        <li><Link to="/cart">Cart</Link></li>
 		      </ul>
 		    
 		  </div>
