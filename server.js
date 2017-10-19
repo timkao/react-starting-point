@@ -13,8 +13,17 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const new_seed = require('./db/new_seed');
 
 
+
+function setCORSHeaders(res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET");
+  res.setHeader("Access-Control-Allow-Headers", "accept, content-type");
+}
+
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 
 app.use(session({
   secret: 'graceshopper',
@@ -22,71 +31,78 @@ app.use(session({
   saveUninitialized: false
 }))
 
-// app.use(passport.initialize())
-// app.use(passport.session())
 
-// app.get('/auth/google', passport.authenticate('google', { scope: 'email' }));
+app.use((req, res, next) => {
+  setCORSHeaders(res);
+  next();
+})
 
-// passport.use(
-//   new GoogleStrategy({
-//     clientID: '877483500262-o0ogi1h7t9jq4a0ak3qon71g6hemnppj.apps.googleusercontent.com',
-//     clientSecret: 'RUzWbhHDGbBb-_t_ptAT6FfD',
-//     callbackURL: 'https://localhost:3000/auth/google/callback'
-//   },
-//   function (token, refreshToken, profile, done) {
-//     console.log('---', 'in verification callback', profile, '---');
-//     var info = {
-//       name: profile.displayName,
-//       email: profile.emails[0].value,
-//     };
-//     User.findOrCreate({
-//       where: {googleId: profile.id},
-//       defaults: info
-//     })
-//     .spread(function (user) {
-//       done(null, user);
-//     })
-//     .catch(done);
-//   })
-// );
-
-// passport.serializeUser(function (user, done) {
-//   done(null, user.id);
-// });
-
-// passport.deserializeUser(function (id, done) {
-//   User.findById(id)
-//   .then(function (user) {
-//     done(null, user);
-//   })
-//   .catch(function (err) {
-//     done(err);
-//   });
-// });
-
-// // handle the callback after Google has authenticated the user
-// app.get('/auth/google/callback', passport.authenticate('google', {
-//     successRedirect: '/', // or wherever
-//     failureRedirect: '/' // or wherever
-//   })
-// );
+app.use(passport.initialize())
+app.use(passport.session())
 
 
-// // app.use(function (req, res, next) {
-// //   console.log('session', req.session, req.user);
-// //   next();
-// // });
+app.get('/auth/google', passport.authenticate('google', { scope: 'email' }));
+
+passport.use(
+  new GoogleStrategy({
+    clientID: '877483500262-o0ogi1h7t9jq4a0ak3qon71g6hemnppj.apps.googleusercontent.com',
+    clientSecret: 'RUzWbhHDGbBb-_t_ptAT6FfD',
+    callbackURL: 'http://localhost:3000/auth/google/callback'
+  },
+  function (token, refreshToken, profile, done) {
+    console.log('---', 'in verification callback', profile, '---');
+    var info = {
+      name: profile.displayName,
+      email: profile.emails[0].value,
+    };
+    User.findOrCreate({
+      where: {googleId: profile.id},
+      defaults: info
+    })
+    .spread(function (user) {
+      done(null, user);
+    })
+    .catch(done);
+  })
+);
+
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+  User.findById(id)
+  .then(function (user) {
+    done(null, user);
+  })
+  .catch(function (err) {
+    done(err);
+  });
+});
+
+// handle the callback after Google has authenticated the user
+app.get('/auth/google/callback', passport.authenticate('google', {
+    successRedirect: '/', // or wherever
+    failureRedirect: '/' // or wherever
+  })
+);
+
 
 // app.use(function (req, res, next) {
-//   if (req.user) {
-//     req.logIn( req.user, function(){
-//       req.session.userId = req.user.id
-//     })
-//   }
+//   console.log('session', req.session, req.user);
 //   next();
 // });
 
-// // auth -- google strategy login
+app.use(function (req, res, next) {
+  if (req.user) {
+    req.logIn( req.user, function(){
+      req.session.userId = req.user.id
+    })
+  }
+  next();
+});
+
+// auth -- google strategy login
 // app.get('/auth/google', passport.authenticate('google', { scope: 'email' }));
 
 
@@ -137,19 +153,19 @@ app.use(session({
 //   });
 // });
 
-// app.use(function (req, res, next) {
-//   //console.log('session', req.session, req.user);
-//   next();
-// });
+app.use(function (req, res, next) {
+  //console.log('session', req.session, req.user);
+  next();
+});
 
-// app.use(function (req, res, next) {
-//   if (req.user) {
-//     req.logIn( req.user, function(){
-//       req.session.userId = req.user.id
-//     })
-//   }
-//   next();
-// });
+app.use(function (req, res, next) {
+  if (req.user) {
+    req.logIn( req.user, function(){
+      req.session.userId = req.user.id
+    })
+  }
+  next();
+});
 
 // auth -- local strategy login
 app.post('/login', (req, res, next) => {
