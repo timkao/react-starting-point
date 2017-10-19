@@ -66,7 +66,7 @@ Order.prototype.changeCartToOrder = function(id){
 	Order.findCartId(id)
 	.then(cart => {
 		Object.assign(this,
-			{ status: 'Order' }
+			{ status: 'Placed' }
 		)
 		return this.save();
 	})

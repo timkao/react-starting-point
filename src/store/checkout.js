@@ -2,10 +2,10 @@ import axios from 'axios';
 
 const CHECKOUT = 'CHECKOUT';
 
-const checkOut = (orderId) => {
+const checkout = (orderId) => {
 	return {
 		type: CHECKOUT,
-		orderId
+		orderId: orderId
 	}
 }
 
@@ -13,7 +13,7 @@ export const checkoutOrder = (orderId) => {
 	return (dispatch) => {
 		axios.put(`/api/orders/${orderId}`)
 		.then(() => {
-			dispatch(checkOut());
+			dispatch(checkout(orderId));
 		})
 	}
 }

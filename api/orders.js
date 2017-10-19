@@ -46,8 +46,14 @@ router.put('/:id', (req, res, next) => {
 	Order.update(req.body, {
 		where : { id : req.params.id }
 	})
-	.then((order) => {res.send(order)}
+	.then((order) => {res.send(order)})
 	.catch(next)
+});
+
+router.post('/', (req, res, next) => {
+	Order.create(req.body)
+	.then(()=> res.sendStatus(204))
+  .catch(next);
 });
 
 
@@ -62,11 +68,5 @@ router.put('/:id', (req, res, next) => {
 
 
 module.exports = router;
-
-
-
-
-
-
 
 

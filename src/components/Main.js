@@ -5,6 +5,7 @@ import Navbar from './Navbar'
 // import store from '../store';
 // import {thunk actions come here later} from '../store';
 import Auth from './Auth'
+import Checkout from './Checkout'
 
 export default class Main extends Component {
 
@@ -15,8 +16,8 @@ export default class Main extends Component {
 					<Switch>
 						<Route exact path="/" component={Home} />
 						<Route exact path="/auth" component={Auth} />
+						<Route exact path="/checkout" component={Checkout} />
 					</Switch>
-
 				</div>
 			)
 	}
