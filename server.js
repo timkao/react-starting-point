@@ -14,11 +14,11 @@ const new_seed = require('./db/new_seed');
 
 
 
-function setCORSHeaders(res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET");
-  res.setHeader("Access-Control-Allow-Headers", "accept, content-type");
-}
+// function setCORSHeaders(res) {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader("Access-Control-Allow-Methods", "*");
+//   res.setHeader("Access-Control-Allow-Headers", "accept, content-type");
+// }
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -32,10 +32,10 @@ app.use(session({
 }))
 
 
-app.use((req, res, next) => {
-  setCORSHeaders(res);
-  next();
-})
+// app.use((req, res, next) => {
+//   setCORSHeaders(res);
+//   next();
+// })
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -47,7 +47,7 @@ passport.use(
   new GoogleStrategy({
     clientID: '877483500262-o0ogi1h7t9jq4a0ak3qon71g6hemnppj.apps.googleusercontent.com',
     clientSecret: 'RUzWbhHDGbBb-_t_ptAT6FfD',
-    callbackURL: 'http://localhost:3000/auth/google/callback'
+    callbackURL: '/auth/google/callback'
   },
   function (token, refreshToken, profile, done) {
     console.log('---', 'in verification callback', profile, '---');

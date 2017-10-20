@@ -19,7 +19,7 @@ function Auth(props) {
         </form>
       </div>
       <div className="col-lg-6">
-        <button onClick={signInGoogle} className="btn btn-primary">{authPath} with Google</button>
+        <a href='/auth/google' className="btn btn-primary">{authPath} with Google</a>
         <button onClick={leaveApp} className="btn btn-default">logout</button>
       </div>
     </div>
