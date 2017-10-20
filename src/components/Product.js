@@ -114,7 +114,7 @@ class Product extends Component{
 							
 						
 						<div>{product.size}</div>
-						<button className="btn btn-default">Add To Cart</button>
+						<button className="btn btn-default single_btn">Add To Cart</button>
 					</div>
 				</div>
 			</div>
