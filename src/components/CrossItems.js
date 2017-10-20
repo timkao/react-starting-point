@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchCrossPurchase, addItemToOrder } from '../store';
+import { Link } from 'react-router-dom';
+
 
 class CrossItems extends Component {
 
@@ -34,7 +36,7 @@ class CrossItems extends Component {
           items.map(item => {
             return (
               <div key={key++} className={format}>
-                <img src={item.pictureUrl} /><br></br>
+                <Link to={`/product/${item.id}`}><img src={item.pictureUrl} /></Link><br></br>
                 {item.name}<br></br>
                 $ {item.price}<br></br>
 

@@ -1,6 +1,8 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { updateOrderQuantity, removeItemFromOrder, saveToList } from '../store'
+import React from 'react';
+import { connect } from 'react-redux';
+import { updateOrderQuantity, removeItemFromOrder, saveToList } from '../store';
+import { Link } from 'react-router-dom';
+
 
 function ProductItem(props) {
 
@@ -9,7 +11,7 @@ function ProductItem(props) {
   return (
     <li className="list-group-item">
       <div className="row">
-        <div className="col-lg-3"><img src={item.product.pictureUrl} /></div>
+        <Link to={`/product/${item.product.id}`}><div className="col-lg-3"><img src={item.product.pictureUrl} /></div></Link>
         <div className="col-lg-5">
           {item.product.name}<br></br>
           color: {item.color}<br></br>

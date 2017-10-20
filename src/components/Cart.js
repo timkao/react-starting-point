@@ -13,7 +13,7 @@ class Cart extends Component {
 
   // cannot use this.props.currentOrder here. evenif i use componentWillMount and componentDidMount together
   // seems like "connect" runs after all lifecycle method...
-  componentDidMount() {
+  componentWillMount() {
     this.props.getOrder();
     this.props.pullSavedProducts();
     this.props.pullHistoryProducts();
