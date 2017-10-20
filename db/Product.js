@@ -22,6 +22,12 @@ const Product = conn.define('product', {
 	onPromotion: {
 		type: Sequelize.BOOLEAN
 	},
+	colors: {
+		type: Sequelize.ARRAY(Sequelize.STRING)
+	},
+	sizes: {
+		type: Sequelize.ARRAY(Sequelize.STRING)
+	},
 	inventory: {
 		type: Sequelize.ARRAY(Sequelize.JSON)  // {"red": {"size8": 10}}
 	}

@@ -55,7 +55,7 @@ class Product extends Component{
 						<p>{product.description}</p>
 						<h4>Color</h4>
 						{colors.map(color => {
-							return(<div onClick=someFunction key={color}>{color}</div>)
+							return(<div /*onClick=someFunction*/ key={color}>{color}</div>)
 						})}
 						
 						<h4>Size</h4>

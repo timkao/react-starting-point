@@ -6,8 +6,8 @@ const numberOfFakeProduct = 20
 const numberOfFakeUser = 10
 const numberOfFakeOrder = 40
 const numberOfFakeLineItem = 50
-
 const seed = () => {
+	console.log(shoeColors[Math.floor((Math.random()*6))]);
 	const products = []
 	const users = []
 	const orders = []
@@ -19,7 +19,7 @@ const seed = () => {
 			name: faker.random.word(),
 			price: faker.commerce.price(),
 			pictureUrl: faker.image.imageUrl(),
-			inventory: [{"red": {"8": 20}}],
+			inventory: [{"red": {"8": 20}}]
 		}))
 	}
 

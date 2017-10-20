@@ -6,7 +6,7 @@ const rn = require('random-number');
 const numberOfBeginProduct = 9
 const numberOfFakeOrder = 15
 const numberOfFakeLineItem = 50
-
+const shoeColors = ['red','green','blue','yellow','white', 'black']
 const seed = () => {
   const products = []
   const productImagesF = [
@@ -42,7 +42,8 @@ const seed = () => {
 			price: faker.commerce.price(),
 			description: faker.lorem.paragraph(),
       pictureUrl: productImagesF[i],
-      pictureUrl2: productImagesT[i],
+			pictureUrl2: productImagesT[i],
+			colors: [shoeColors[Math.floor((Math.random()*6))],shoeColors[Math.floor((Math.random()*6))],shoeColors[Math.floor((Math.random()*6))]],
       inventory: [
         {"red": {"8": 20, "9": 10, "7": 4, "10": 10, "6": 10}},
         {"blue": {"8": 20, "9": 10, "7": 4, "10": 10, "6": 10}},

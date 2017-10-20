@@ -1,0 +1,81 @@
+.heroText h2 {
+    display: inline-block;
+    color: white;
+    font-size: 54px;
+}
+.heroText {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: right;
+}
+.categoryHero .wrapper {
+    height:100%;
+}
+.products, .productDetails, .productColors {
+    width:100%;
+    white-space: nowrap;
+  }
+  .products {
+      padding:4em 0;
+  }
+  .productDetails {
+      margin:1.25em 0 .55em;
+  }
+  
+  .products .product {
+    width:33.3333%;
+    padding:30px;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+  
+  .productDetails .productName{
+    width:66.66%;
+    display: inline-block;
+  }
+  
+  .productDetails .productPrice{
+    width:33.33%;
+    display: inline-block;
+    text-align: right;
+  }
+
+  .categoryHero.Women .heroText {
+      text-align: left;
+  }
+  
+  .categoryHeroSection .categoryHero{
+    height:450px;
+    width:100%;
+    background-size: cover;
+    background-position: bottom center;
+  }
+
+  .categoryHero.Men {
+    background-image: url('https://feetz.com/img/home/home-axis-banner.jpg');
+  }
+  .categoryHero.Women {
+      background-image: url('https://feetz.com/img/home/loaFFFer-home-banner.jpg');
+      background-position: 0% 65%;
+  }
+  .colorTile, .colorTileFilter {
+      width:18px;
+      height:18px;
+      display: inline-block;
+      border:1px solid black;
+      border-radius:4px;
+      margin-right: 8px;
+      transition: all .075s linear;      
+  }
+  
+  .colorTileFilter:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+      transition: all .075s linear;
+  }
+
+  .colorTileFilter.clicked {
+      transform: scale(1.1);
+      transition: all .075s linear;
+  }
