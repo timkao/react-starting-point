@@ -7,6 +7,7 @@ import store, {fetchCategories} from '../store';
 // import {thunk actions come here later} from '../store';
 import Auth from './Auth';
 import Cart from './Cart';
+import Checkout from './Checkout';
 
 export default class Main extends Component {
 	componentDidMount(){
@@ -25,6 +26,7 @@ export default class Main extends Component {
 							<Route exact path="/signup" component={Auth} />
 							<Route exact path="/login" component={Auth} />
 							<Route exact path="/cart" component={Cart} />
+							<Route exact path="/checkout" component={Checkout} />
 						</Switch>
 					</div>
 				</div>

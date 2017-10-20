@@ -2,6 +2,12 @@ const Sequelize = require('sequelize');
 const conn = require('./conn');
 
 const Order = conn.define('order', {
+	name: {
+		type: Sequelize.STRING
+	},
+	email: {
+		type: Sequelize.STRING
+	},
 	shippingAddress1: {
 		type: Sequelize.STRING
 	},
