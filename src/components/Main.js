@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import Navbar from './Navbar'
+import Footer from './Footer'
 // import store from '../store';
 // import {thunk actions come here later} from '../store';
 import Auth from './Auth'
@@ -19,6 +20,7 @@ export default class Main extends Component {
 						<Route exact path="/login" component={Auth} />
 						<Route path="/cart" component={Cart} />
 					</Switch>
+					<Footer />
 				</div>
 			)
 	}
