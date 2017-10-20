@@ -24,6 +24,7 @@ function Navbar(props){
 		        }) }
 		          </ul>
 		        </li>
+						<li><Link to='/Admin'>Admin</Link></li>
 		      </ul>
 
 		      <ul className="nav navbar-nav navbar-right">
