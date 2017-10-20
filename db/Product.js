@@ -16,18 +16,14 @@ const Product = conn.define('product', {
 	pictureUrl: {
 		type: Sequelize.STRING
 	},
+	pictureUrl2: {
+		type: Sequelize.STRING
+	},
 	onPromotion: {
 		type: Sequelize.BOOLEAN
 	},
 	inventory: {
-		type: Sequelize.INTEGER,
-		allowNull: false
-	},
-	color: {
-		type: Sequelize.STRING
-	},
-	size: {
-		type: Sequelize.STRING
+		type: Sequelize.ARRAY(Sequelize.JSON)  // {"red": {"size8": 10}}
 	}
 });
 

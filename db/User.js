@@ -45,17 +45,20 @@ const User = conn.define('user', {
 	},
 	salt: {
 		type: Sequelize.STRING
+	},
+	savedList: {
+		type: Sequelize.ARRAY(Sequelize.JSON),
+		defaultValue: []
 	}
 });
 
 module.exports = User;
 
-// i think both instance method or class method works...
-User.produceSalt = function() {
+User.prototype.produceSalt = function() {
 	return crypto.randomBytes(16).toString('base64');
 };
 
-User.securePassword = function(userInput, salt) {
+User.prototype.securePassword = function(userInput, salt) {
 	return crypto.createHash('RSA-SHA256')
 	.update(userInput)
 	.update(salt)
@@ -63,13 +66,13 @@ User.securePassword = function(userInput, salt) {
 };
 
 User.prototype.verifyPassword = function(passwordInput) {
-	return User.securePassword(passwordInput, this.salt) === this.password;
+	return this.securePassword(passwordInput, this.salt) === this.password;
 }
 
 function setSaltAndPassword(user) {
 	if (user.changed('password')) {
-		user.salt = User.produceSalt();
-		user.password = User.securePassword(user.password, user.salt);
+		user.salt = user.produceSalt();
+		user.password = user.securePassword(user.password, user.salt);
 	}
 }
 

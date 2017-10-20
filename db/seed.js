@@ -5,7 +5,7 @@ const faker = require('faker')
 const numberOfFakeProduct = 20
 const numberOfFakeUser = 10
 const numberOfFakeOrder = 40
-const numberOfFakeLineItem = 100
+const numberOfFakeLineItem = 50
 
 const seed = () => {
 	const products = []
@@ -19,9 +19,7 @@ const seed = () => {
 			name: faker.random.word(),
 			price: faker.commerce.price(),
 			pictureUrl: faker.image.imageUrl(),
-			inventory: parseInt((Math.random() * 100), 10),
-			color: faker.commerce.color(),
-			size: faker.lorem.word()
+			inventory: [{"red": {"8": 20}}],
 		}))
 	}
 
@@ -56,7 +54,9 @@ const seed = () => {
 	for (var m = 0; m < numberOfFakeLineItem; m++) {
 		const volume = parseInt((Math.random() * 10), 10)
 		lineItems.push(LineItem.create({
-			quantity: volume > 0 ? volume : 1
+			quantity: volume > 0 ? volume : 1,
+			color: faker.commerce.color(),
+			size: "9"
 		}))
 	}
 
