@@ -5,7 +5,8 @@ import Navbar from './Navbar'
 import Product from './Product'
 import store, {fetchCategories} from '../store';
 // import {thunk actions come here later} from '../store';
-import Auth from './Auth'
+import Auth from './Auth';
+import Cart from './Cart';
 
 export default class Main extends Component {
 	componentDidMount(){
@@ -23,10 +24,11 @@ export default class Main extends Component {
 							<Route exact path="/product/:productId" component={Product} />
 							<Route exact path="/signup" component={Auth} />
 							<Route exact path="/login" component={Auth} />
+							<Route exact path="/cart" component={Cart} />
 						</Switch>
 					</div>
 				</div>
-				
+
 			)
 	}
 }
