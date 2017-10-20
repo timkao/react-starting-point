@@ -11,13 +11,18 @@ export const keyinEmail = (emailInput) => {
   }
 };
 
-export const signupUser = (signupData) => {
+export const signupUser = (signupData, history) => {
   return function(dispatch) {
     axios.post('/signup', signupData)
     .then( result => {
       dispatch(keyinEmail(''));
       dispatch(keyinPassword(''));
-      console.log(result.data)
+      if (typeof result.data !== 'string') {
+        history.push('/');
+      }
+      else {
+        console.log(result.data)
+      }
     })
     .catch( err => {
       console.log('signup failed!', err.message);
@@ -25,13 +30,18 @@ export const signupUser = (signupData) => {
   }
 };
 
-export const loginUser = (loginData) => {
+export const loginUser = (loginData, history) => {
   return function(dispatch) {
     axios.post('/login', loginData)
     .then( result => {
       dispatch(keyinEmail(''));
       dispatch(keyinPassword(''));
-      console.log(result.data)
+      if (typeof result.data !== 'string') {
+        history.push('/');
+      }
+      else {
+        console.log(result.data)
+      }
     })
     .catch( err => {
       console.log('login failed!', err.message);

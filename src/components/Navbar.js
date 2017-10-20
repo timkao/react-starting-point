@@ -1,15 +1,16 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logoutUser, getSavedProducts, getHistoryPurchases } from '../store';
 
 function Navbar(props){
-	
+
 	const more_cats = props.categories.filter(cat => cat.name!='Men' && cat.name != 'Women' && cat.name!= 'Kids')
 	return(
 		<nav className="navbar navbar-default">
 		  <div className="container-fluid">
 		      <a className="navbar-brand" href="#">Mayo Jar</a>
-		   
+
 		      <ul className="nav navbar-nav">
 		        <li className="active"><Link to='/categories/Men'>Men</Link></li>
 		        <li><Link to='/categories/Women'>Women</Link></li>
@@ -28,14 +29,15 @@ function Navbar(props){
 		      <ul className="nav navbar-nav navbar-right">
 		        <li><Link to="/signup">Sign up</Link></li>
 		        <li><Link to="/login">Log in</Link></li>
+						<li onClick={props.leaveApp}><Link to="/">Log out</Link></li>
 		        <li><Link to="/cart">Cart</Link></li>
 		      </ul>
-		    
+
 		  </div>
 		</nav>
 		)
-	
-}	
+
+}
 
 const mapToState = (state) => {
 	return {
@@ -46,7 +48,13 @@ const mapToState = (state) => {
 
 const mapToDispatch = (dispatch) => {
 	return {
-
+		leaveApp(evt) {
+      evt.preventDefault()
+      const thunk = logoutUser()
+			dispatch(thunk);
+			dispatch(getSavedProducts([]));
+			dispatch(getHistoryPurchases([]));
+    }
 	}
 }
 

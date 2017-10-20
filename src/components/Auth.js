@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { keyinEmail, keyinPassword, signupUser, logoutUser, loginUser, authGoogle } from '../store'
+import { keyinEmail, keyinPassword, signupUser, loginUser, authGoogle } from '../store'
 
 function Auth(props) {
 
@@ -20,7 +20,6 @@ function Auth(props) {
       </div>
       <div className="col-lg-6">
         <a href='/auth/google' className="btn btn-primary">{authPath} with Google</a>
-        <button onClick={leaveApp} className="btn btn-default">logout</button>
       </div>
     </div>
   )
@@ -50,14 +49,8 @@ const mapToDispatch = (dispatch, ownProps) => {
         password: evt.target.password.value
       };
       const thunk = ownProps.location.pathname === '/signup'
-      ? signupUser(userInfo) : loginUser(userInfo);
-
+      ? signupUser(userInfo, ownProps.history) : loginUser(userInfo, ownProps.history);
       dispatch(thunk);
-    },
-    leaveApp(evt) {
-      evt.preventDefault()
-      const thunk = logoutUser()
-      dispatch(thunk)
     },
     signInGoogle(evt) {
       evt.preventDefault()

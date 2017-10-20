@@ -63,7 +63,7 @@ img {
   width:inherit;
   height:inherit;
   vertical-align:middle;
-  
+
 }
 .btn{
   font-size:13px;
@@ -84,3 +84,14 @@ img {
   margin-top: 12px;
 }
 
+.list-wrapper {
+  border: 0.1vh solid grey;
+}
+
+#cross-list-title {
+  margin-top: 5vh;
+}
+
+.list-group-item {
+  margin: 1vh 1vh 1vh 1vh
+}
