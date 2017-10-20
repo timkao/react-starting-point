@@ -9,6 +9,8 @@ import passwordInput from './password';
 import savedProducts from './savedProducts';
 import crossList from './crossPurchase';
 import historyList from './historyPurchase';
+import product from './product';
+import categories from './categories';
 
 
 const reducer = combineReducers(
@@ -19,7 +21,9 @@ const reducer = combineReducers(
     currentOrder,
     savedProducts,
     crossList,
-    historyList
+    historyList,
+    categories,
+    product
 	}
 );
 
@@ -40,3 +44,5 @@ export * from './currentOrder';
 export * from './savedProducts';
 export * from './crossPurchase';
 export * from './historyPurchase';
+export * from './product';
+export * from './categories';
