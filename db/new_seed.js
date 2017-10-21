@@ -3,8 +3,8 @@ const { Product, Category, User, LineItem, Order, Review } = require('./index').
 const faker = require('faker');
 const rn = require('random-number');
 
-const numberOfBeginProduct = 9
-const numberOfFakeOrder = 15
+const numberOfBeginProduct = 10
+const numberOfFakeOrder = 1
 const numberOfFakeLineItem = 50
 
 const seed = () => {
@@ -97,7 +97,7 @@ const seed = () => {
 			billingCity: faker.address.city(),
 			billingState: faker.address.state(),
 			billingZip: faker.address.zipCode(),
-			status: 'Placed'
+			status: 'Open'
 		}))
 	}
 

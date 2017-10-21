@@ -91,7 +91,7 @@ class Checkout extends Component {
 	        	<hr />
 	        	Billing Information
 	        	<hr />
-	        </div>
+	        </div>{console.log(this.props)}
 					<div>
 	        	<label>Name:</label>
 	        	<div><input name="name" type="text" onChange={this.handleChangeName} /></div>
