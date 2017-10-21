@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import store, {fetchProduct} from '../store';
+import Review from './Review';
 
 class Product extends Component{
 	constructor(props){
@@ -117,6 +118,7 @@ class Product extends Component{
 						<button className="btn btn-default single_btn">Add To Cart</button>
 					</div>
 				</div>
+				<Review/>
 			</div>
 			)	
 	}
