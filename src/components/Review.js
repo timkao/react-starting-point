@@ -31,6 +31,9 @@ class Review extends Component{
 									<hr/>
 									<div className="row">
 										<h4>{review.title}</h4>
+										<h5>{review.user.name}</h5>
+										<h5>{`rating: ${review.rating}`}</h5>
+										<p>{review.content}</p>
 
 									</div>
 									<hr/>
@@ -49,7 +52,7 @@ class Review extends Component{
 
 const mapToState = (state, ownProps) => {
 	return {
-		productId: ownProps.match.params.productId,
+		productId: ownProps.productId,
 		reviews: state.reviews
 
 	}

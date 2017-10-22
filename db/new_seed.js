@@ -58,7 +58,7 @@ const seed = () => {
 			content: faker.lorem.sentences(),
 			rating: 3,
 			// rating: Math.floor(Math.random()*5)
-			title: faker.lorem.sentence()
+			title: faker.lorem.sentence(),
 		}))
 	}
 
@@ -154,24 +154,7 @@ const seed = () => {
       ]
 			return Promise.all(relationships)
 		})
-		.then(()=>{
-			return Promise.all(reviews)
-		})
-		.then(reviewsArr=>{
-			const relationships = [
-				reviewsArr[0].setProduct(product1),
-		        reviewsArr[1].setProduct(product1),
-		        reviewsArr[2].setProduct(product1),
-		        reviewsArr[3].setProduct(product1),
-		        reviewsArr[4].setProduct(product1),
-		        reviewsArr[5].setProduct(product1),
-		        reviewsArr[6].setProduct(product1),
-		        reviewsArr[7].setProduct(product1),
-		        reviewsArr[8].setProduct(product1),
-		        reviewsArr[9].setProduct(product1)
-			]
-			return Promise.all(relationships)	
-		})
+		
 		.then(() => {
 			return Promise.all(users)
 		})
@@ -191,6 +174,36 @@ const seed = () => {
 				return order.setUser(allUsers[count])
 			})
 			return Promise.all(ordersUsers)
+		})
+		.then(()=>{
+			return Promise.all(reviews)
+		})
+		.then(reviewsArr=>{
+			const relationships = [
+				reviewsArr[0].setProduct(product1),
+		        reviewsArr[1].setProduct(product1),
+		        reviewsArr[2].setProduct(product1),
+		        reviewsArr[3].setProduct(product1),
+		        reviewsArr[4].setProduct(product1),
+		        reviewsArr[5].setProduct(product1),
+		        reviewsArr[6].setProduct(product1),
+		        reviewsArr[7].setProduct(product1),
+		        reviewsArr[8].setProduct(product1),
+		        reviewsArr[9].setProduct(product1),
+		        reviewsArr[0].setUser(tim),
+		        reviewsArr[1].setUser(tim),
+		        reviewsArr[2].setUser(tom),
+		        reviewsArr[3].setUser(tom),
+		        reviewsArr[4].setUser(tim),
+		        reviewsArr[5].setUser(david),
+		        reviewsArr[6].setUser(david),
+		        reviewsArr[7].setUser(tim),
+		        reviewsArr[8].setUser(tim),
+		        reviewsArr[9].setUser(tim),
+
+
+			]
+			return Promise.all(relationships)	
 		})
 		.then(() => {
 			return Promise.all(lineItems)

@@ -117,7 +117,7 @@ class Product extends Component{
 						<button className="btn btn-default single_btn">Add To Cart</button>
 					</div>
 				</div>
-				
+				<Review productId={this.props.productId}/>
 			</div>
 			)	
 	}
@@ -127,7 +127,7 @@ class Product extends Component{
 const mapToState = (state, ownProps) => {
 	return {
 		productId: ownProps.match.params.productId,
-		// product: state.product
+		product: state.product
 	}
 }
 
