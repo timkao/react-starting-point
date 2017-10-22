@@ -6,6 +6,7 @@ import Product from './Product'
 import store, {fetchCategories} from '../store';
 // import {thunk actions come here later} from '../store';
 import Auth from './Auth'
+import Review from './Review'
 
 export default class Main extends Component {
 	componentDidMount(){
@@ -23,6 +24,7 @@ export default class Main extends Component {
 							<Route exact path="/product/:productId" component={Product} />
 							<Route exact path="/signup" component={Auth} />
 							<Route exact path="/login" component={Auth} />
+							<Route exact path="/reviews/:productId" component={Review} />
 						</Switch>
 					</div>
 				</div>

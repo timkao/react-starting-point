@@ -6,11 +6,9 @@ const rn = require('random-number');
 const numberOfBeginProduct = 9
 const numberOfFakeOrder = 15
 const numberOfFakeLineItem = 50
-const numberOfBeginReview = 10
 
 const seed = () => {
   const products = []
-  const reviews = []
   const productImagesF = [
     '/public/product_images/21595-107_F.jpg',
     '/public/product_images/K100226-008_F.jpg',
@@ -36,7 +34,7 @@ const seed = () => {
 	const users = []
 	const orders = []
 	const lineItems = []
-	let menC, womenC, kidsC, sockC, accessoriesC, allProducts, allUsers, allOrders, allLineItems, tim, tom, david, product1;
+	let menC, womenC, kidsC, sockC, accessoriesC, allProducts, allUsers, allOrders, allLineItems, tim, tom, david;
 
 	for (var i = 0; i < numberOfBeginProduct; i++) {
 		products.push(Product.create({
@@ -50,15 +48,6 @@ const seed = () => {
         {"white": {"8": 20, "9": 10, "7": 4, "10": 10, "6": 10}},
         {"green": {"8": 20, "9": 10, "7": 4, "10": 10, "6": 10}}
       ]
-		}))
-	}
-
-	for (var i = 0; i < numberOfBeginReview; i++) {
-		reviews.push(Review.create({
-			content: faker.lorem.sentences(),
-			rating: 3,
-			// rating: Math.floor(Math.random()*5)
-			title: faker.lorem.sentence()
 		}))
 	}
 
@@ -138,9 +127,7 @@ const seed = () => {
 			return Promise.all(products)
 		})
 		.then(productsArr => {
-			// console.log(productsArr)
 			allProducts = productsArr
-			product1 = productsArr[0]
 			const relationships = [
         productsArr[0].setCategory(womenC),
         productsArr[1].setCategory(menC),
@@ -153,24 +140,6 @@ const seed = () => {
         productsArr[8].setCategory(kidsC)
       ]
 			return Promise.all(relationships)
-		})
-		.then(()=>{
-			return Promise.all(reviews)
-		})
-		.then(reviewsArr=>{
-			const relationships = [
-				reviewsArr[0].setProduct(product1),
-		        reviewsArr[1].setProduct(product1),
-		        reviewsArr[2].setProduct(product1),
-		        reviewsArr[3].setProduct(product1),
-		        reviewsArr[4].setProduct(product1),
-		        reviewsArr[5].setProduct(product1),
-		        reviewsArr[6].setProduct(product1),
-		        reviewsArr[7].setProduct(product1),
-		        reviewsArr[8].setProduct(product1),
-		        reviewsArr[9].setProduct(product1)
-			]
-			return Promise.all(relationships)	
 		})
 		.then(() => {
 			return Promise.all(users)
@@ -234,7 +203,6 @@ const seed = () => {
         order3.setUser(david)
       ])
     })
-    
 
 
 }
