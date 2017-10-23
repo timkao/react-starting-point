@@ -2,7 +2,10 @@ const Sequelize = require('sequelize');
 const conn = require('./conn');
 
 const Review = conn.define('review', {
-	content: {
+	title:{
+    type: Sequelize.STRING,
+  },
+  content: {
 		type: Sequelize.TEXT,
   },
   rating: {

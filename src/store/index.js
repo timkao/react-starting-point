@@ -11,6 +11,8 @@ import crossList from './crossPurchase';
 import historyList from './historyPurchase';
 import product from './product';
 import categories from './categories';
+import reviews from './reviews';
+import {newReviewTitleReducer as newReviewTitle, newReviewContentReducer as newReviewContent} from './newReview';
 import currentUser from './currentUser';
 
 
@@ -25,7 +27,11 @@ const reducer = combineReducers(
     historyList,
     categories,
     product,
+    reviews,
+    newReviewTitle,
+    newReviewContent,
     currentUser
+
 	}
 );
 
@@ -48,4 +54,6 @@ export * from './crossPurchase';
 export * from './historyPurchase';
 export * from './product';
 export * from './categories';
+export * from './reviews';
+export * from './newReview';
 export * from './currentUser';

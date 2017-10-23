@@ -10,6 +10,8 @@ import Cart from './Cart';
 import Checkout from './Checkout';
 import Admin from './AdminProduct';
 import Products from './Products';
+import Review from './Review'
+
 
 export default class Main extends Component {
 
@@ -28,6 +30,7 @@ export default class Main extends Component {
 							<Route exact path="/product/:productId" component={Product} />
 							<Route exact path="/signup" component={Auth} />
 							<Route exact path="/login" component={Auth} />
+							<Route exact path="/reviews/:productId" component={Review} />
 							<Route exact path="/cart" component={Cart} />
 							<Route exact path="/checkout" component={Checkout} />
 							<Route path="/admin" component={Admin} />

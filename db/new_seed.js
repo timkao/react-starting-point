@@ -3,40 +3,43 @@ const { Product, Category, User, LineItem, Order, Review } = require('./index').
 const faker = require('faker');
 const rn = require('random-number');
 
-const numberOfBeginProduct = 9;
-const numberOfFakeOrder = 15;
-const numberOfFakeLineItem = 50;
+const numberOfBeginProduct = 9
+const numberOfFakeOrder = 15
+const numberOfFakeLineItem = 50
+const numberOfBeginReview = 10
 const shoeColors = ['red','green','blue','yellow','white', 'black'];
 const sizeArray = ['8.0', '8.5','9.0', '9.5','10.0', '10.5','11.0', '11.5','12.0'];
 
 const seed = () => {
-	const products = []
-	const productImagesF = [
-		'/public/product_images/21595-107_F.jpg',
-		'/public/product_images/K100226-008_F.jpg',
-		'/public/product_images/K100260-002_F.jpg',
-		'/public/product_images/K100267-002_F.jpg',
-		'/public/product_images/K200524-002_F.jpg',
-		'/public/product_images/K400218-003_F.jpg',
-		'/public/product_images/K800150-001_F.jpg',
-		'/public/product_images/K900121-001_F.jpg',
-		'/public/product_images/K900131-002_F.jpg'
-	];
-	const productImagesT = [
-		'/public/product_images/21595-107_T.jpg',
-		'/public/product_images/K100226-008_T.jpg',
-		'/public/product_images/K100260-002_T.jpg',
-		'/public/product_images/K100267-002_T.jpg',
-		'/public/product_images/K200524-002_T.jpg',
-		'/public/product_images/K400218-003_T.jpg',
-		'/public/product_images/K800150-001_T.jpg',
-		'/public/product_images/K900121-001_T.jpg',
-		'/public/product_images/K900131-002_T.jpg'
-	];
+  const products = []
+  const reviews = []
+  const productImagesF = [
+    '/public/product_images/21595-107_F.jpg',
+    '/public/product_images/K100226-008_F.jpg',
+    '/public/product_images/K100260-002_F.jpg',
+    '/public/product_images/K100267-002_F.jpg',
+    '/public/product_images/K200524-002_F.jpg',
+    '/public/product_images/K400218-003_F.jpg',
+    '/public/product_images/K800150-001_F.jpg',
+    '/public/product_images/K900121-001_F.jpg',
+    '/public/product_images/K900131-002_F.jpg'
+  ];
+  const productImagesT = [
+    '/public/product_images/21595-107_T.jpg',
+    '/public/product_images/K100226-008_T.jpg',
+    '/public/product_images/K100260-002_T.jpg',
+    '/public/product_images/K100267-002_T.jpg',
+    '/public/product_images/K200524-002_T.jpg',
+    '/public/product_images/K400218-003_T.jpg',
+    '/public/product_images/K800150-001_T.jpg',
+    '/public/product_images/K900121-001_T.jpg',
+    '/public/product_images/K900131-002_T.jpg'
+  ];
+
 	const users = []
 	const orders = []
 	const lineItems = []
-	let menC, womenC, kidsC, sockC, accessoriesC, allProducts, allUsers, allOrders, allLineItems, tim, tom, david;
+	let menC, womenC, kidsC, sockC, accessoriesC, allProducts, allUsers, allOrders, allLineItems, tim, tom, david, product1;
 
 	for (var i = 0; i < numberOfBeginProduct; i++) {
 		products.push(Product.create({
@@ -55,6 +58,15 @@ const seed = () => {
 				{ "white": { "8.0": 20, "8.5": 10, "9.0": 4, "9.5": 10, "10": 10, "10.0": 12, "11.5": 10, "12.0": 3 } },
 				{ "black": { "8.0": 20, "8.5": 10, "9.0": 4, "9.5": 10, "10": 10, "10.0": 12, "11.5": 10, "12.0": 3 } }
 			]
+		}))
+	}
+
+	for (var i = 0; i < numberOfBeginReview; i++) {
+		reviews.push(Review.create({
+			content: faker.lorem.sentences(),
+			rating: 3,
+			// rating: Math.floor(Math.random()*5)
+			title: faker.lorem.sentence(),
 		}))
 	}
 
@@ -134,7 +146,9 @@ const seed = () => {
 			return Promise.all(products)
 		})
 		.then(productsArr => {
+			// console.log(productsArr)
 			allProducts = productsArr
+			product1 = productsArr[0]
 			const relationships = [
 				productsArr[0].setCategory(womenC),
 				productsArr[1].setCategory(menC),
@@ -148,6 +162,7 @@ const seed = () => {
 			]
 			return Promise.all(relationships)
 		})
+		
 		.then(() => {
 			return Promise.all(users)
 		})
@@ -167,6 +182,36 @@ const seed = () => {
 				return order.setUser(allUsers[count])
 			})
 			return Promise.all(ordersUsers)
+		})
+		.then(()=>{
+			return Promise.all(reviews)
+		})
+		.then(reviewsArr=>{
+			const relationships = [
+				reviewsArr[0].setProduct(product1),
+		        reviewsArr[1].setProduct(product1),
+		        reviewsArr[2].setProduct(product1),
+		        reviewsArr[3].setProduct(product1),
+		        reviewsArr[4].setProduct(product1),
+		        reviewsArr[5].setProduct(product1),
+		        reviewsArr[6].setProduct(product1),
+		        reviewsArr[7].setProduct(product1),
+		        reviewsArr[8].setProduct(product1),
+		        reviewsArr[9].setProduct(product1),
+		        reviewsArr[0].setUser(tim),
+		        reviewsArr[1].setUser(tim),
+		        reviewsArr[2].setUser(tom),
+		        reviewsArr[3].setUser(tom),
+		        reviewsArr[4].setUser(tim),
+		        reviewsArr[5].setUser(david),
+		        reviewsArr[6].setUser(david),
+		        reviewsArr[7].setUser(tim),
+		        reviewsArr[8].setUser(tim),
+		        reviewsArr[9].setUser(tim),
+
+
+			]
+			return Promise.all(relationships)	
 		})
 		.then(() => {
 			return Promise.all(lineItems)
@@ -195,21 +240,22 @@ const seed = () => {
 				return item.setOrder(allOrders[count])
 			})
 			return Promise.all(lineOrders)
-		})
-		.then(() => {
-			return Promise.all([
-				Order.create({}),
-				Order.create({}),
-				Order.create({})
-			])
-		})
-		.then(([order1, order2, order3]) => {
-			return Promise.all([
-				order1.setUser(tim),
-				order2.setUser(tom),
-				order3.setUser(david)
-			])
-		})
+
+    })
+    .then(() => {
+      return Promise.all([
+        Order.create({}),
+        Order.create({}),
+        Order.create({})
+      ])
+    })
+    .then( ([order1, order2, order3]) => {
+      return Promise.all([
+        order1.setUser(tim),
+        order2.setUser(tom),
+        order3.setUser(david)
+      ])
+    })
 
 
 }

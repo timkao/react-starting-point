@@ -99,6 +99,33 @@ img {
   margin-top: 12px;
 }
 
+.centeredHeader{
+  text-align: center;
+}
+
+.formRow{
+  margin-bottom: 5px
+}
+
+.rateCircle{
+  width:10;
+  display:inline-block;
+  float:left;
+}
+
+.reviewButton{
+  position:relative;
+   left:50%;
+}
+
+#titleInput{
+  width: 100%; height: 30px;
+}
+
+#contentInput{
+ width: 100%; height: 80px;
+}
+
 .list-wrapper {
   border: 0.1vh solid grey;
 }
