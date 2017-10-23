@@ -32,7 +32,7 @@ function SavedItem(props) {
 
 const mapToState = (state) => {
   return {
-
+    savedProducts: state.savedProducts
   };
 }
 

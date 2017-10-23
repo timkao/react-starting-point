@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import Navbar from './Navbar'
 import Product from './Product'
-import store, {fetchCategories, getSavedProducts, getHistoryPurchases} from '../store';
+import store, {fetchCategories, getCurrentOrder, fetchSaveProducts, fetchHistoryPurchases} from '../store';
 // import {thunk actions come here later} from '../store';
 import Auth from './Auth';
 import Cart from './Cart';
@@ -16,6 +16,9 @@ export default class Main extends Component {
 	componentDidMount(){
 		const categoriesThunk = fetchCategories();
 		store.dispatch(categoriesThunk);
+		// store.dispatch(getCurrentOrder());
+		// store.dispatch(fetchSaveProducts());
+		// store.dispatch(fetchHistoryPurchases());
 	}
 	render(){
 		return(

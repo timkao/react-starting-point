@@ -1,6 +1,7 @@
 body {
   padding:0;
   margin:0;
+  font-size: 12px;
 }
 
 img {
@@ -110,3 +111,55 @@ img {
   margin: 1vh 1vh 1vh 1vh
 }
 
+h2 {
+  font-size:4em;
+  margin:.45em 0;
+}
+h4 {
+  line-height: 1.35em;
+}
+
+#home .hero {
+  background-image: url(https://wallpaperscraft.com/image/yeezy_boost_350_adidas_sneakers_102932_1920x1080.jpg);
+  height: 85vh;
+  width: 100%;
+  background-position: 185% 50%;
+  background-size: 85%;
+  background-color: #eeeee4;
+  background-repeat: no-repeat;
+}
+
+#home .heroContent {
+  height:100%;
+  position: relative;
+}
+
+#home .heroCopy {
+  position: relative;
+  top:50%;
+  width:550px;
+  text-align: center;
+  border-top:2px dotted #ff5252;
+  border-bottom:2px dotted #ff5252;
+  transform: translateY(-50%);
+}
+
+.cta {
+  width:150px;
+  border:2px solid #333;
+  text-align: center;
+  margin: 24px auto;
+}
+.cta a {
+  padding: 9px 0;
+  display: block;
+  color: #333;
+  transition: all .075s linear;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.cta a:hover {
+  background-color:#ffffee;
+  transition: all .075s linear;
+}

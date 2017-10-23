@@ -13,7 +13,6 @@ const User = conn.define('user', {
 	},
 	password: {
 		type: Sequelize.TEXT,
-		allowNull: false
 	},
 	address1: {
 		type: Sequelize.STRING
