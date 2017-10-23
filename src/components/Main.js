@@ -5,16 +5,13 @@ import Navbar from './Navbar'
 import Product from './Product'
 import store, {fetchCategories, getCurrentOrder, fetchSaveProducts, fetchHistoryPurchases} from '../store';
 // import {thunk actions come here later} from '../store';
-<<<<<<< HEAD
-import Auth from './Auth'
-import Review from './Review'
-=======
 import Auth from './Auth';
 import Cart from './Cart';
 import Checkout from './Checkout';
 import Admin from './AdminProduct';
 import Products from './Products';
->>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af
+import Review from './Review'
+
 
 export default class Main extends Component {
 
@@ -33,13 +30,10 @@ export default class Main extends Component {
 							<Route exact path="/product/:productId" component={Product} />
 							<Route exact path="/signup" component={Auth} />
 							<Route exact path="/login" component={Auth} />
-<<<<<<< HEAD
 							<Route exact path="/reviews/:productId" component={Review} />
-=======
 							<Route exact path="/cart" component={Cart} />
 							<Route exact path="/checkout" component={Checkout} />
 							<Route exact path="/admin" component={Admin} />
->>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af
 						</Switch>
 					</div>
 				</div>

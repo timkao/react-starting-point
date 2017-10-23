@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
-import store, {fetchProduct} from '../store';
 import Review from './Review';
-=======
 import store, {fetchProduct, addItemToOrder, getCurrentOrder} from '../store';
->>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af
 
 class Product extends Component{
 	constructor(props){
@@ -88,12 +84,8 @@ class Product extends Component{
 		let oneColor = inventory[0] || {'fake_key': 'fake_val'}
 		let oneColorKey = Object.keys(oneColor)[0] || 'fake_key'
 		let allSizes = Object.keys(oneColor[oneColorKey])
-<<<<<<< HEAD
-		// console.log(this.state)
-=======
 		console.log(this.state)
 		const order = this.props.currentOrder;
->>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af
 		const state = this.state
 		return(
 			<div>
@@ -122,12 +114,6 @@ class Product extends Component{
 
 						<h4>Size</h4>
 							{ this.renderSizes()}
-<<<<<<< HEAD
-							
-=======
-
-
->>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af
 						<div>{product.size}</div>
 						<button onClick={() => {this.props.addItemToCart(product.id, order.id)} }className="btn btn-default single_btn">Add To Cart</button>
 					</div>
@@ -162,23 +148,3 @@ const mapToDispatch = (dispatch) => {
 
 const ProductContainer = connect(mapToState, mapToDispatch)(Product)
 export default ProductContainer
-
-<<<<<<< HEAD
-// <Review/>
-=======
-/*
-<div>{props.products[0]}</div>
-
-<Link className="thumbnail" to={`/albums/${album.id}`}>
-*/
-
-// <div className="rectangle"></div>
-
-// onClick=someFunction
-
-// <div key={color}>
-// 	<div>{color}</div>
-// 	<div className="rectangle"></div>
-// </div>
-// style={`color:'${color}'`}
->>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af

@@ -92,7 +92,7 @@ app.get('/auth/google/callback', passport.authenticate('google', {
   })
 );
 
-<<<<<<< HEAD
+
 
 // app.use(function (req, res, next) {
 //   console.log('session', req.session, req.user);
@@ -108,8 +108,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-=======
->>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af
+
 app.use(function (req, res, next) {
   // console.log('session', req.session, req.user);
   next();
@@ -161,17 +160,11 @@ app.post('/signup', (req, res, next) => {
           })
           .then( order => {
             return order.setUser(newUser);
-<<<<<<< HEAD
+
           })
           .then(() => {
             res.send(newUser);
           })
-=======
-          })
-          .then(() => {
-            res.send(newUser);
-          })
->>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af
 
       }
     })
@@ -212,8 +205,4 @@ db.sync()
 
   // app.listen(port, () => {
   //   console.log(`listening on port ${port}`)
-<<<<<<< HEAD
   // });
-=======
-  // });
->>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af

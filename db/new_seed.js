@@ -3,11 +3,12 @@ const { Product, Category, User, LineItem, Order, Review } = require('./index').
 const faker = require('faker');
 const rn = require('random-number');
 
-<<<<<<< HEAD
 const numberOfBeginProduct = 9
 const numberOfFakeOrder = 15
 const numberOfFakeLineItem = 50
 const numberOfBeginReview = 10
+const shoeColors = ['red','green','blue','yellow','white', 'black'];
+const sizeArray = ['8.0', '8.5','9.0', '9.5','10.0', '10.5','11.0', '11.5','12.0'];
 
 const seed = () => {
   const products = []
@@ -34,38 +35,7 @@ const seed = () => {
     '/public/product_images/K900121-001_T.jpg',
     '/public/product_images/K900131-002_T.jpg'
   ];
-=======
-const numberOfBeginProduct = 9;
-const numberOfFakeOrder = 15;
-const numberOfFakeLineItem = 50;
-const shoeColors = ['red','green','blue','yellow','white', 'black'];
-const sizeArray = ['8.0', '8.5','9.0', '9.5','10.0', '10.5','11.0', '11.5','12.0'];
 
-const seed = () => {
-	const products = []
-	const productImagesF = [
-		'/public/product_images/21595-107_F.jpg',
-		'/public/product_images/K100226-008_F.jpg',
-		'/public/product_images/K100260-002_F.jpg',
-		'/public/product_images/K100267-002_F.jpg',
-		'/public/product_images/K200524-002_F.jpg',
-		'/public/product_images/K400218-003_F.jpg',
-		'/public/product_images/K800150-001_F.jpg',
-		'/public/product_images/K900121-001_F.jpg',
-		'/public/product_images/K900131-002_F.jpg'
-	];
-	const productImagesT = [
-		'/public/product_images/21595-107_T.jpg',
-		'/public/product_images/K100226-008_T.jpg',
-		'/public/product_images/K100260-002_T.jpg',
-		'/public/product_images/K100267-002_T.jpg',
-		'/public/product_images/K200524-002_T.jpg',
-		'/public/product_images/K400218-003_T.jpg',
-		'/public/product_images/K800150-001_T.jpg',
-		'/public/product_images/K900121-001_T.jpg',
-		'/public/product_images/K900131-002_T.jpg'
-	];
->>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af
 	const users = []
 	const orders = []
 	const lineItems = []
@@ -75,16 +45,6 @@ const seed = () => {
 		products.push(Product.create({
 			name: faker.random.word(),
 			price: faker.commerce.price(),
-<<<<<<< HEAD
-      pictureUrl: productImagesF[i],
-      pictureUrl2: productImagesT[i],
-      inventory: [
-        {"red": {"8": 20, "9": 10, "7": 0, "10": 10, "6": 10}},
-        {"blue": {"8": 20, "9": 10, "7": 4, "10": 10, "6": 10}},
-        {"white": {"8": 20, "9": 10, "7": 4, "10": 10, "6": 10}},
-        {"green": {"8": 20, "9": 10, "7": 4, "10": 10, "6": 10}}
-      ]
-=======
 			description: faker.lorem.paragraph(),
 			pictureUrl: productImagesF[i],
 			pictureUrl2: productImagesT[i],
@@ -98,7 +58,6 @@ const seed = () => {
 				{ "white": { "8.0": 20, "8.5": 10, "9.0": 4, "9.5": 10, "10": 10, "10.0": 12, "11.5": 10, "12.0": 3 } },
 				{ "black": { "8.0": 20, "8.5": 10, "9.0": 4, "9.5": 10, "10": 10, "10.0": 12, "11.5": 10, "12.0": 3 } }
 			]
->>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af
 		}))
 	}
 
@@ -281,7 +240,7 @@ const seed = () => {
 				return item.setOrder(allOrders[count])
 			})
 			return Promise.all(lineOrders)
-<<<<<<< HEAD
+
     })
     .then(() => {
       return Promise.all([
@@ -297,24 +256,6 @@ const seed = () => {
         order3.setUser(david)
       ])
     })
-    
-=======
-		})
-		.then(() => {
-			return Promise.all([
-				Order.create({}),
-				Order.create({}),
-				Order.create({})
-			])
-		})
-		.then(([order1, order2, order3]) => {
-			return Promise.all([
-				order1.setUser(tim),
-				order2.setUser(tom),
-				order3.setUser(david)
-			])
-		})
->>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af
 
 
 }
