@@ -163,3 +163,7 @@ h4 {
   background-color:#ffffee;
   transition: all .075s linear;
 }
+
+#admin-product {
+  margin-top: 10vh;
+}

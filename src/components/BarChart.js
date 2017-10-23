@@ -40,7 +40,7 @@ class BarChart extends Component {
   render() {
 
     // canvas setting
-    const canvasWidth = 1000;
+    const canvasWidth = 1200;
     const canvasHeight = 300;
     const padding = 20;
 

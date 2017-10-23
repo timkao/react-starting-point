@@ -30,7 +30,7 @@ export default class Main extends Component {
 							<Route exact path="/login" component={Auth} />
 							<Route exact path="/cart" component={Cart} />
 							<Route exact path="/checkout" component={Checkout} />
-							<Route exact path="/admin" component={Admin} />
+							<Route path="/admin" component={Admin} />
 						</Switch>
 					</div>
 				</div>

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../store';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import BarChart from './BarChart';
+import faker from 'faker';
+import ProductForm from './ProductForm';
 
 
 class AdminP extends Component {
@@ -16,21 +18,53 @@ class AdminP extends Component {
   }
 
   render() {
-      const priceData = [];
-      const labelData = [];
-
-      this.props.products.forEach( product => {
-        priceData.push(product.price);
-        labelData.push(product.name);
-      })
+    const priceData = [];
+    const labelData = [];
+    const { products } = this.props;
+    products.forEach(product => {
+      priceData.push(product.price);
+      labelData.push(product.name);
+    })
 
 
 
     return (
       <div>
-        {
-          this.props.products.length && <BarChart data={priceData} labels={labelData} />
-        }
+        <div className="row">
+          {
+            products.length && <BarChart data={priceData} labels={labelData} />
+          }
+        </div>
+        <div id="admin-product" className="row">
+          <div className="col-lg-8">
+            {
+              products.length && products.map(product => {
+                return (
+                  <div key={product.id} className="row">
+                    <div className="col-lg-3">
+                      <img src={product.pictureUrl} />
+                    </div>
+                    <div className="col-lg-3">
+                      Name: {product.name}
+                    </div>
+                    <div className="col-lg-3">
+                      Price: $ {product.price}
+                    </div>
+                    <div className="col-lg-3">
+                      <button className="btn btn-default"><Link to={`/Admin/editProduct/${product.id}`}>edit</Link></button>
+                      <button className="btn btn-danger">delete</button>
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </div>
+          <div className="col-lg-4">
+            {
+            products.length && <Route exact path='/Admin/editProduct/:productId' render={(props) => <ProductForm info={props} products={products} />} />
+            }
+          </div>
+        </div>
       </div>
 
     )
