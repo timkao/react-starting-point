@@ -7,6 +7,8 @@ const numberOfBeginProduct = 9
 const numberOfFakeOrder = 15
 const numberOfFakeLineItem = 50
 const shoeColors = ['red','green','blue','yellow','white', 'black']
+const sizeArray = ['8.0', '8.5','9.0', '9.5','10.0', '10.5','11.0', '11.5','12.0']
+
 const seed = () => {
   const products = []
   const productImagesF = [
@@ -44,6 +46,7 @@ const seed = () => {
       pictureUrl: productImagesF[i],
 			pictureUrl2: productImagesT[i],
 			colors: [shoeColors[Math.floor((Math.random()*6))],shoeColors[Math.floor((Math.random()*6))],shoeColors[Math.floor((Math.random()*6))]],
+			sizes: [sizeArray[Math.floor((Math.random()*9))],sizeArray[Math.floor((Math.random()*9))],sizeArray[Math.floor((Math.random()*9))],sizeArray[Math.floor((Math.random()*9))],sizeArray[Math.floor((Math.random()*9))]],
       inventory: [
         {"red": {"8": 20, "9": 10, "7": 4, "10": 10, "6": 10}},
         {"blue": {"8": 20, "9": 10, "7": 4, "10": 10, "6": 10}},
