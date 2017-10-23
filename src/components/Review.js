@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import store, {fetchReviews} from '../store';
+import ReviewForm from './ReviewForm';
 
 class Review extends Component{
 	constructor(props){
@@ -15,14 +16,21 @@ class Review extends Component{
 	}
 	
 	render(){
-		console.log(this.props)
+		
 		const reviewsArray = this.props.reviews
 		return(
 			<div>
 				<div className="row">
 					<hr/>
-					<h2 className="centeredHeader">Reviews</h2>
+					<div className="col-md-9">
+						<h2 className="centeredHeader">Reviews</h2>
+					</div>
 				</div>
+
+				<div className="row">
+					<ReviewForm/>
+				</div>
+
 				<div className="row">
 					<div className="col-md-9">
 						{reviewsArray.map(review =>{
