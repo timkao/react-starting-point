@@ -1,3 +1,17 @@
+body {
+  padding:0;
+  margin:0;
+}
+
+img {
+  width: 100%;
+}
+
+.wrapper {
+  max-width:1440px;
+  margin: 0 auto;
+}
+
 #cartList img {
   height: 10vh;
   width: auto
@@ -94,4 +108,10 @@ img {
 
 .list-group-item {
   margin: 1vh 1vh 1vh 1vh
+}
+
+.navbar {
+  margin:0;
+  position: fixed;
+  width:100%;
 }

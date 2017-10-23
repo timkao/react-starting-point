@@ -30,6 +30,12 @@ const Product = conn.define('product', {
 	},
 	inventory: {
 		type: Sequelize.ARRAY(Sequelize.JSON)  // {"red": {"size8": 10}}
+	},
+	color: {
+		type: Sequelize.STRING
+	},
+	size: {
+		type: Sequelize.STRING
 	}
 });
 
