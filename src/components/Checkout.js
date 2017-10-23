@@ -2,12 +2,13 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom';
-import { checkOut } from '../store'
+import { checkOut, getCurrentOrder } from '../store';
+import ProductItem from './ProductItem';
 import axios from 'axios'
 
 class Checkout extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
     	name: '',
     	email: '',
@@ -42,10 +43,33 @@ class Checkout extends Component {
     this.handleChangePaymentMethod = this.handleChangePaymentMethod.bind(this)
     this.handleChangeStatus = this.handleChangeStatus.bind(this)
   }
+
 	handleSubmit(evt) {
     evt.preventDefault();
-   	// alert(this.state.paymentMethod)
-   	axios.post('/api/orders/',
+   	
+   	if (this.props.currentOrder.userId){
+   		axios.put(`/api/orders/${this.props.currentOrder.id}`,
+   			{
+   				name: this.state.name,
+					email: this.state.email,
+					phoneNumber: this.state.phoneNumber,
+					shippingAddress1: this.state.shippingAddress1,
+					shippingAddress2: this.state.shippingAddress2,
+					shippingCity: this.state.shippingCity,
+					shippingState: this.state.shippingState,
+					shippingZip: this.state.shippingZip,
+					billingAddress1: this.state.billingAddress1,
+					billingAddress2: this.state.billingAddress2,
+					billingCity: this.state.billingCity,
+					billingState: this.state.billingState,
+					billingZip: this.state.billingZip,
+					paymentMethod: this.state.paymentMethod,
+					status:'Placed'
+   			})
+   		.then(() => this.props.history.push('/reciept'))
+   	}
+   	else{
+   		axios.post('/api/orders/',
 			{
 				name: this.state.name,
 				email: this.state.email,
@@ -61,10 +85,12 @@ class Checkout extends Component {
 				billingState: this.state.billingState,
 				billingZip: this.state.billingZip,
 				paymentMethod: this.state.paymentMethod,
-				status:'Placed'
-			}
-		)
-		.then(() => this.props.history.push('/'))
+				status:'Placed',
+				lineitems: this.props.currentOrder.lineitems
+			})
+			.then(() => this.props.history.push('/reciept'))
+   	}
+   	
   }
   handleChangeName(evt){this.setState({name: evt.target.value})}
   handleChangeEmail(evt){this.setState({email: evt.target.value})}
@@ -83,9 +109,10 @@ class Checkout extends Component {
   handleChangeStatus(evt){this.setState({status: evt.target.value})
 }
   render(){
-
+// const items = this.props.currentOrder.lineitems || [];
+// {console.log('itemsssss'+JSON.stringify(items))}
 		return (
-			<div>
+			<div>  
 				<form onSubmit={ this.handleSubmit }>
 					<div>
 	        	<hr />
@@ -160,10 +187,17 @@ class Checkout extends Component {
 		        <button type="submit" name="submitOrder"  >Save</button>
 	        </div>
 		    </form>
-		    
+		    {console.log(this.props.currentOrder)}
 		  </div>
 		)
 	}
 }
+const mapStateToProps = (state, ownProps = {}) => {
+  return  {currentOrder: state.currentOrder}
+}
+const mapDispatchToProps = { getCurrentOrder }
 
-export default Checkout
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
+
+
+
