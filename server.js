@@ -67,14 +67,6 @@ passport.use(
       }
     })
     .catch(done);
-    // User.findOrCreate({
-    //   where: {googleId: profile.id},
-    //   defaults: info
-    // })
-    // .spread(function (user) {
-    //   done(null, user);
-    // })
-    // .catch(done);
   })
 );
 
@@ -98,12 +90,6 @@ app.get('/auth/google/callback', passport.authenticate('google', {
     failureRedirect: '/' // or wherever
   })
 );
-
-
-// app.use(function (req, res, next) {
-//   console.log('session', req.session, req.user);
-//   next();
-// });
 
 app.use(function (req, res, next) {
   // console.log('session', req.session, req.user);
