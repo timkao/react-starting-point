@@ -174,16 +174,16 @@ app.use(function (err, req, res, next) {
   res.status(500).send('Something broke!')
 })
 
-// db.sync()
-//   .then(new_seed)
-//   .then(() => {
+db.sync()
+  .then(new_seed)
+  .then(() => {
 
-//     app.listen(port, () => {
-//       console.log(`listening on port ${port}`)
-//     });
+    app.listen(port, () => {
+      console.log(`listening on port ${port}`)
+    });
 
-//   })
+  })
 
-  app.listen(port, () => {
-    console.log(`listening on port ${port}`)
-  });
+  // app.listen(port, () => {
+  //   console.log(`listening on port ${port}`)
+  // });

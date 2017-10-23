@@ -80,7 +80,6 @@ class Product extends Component{
 		const inventory = product.inventory || []
 		let intermediary = inventory.map(obj=>{return(Object.keys(obj))})
 		let colors = [].concat.apply([], intermediary)
-
 		let oneColor = inventory[0] || {'fake_key': 'fake_val'}
 		let oneColorKey = Object.keys(oneColor)[0] || 'fake_key'
 		let allSizes = Object.keys(oneColor[oneColorKey])

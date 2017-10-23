@@ -13,15 +13,15 @@ router.get('/', (req, res, next) => {
 })
 
 // GET single category (by category ID) includes products
-router.get('/:id', (req, res, next) => {
-	Category.findById(req.params.id*1, {
-		include: [Product]
-	})
-	.then(category => {
-		res.send(category)
-	})
-	.catch(next)
-})
+// router.get('/:id', (req, res, next) => {
+// 	Category.findById(req.params.id*1, {
+// 		include: [Product]
+// 	})
+// 	.then(category => {
+// 		res.send(category)
+// 	})
+// 	.catch(next)
+// })
 
 router.get('/:categoryName', (req, res, next) => {
 	Category.findAll({

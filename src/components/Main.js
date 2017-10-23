@@ -8,7 +8,8 @@ import store, {fetchCategories, getSavedProducts, getHistoryPurchases} from '../
 import Auth from './Auth';
 import Cart from './Cart';
 import Checkout from './Checkout';
-import Admin from './AdminProduct'
+import Admin from './AdminProduct';
+import Products from './Products';
 
 export default class Main extends Component {
 
@@ -23,7 +24,7 @@ export default class Main extends Component {
 					<div className="container">
 						<Switch>
 							<Route exact path="/" component={Home} />
-							<Route exact path="/categories/:categoryName" component={Home} />
+							<Route exact path="/categories/:categoryName" component={Products} />
 							<Route exact path="/product/:productId" component={Product} />
 							<Route exact path="/signup" component={Auth} />
 							<Route exact path="/login" component={Auth} />

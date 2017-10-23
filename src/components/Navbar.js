@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { logoutUser, getSavedProducts, getHistoryPurchases } from '../store';
+import { logoutUser, getSavedProducts, getHistoryPurchases, getCurrentOrder } from '../store';
 
 function Navbar(props){
 
@@ -55,6 +55,7 @@ const mapToDispatch = (dispatch) => {
 			dispatch(thunk);
 			dispatch(getSavedProducts([]));
 			dispatch(getHistoryPurchases([]));
+			dispatch(getCurrentOrder());
     }
 	}
 }

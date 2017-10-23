@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import Slider, { Range } from 'rc-slider';
+import { Link } from 'react-router-dom';
 //import 'rc-slider/assets/index.css';
 
 export default class Products extends Component {
@@ -177,8 +178,8 @@ export default class Products extends Component {
                   <div className='colorFilter'>
                     <p>Colors:</p>
                     {
-                        availableColors.map(color=>(
-                            <div data-value={color} onClick={this.selectColor} key={color} className={'colorTileFilter' +(selectedColors.includes(color) ?' clicked':'')} style={{backgroundColor:`${color}`}}></div>
+                        availableColors.map( (color, i)=>(
+                            <div data-value={color} onClick={this.selectColor} key={i} className={'colorTileFilter' +(selectedColors.includes(color) ?' clicked':'')} style={{backgroundColor:`${color}`}}></div>
                         ))
                     }
                   </div>
@@ -201,9 +202,9 @@ export default class Products extends Component {
               <div className='wrapper'>
               <div className='productRow'>
                 {
-                    products.map(product => (
-                        <div className='product'>
-                            <a href={`/product/${product.id}`}><img src={product.pictureUrl} /></a>
+                    products.map( (product, i) => (
+                        <div key={i} className='product'>
+                            <Link to={`/product/${product.id}`}><img src={product.pictureUrl} /></Link>
                             <div className='productDetails'>
                                 <div className='productName'>
                                     <h4>{product.name}</h4>
@@ -214,7 +215,7 @@ export default class Products extends Component {
                             </div>
                             <div className='productColors'>
                                 {
-                                    product.colors.map(color => (
+                                    product.colors.map( (color) => (
                                         <div key={color} className='colorTile' style={{backgroundColor:`${color}`}}></div>
                                     ))
                                 }
