@@ -99,6 +99,34 @@ img {
   margin-top: 12px;
 }
 
+<<<<<<< HEAD
+.centeredHeader{
+  text-align: center;  
+}
+
+.formRow{
+  margin-bottom: 5px
+}
+
+.rateCircle{
+  width:10;
+  display:inline-block;
+  float:left;
+}
+
+.reviewButton{
+  position:relative;
+   left:50%;
+}
+
+#titleInput{
+  width: 100%; height: 30px; 
+}
+
+#contentInput{
+ width: 100%; height: 80px;  
+}
+=======
 .list-wrapper {
   border: 0.1vh solid grey;
 }
@@ -163,3 +191,4 @@ h4 {
   background-color:#ffffee;
   transition: all .075s linear;
 }
+>>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af

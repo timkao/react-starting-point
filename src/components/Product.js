@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Review from './Review';
 import store, {fetchProduct, addItemToOrder, getCurrentOrder} from '../store';
 
 class Product extends Component{
 	constructor(props){
 		super(props);
-		this.state = {sizes:[], colorClicked:false}
+		this.state = {sizes:[], colorClicked:false, selectedColor:'', selectedSize:''}
 		this.getSizes = this.getSizes.bind(this)
 		this.renderSizes = this.renderSizes.bind(this)
+		this.addItemToCart = this.addItemToCart.bind(this)
+		this.setSize = this.setSize.bind(this)
 	}
 
 	componentDidMount(props){
@@ -20,6 +23,7 @@ class Product extends Component{
 	}
 
 	getSizes(e){
+		console.log(e.target.id)
 		let color = e.target.id
 		let inventory = this.props.product.inventory || []
 		let colorObj = inventory.filter((obj)=> {
@@ -31,9 +35,22 @@ class Product extends Component{
 
 		})
 
-		this.setState({sizes, colorClicked:true})
+		this.setState({sizes, colorClicked:true, selectedColor:color})
 
 	}
+
+	setSize(e){
+		this.setState({selectedSize: e.target.id})
+	}
+
+	addItemToCart(productId, orderId) {
+		    const thunk = addItemToOrder(orderId, productId, {
+		        color: this.state.selectedColor,
+				size: this.state.selectedSize,
+				quantity: 1
+		    });
+					store.dispatch(thunk);
+		    }
 
 	renderSizes(){
 		//getting at allSizes off of first entry in inventory for now.
@@ -52,8 +69,8 @@ class Product extends Component{
 			return (
 				this.state.sizes.map(size=>{
 					return(
-						<div className="btn" key={`size_${size}`}>
-						<span className="btn__label">{size}</span>
+						<div className="btn" key={`size_${size}`} id={size} onClick={this.setSize}>
+						<span className="btn__label" id={size}>{size}</span>
 						</div>
 						)
 				})
@@ -113,12 +130,11 @@ class Product extends Component{
 
 						<h4>Size</h4>
 							{ this.renderSizes()}
-
-
 						<div>{product.size}</div>
-						<button onClick={() => {this.props.addItemToCart(product.id, order.id)} }className="btn btn-default single_btn">Add To Cart</button>
+						<button onClick={() => {this.addItemToCart(product.id, order.id)} }className="btn btn-default single_btn">Add To Cart</button>
 					</div>
 				</div>
+				<Review productId={this.props.productId}/>
 			</div>
 			)
 	}
@@ -135,32 +151,9 @@ const mapToState = (state, ownProps) => {
 
 const mapToDispatch = (dispatch) => {
 	return {
-		addItemToCart(productId, orderId) {
-      const thunk = addItemToOrder(orderId, productId, {
-        color: 'need your input',
-				size: 'need your input',
-				quantity: 1
-      });
-			dispatch(thunk);
-    }
+		
 	}
 }
 
 const ProductContainer = connect(mapToState, mapToDispatch)(Product)
 export default ProductContainer
-
-/*
-<div>{props.products[0]}</div>
-
-<Link className="thumbnail" to={`/albums/${album.id}`}>
-*/
-
-// <div className="rectangle"></div>
-
-// onClick=someFunction
-
-// <div key={color}>
-// 	<div>{color}</div>
-// 	<div className="rectangle"></div>
-// </div>
-// style={`color:'${color}'`}

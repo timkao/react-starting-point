@@ -1,3 +1,4 @@
+
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -91,6 +92,23 @@ app.get('/auth/google/callback', passport.authenticate('google', {
   })
 );
 
+
+
+// app.use(function (req, res, next) {
+//   console.log('session', req.session, req.user);
+//   next();
+// });
+
+app.use(function (req, res, next) {
+  if (req.user) {
+    req.logIn( req.user, function(){
+      req.session.userId = req.user.id
+    })
+  }
+  next();
+});
+
+
 app.use(function (req, res, next) {
   // console.log('session', req.session, req.user);
   next();
@@ -142,6 +160,7 @@ app.post('/signup', (req, res, next) => {
           })
           .then( order => {
             return order.setUser(newUser);
+
           })
           .then(() => {
             res.send(newUser);
