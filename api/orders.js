@@ -58,6 +58,14 @@ router.put('/:id', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
 	Order.create(req.body)
+	.then((order)=>{
+		console.log('reqbody' + JSON.stringify(req.body.lineitems[0].id))
+		const lineitems = req.body.lineitems
+		lineitems.map(lineitem=>{
+			console.log(lineitem.id)
+			// need to create lineitem and then attach to order lineitem.setOrder(order)
+		})
+	})
 	.then(()=> res.sendStatus(204))
   .catch(next);
 });
