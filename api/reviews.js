@@ -13,7 +13,7 @@ router.get('/:productId', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     console.log(req.body)
-    req.body[userId]= req.session.userId
+    // req.body[userId]= req.session.userId
     Review.create(req.body)
     .then(review => res.send(review))
     .catch(next)

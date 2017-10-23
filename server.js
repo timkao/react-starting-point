@@ -44,13 +44,28 @@ passport.use(
     var info = {
       name: profile.displayName,
       email: profile.emails[0].value,
+      googleId: profile.id
     };
-    User.findOrCreate({
-      where: {googleId: profile.id},
-      defaults: info
-    })
-    .spread(function (user) {
-      done(null, user);
+    console.log(info);
+    let currentUser;
+    User.findOne({where: {googleId: profile.id}})
+    .then( user => {
+      if (!user){
+        User.create(info)
+        .then( newUser => {
+          currentUser = newUser;
+          return Order.create({})
+        })
+        .then( order => {
+          return order.setUser(currentUser);
+        })
+        .then( () => {
+          done(null, currentUser);
+        })
+      }
+      else {
+        done(null, user);
+      }
     })
     .catch(done);
   })
@@ -77,6 +92,7 @@ app.get('/auth/google/callback', passport.authenticate('google', {
   })
 );
 
+<<<<<<< HEAD
 
 // app.use(function (req, res, next) {
 //   console.log('session', req.session, req.user);
@@ -92,8 +108,10 @@ app.use(function (req, res, next) {
   next();
 });
 
+=======
+>>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af
 app.use(function (req, res, next) {
-  //console.log('session', req.session, req.user);
+  // console.log('session', req.session, req.user);
   next();
 });
 
@@ -143,10 +161,17 @@ app.post('/signup', (req, res, next) => {
           })
           .then( order => {
             return order.setUser(newUser);
+<<<<<<< HEAD
           })
           .then(() => {
             res.send(newUser);
           })
+=======
+          })
+          .then(() => {
+            res.send(newUser);
+          })
+>>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af
 
       }
     })
@@ -187,4 +212,8 @@ db.sync()
 
   // app.listen(port, () => {
   //   console.log(`listening on port ${port}`)
+<<<<<<< HEAD
   // });
+=======
+  // });
+>>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af

@@ -48,6 +48,28 @@ router.get('/user/:userId', (req, res, next) => {
 		.catch(next)
 });
 
+router.put('/:id', (req, res, next) => {
+	Order.update(req.body, {
+		where : { id : req.params.id }
+	})
+	.then((order) => {res.send(order)})
+	.catch(next)
+});
+
+router.post('/', (req, res, next) => {
+	Order.create(req.body)
+	.then((order)=>{
+		console.log('reqbody' + JSON.stringify(req.body.lineitems[0].id))
+		const lineitems = req.body.lineitems
+		lineitems.map(lineitem=>{
+			console.log(lineitem.id)
+			// need to create lineitem and then attach to order lineitem.setOrder(order)
+		})
+	})
+	.then(()=> res.sendStatus(204))
+  .catch(next);
+});
+
 
 //when we have extra time...
 
@@ -60,11 +82,5 @@ router.get('/user/:userId', (req, res, next) => {
 
 
 module.exports = router;
-
-
-
-
-
-
 
 

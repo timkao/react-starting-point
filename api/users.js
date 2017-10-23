@@ -36,7 +36,6 @@ router.get('/currentOrder', (req, res, next) => {
 // add a product to savedList
 router.put('/savelist', (req, res, next) => {
 	if (req.session.userId) {
-		// const id = 3 // from req.session.userId
 		User.findById(req.session.userId)
 			.then(user => {
 				// user.saveList.push(req.body) does not work...
@@ -48,17 +47,22 @@ router.put('/savelist', (req, res, next) => {
 			})
 			.catch(next)
 	}
+	else {
+		res.send('not member');
+	}
 })
 
 // get all products from savedList
 router.get('/savelist', (req, res, next) => {
 	if (req.session.userId) {
-		// const id = 3  // from req.sesson.userId
 		User.findById(req.session.userId)
 			.then(user => {
 				res.send(user.savedList)
 			})
 			.catch(next)
+	}
+	else {
+		res.send('not member');
 	}
 })
 
@@ -74,14 +78,16 @@ router.put('/savelist/:productId', (req, res, next) => {
 			.then(user => {
 				res.send(user.savedList)
 			})
-			.catch(next)
+			.catch(next);
+	}
+	else {
+		res.send('not member');
 	}
 })
 
 // get all orders of the user
 router.get('/history', (req, res, next) => {
 	if (req.session.userId) {
-		// const id = 3 // from req.session.userId
 		User.findById(req.session.userId, {
 			include: {
 				model: Order,
@@ -92,26 +98,38 @@ router.get('/history', (req, res, next) => {
 			}
 		})
 			.then(user => {
-				res.send(user.orders)
+				res.send(user.orders);
 			})
-			.catch(next)
+			.catch(next);
+	}
+	else {
+		res.send('not memeber');
 	}
 })
 
 
-// someone might not have any order....
 router.put('/:userId', (req, res, next) => {
 	User.findById(req.params.userId, {
 		include: [Order]
 	})
 		.then(user => {
 			user.userType = 'admin'
-			return user.save()
+			return user.save();
 		})
 		.then(user => {
-			res.send(user)
+			res.send(user);
 		})
-		.catch(next)
+		.catch(next);
 });
+
+router.get('/currentUser', (req, res, next) => {
+	if (req.session.userId) {
+		User.findById(req.session.userId)
+		.then( user => {
+			res.send(user);
+		})
+		.catch(next);
+	}
+})
 
 module.exports = router;

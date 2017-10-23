@@ -53,12 +53,8 @@ router.post('/:orderId/:productId', (req, res, next) => {
 		Product.findById(req.params.productId)
 		.then( product => {
 			res.send({
-				color: req.color,
-				size: req.size,
-				quantity: req.quantity,
 				productId: req.params.productId,
 				product: product,
-				id: 'temp'
 			})
 		})
 		.catch(next);

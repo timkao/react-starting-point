@@ -8,20 +8,37 @@ class ReviewForm extends Component{
 		super(props);
 		this.state = {clickedRate:''}
 		this.setRate = this.setRate.bind(this)
+		this.handleSubmit = this.handleSubmit.bind(this)
 	}
 
 	setRate(rate){
 		this.setState({clickedRate:rate})
 	}
+
+	handleSubmit(e){
+		e.preventDefault();
+		
+		store.dispatch(postReview({
+			title: e.target.titleInput.value, 
+			content: e.target.contentInput.value, 
+			rating: this.state.clickedRate,
+			productId: this.props.productId*1,
+			userId: 1
+		}, this.props.productId))
+		store.dispatch(createReviewTitle(''))
+		store.dispatch(createReviewContent(''))
+
+		}
+
 	render(){
-		console.log(this.props)
-		console.log(this.state)
-		const {handleSubmit, handleChange, titleInput, contentInput} = this.props
+		// console.log(this.props)
+		// console.log(this.state)
+		const {handleChange, titleInput, contentInput} = this.props
 	
 		return(
 			<div>
 				<div className="row">
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={this.handleSubmit}>
 					<div className="row formRow">
 						<div className="col-md-1">
 							<label>Title</label>
@@ -77,17 +94,21 @@ class ReviewForm extends Component{
 }
 	
 
-const mapToState = (state) => {
+const mapToState = (state, ownProps) => {
 
 	return {
 		titleInput: state.titleInput,
 		contentInput: state.contentInput,
-		clickedRate: state.clickedRate
+		clickedRate: state.clickedRate,
+		productId: ownProps.productId
 
 	}
 }
 
-const mapToDispatch = (dispatch) => {
+const mapToDispatch = (dispatch, ownProps) => {
+	console.log('look here')
+	// console.log(this.location)
+
 	return {
 		handleChange(e){
 			if(e.target.name === 'title'){
@@ -97,15 +118,7 @@ const mapToDispatch = (dispatch) => {
 				dispatch(createReviewContent(e.target.value))	
 			}
 		},
-		handleSubmit(e){
-			e.preventDefault();
-			console.log(e.target.titleInput)
-			// const campusId = ownProps.match.params.campusId
-			dispatch(postReview({title: e.target.titleInput.value, content: e.target.contentInput.value, rating: this.state.clickedRate}))
-			dispatch(createReviewTitle(''))
-			dispatch(createReviewContent(''))
-
-		}
+		
 	}
 }
 

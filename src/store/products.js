@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 // action
 const GET_PRODUCTS = 'GET_PRODUCTS'
 
@@ -9,6 +11,16 @@ export const getProducts = (products) => {
   }
 }
 
+export const fetchProducts = () => {
+
+  return function(dispatch) {
+    axios.get('/api/products')
+    .then(result => result.data)
+    .then( products => {
+      dispatch(getProducts(products));
+    })
+  }
+}
 
 // reducer
 const productsReducer = (state = [], action) => {

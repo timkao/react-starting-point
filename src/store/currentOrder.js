@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const GET_CURRENT_ORDER = 'GET_CURRENT_ORDER'
+const SET_CURRENT_ORDER = 'SET_CURRENT_ORDER'
 const tempOrder = {
   billingAddress1: null,
   billingAddress2: null,
@@ -24,7 +24,7 @@ const tempOrder = {
 
 export const setCurrentOrder = (order) => {
   return {
-    type: GET_CURRENT_ORDER,
+    type: SET_CURRENT_ORDER,
     currentOrder: order
   }
 }
@@ -81,12 +81,12 @@ export const addItemToOrder = (orderId, productId, itemInfo) => {
   return function (dispatch) {
     axios.post(`/api/lineitems/${orderId}/${productId}`, itemInfo)
       .then(result => {
-        if (result.data.id !== 'temp') {
+        if (result.data.id) {
           const thunk = getCurrentOrder(orderId)
           dispatch(thunk)
         }
         else {
-          tempOrder.lineitems.push(result.data)
+          tempOrder.lineitems.push(Object.assign({}, result.data, itemInfo));
           const action = setCurrentOrder(tempOrder);
           dispatch(action);
         }
@@ -96,7 +96,7 @@ export const addItemToOrder = (orderId, productId, itemInfo) => {
 
 const orderReducer = (state = {}, action) => {
   switch (action.type) {
-    case GET_CURRENT_ORDER:
+    case SET_CURRENT_ORDER:
       return action.currentOrder
     default:
       return state

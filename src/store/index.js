@@ -11,8 +11,12 @@ import crossList from './crossPurchase';
 import historyList from './historyPurchase';
 import product from './product';
 import categories from './categories';
+<<<<<<< HEAD
 import reviews from './reviews';
 import {newReviewTitleReducer as newReviewTitle, newReviewContentReducer as newReviewContent} from './newReview';
+=======
+import currentUser from './currentUser';
+>>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af
 
 
 const reducer = combineReducers(
@@ -26,9 +30,13 @@ const reducer = combineReducers(
     historyList,
     categories,
     product,
+<<<<<<< HEAD
     reviews,
     newReviewTitle,
     newReviewContent
+=======
+    currentUser
+>>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af
 	}
 );
 
@@ -51,5 +59,9 @@ export * from './crossPurchase';
 export * from './historyPurchase';
 export * from './product';
 export * from './categories';
+<<<<<<< HEAD
 export * from './reviews';
 export * from './newReview';
+=======
+export * from './currentUser';
+>>>>>>> e811f3d2c643089844f9995c127eb4c0e4a913af

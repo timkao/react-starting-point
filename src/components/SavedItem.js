@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { removeFromList } from '../store'
+import { removeFromList } from '../store';
+import { Link } from 'react-router-dom';
+
 
 function SavedItem(props) {
 
@@ -9,7 +11,7 @@ function SavedItem(props) {
   return (
     <li className="list-group-item">
       <div className="row">
-        <div className="col-lg-3"><img src={item.pictureUrl} /></div>
+        <Link to={`/product/${item.id}`}><div className="col-lg-3"><img src={item.pictureUrl} /></div></Link>
         <div className="col-lg-5">
           {item.name}<br></br>
           <br></br>
@@ -30,7 +32,7 @@ function SavedItem(props) {
 
 const mapToState = (state) => {
   return {
-
+    savedProducts: state.savedProducts
   };
 }
 

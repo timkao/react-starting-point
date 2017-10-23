@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getCurrentOrder, fetchSaveProducts, fetchHistoryPurchases } from '../store';
 import ProductItem from './ProductItem';
-import SavedItem from './SavedItem'
-import CrossItems from './CrossItems'
+import SavedItem from './SavedItem';
+import CrossItems from './CrossItems';
+import { Link } from 'react-router-dom';
 
 class Cart extends Component {
 
   constructor(props) {
     super(props)
   }
-
   // cannot use this.props.currentOrder here. evenif i use componentWillMount and componentDidMount together
   // seems like "connect" runs after all lifecycle method...
   componentDidMount() {
@@ -20,7 +20,6 @@ class Cart extends Component {
   }
 
   render() {
-    console.log(this.props.currentOrder);
     const items = this.props.currentOrder.lineitems || [];
     items.sort(function (a, b) {
       return a.id - b.id
@@ -34,7 +33,6 @@ class Cart extends Component {
     const subtotalMessage = totalUnit > 1 ? `Subtotal ( ${totalUnit} items): ` : `Subtotal ( ${totalUnit} item ): `;
 
     const savedProducts = this.props.savedProducts || []
-    let key = 0;
 
     return (
       <div className="row">
@@ -44,13 +42,16 @@ class Cart extends Component {
             <div className="col-lg-2">Price</div>
             <div className="col-lg-2"><div className="pull-right">Quantity</div></div>
           </div>
-          <div className="row">
+          <div className="row list-wrapper">
+            {
+              items.length === 0 && <div className="col-lg-12">Cart is Empty</div>
+            }
             {
               <ul id="cartList" className="list-group">
                 {
                   items.map(item => {
                     return (
-                      <ProductItem key={item.id} item={item} />
+                      <ProductItem key={item.id} item={item} order={this.props.currentOrder} />
                     )
                   })
                 }
@@ -64,41 +65,52 @@ class Cart extends Component {
               </div>
             </div>
           </div>
-          <div className="row">
-            <div className="col-lg-8">{`Saved for Later ( ${savedProducts.length} item(s) )`}</div>
-            <div className="col-lg-2">Price</div>
-          </div>
+          {
+            this.props.currentOrder.id !== 'temp' && <div className="row">
+              <div className="col-lg-8">{`Saved for Later ( ${savedProducts.length} item(s) )`}</div>
+              <div className="col-lg-2">Price</div>
+            </div>
+          }
+          {
+            this.props.currentOrder.id !== 'temp' && <div className="row list-wrapper">
+              {
+                savedProducts.length === 0 && <div className="col-lg-12">List is Empty</div>
+              }
+              {
+                <ul id="savedList" className="list-group">
+                  {
+                    savedProducts.map( (product, i) => {
+                      return (
+                        <SavedItem key={i} item={product} />
+                      )
+                    })
+                  }
+                </ul>
+              }
+            </div>
+          }
+          {
+            items[0] && <div id="cross-list-title" className="row">
+              <div className="col-lg-8">People Also Buy</div>
+            </div>
+          }
           <div className="row">
             {
-              <ul id="savedList" className="list-group">
-                {
-                  savedProducts.map(product => {
-                    return (
-                      <SavedItem key={key++} item={product} />
-                    )
-                  })
-                }
-              </ul>
-            }
-          </div>
-          <div className="row">
-            People Also Buy <br></br>
-            {
-              items[0] && <CrossItems id={items[0].productId} orderId={this.props.currentOrder.id} />
+              items[0] && <CrossItems id={items[0].productId * 1} orderId={this.props.currentOrder.id} />
             }
           </div>
         </div>
         <div className="col-lg-2">
           <div className="row">
             <div className="col-lg-12">
-              {subtotalMessage}<br></br><span>$ {totalValue}</span>
-              <button className="btn btn-default">Proceed To Checkout</button>
+              {subtotalMessage}<br></br><span>$ {totalValue}</span><br></br>
+              <Link to="/checkout"><button className="btn btn-default">Proceed To Checkout</button></Link>
             </div>
           </div>
           <div className="row">
             <div className="col-lg-12">
               Buy it Again<br></br>
-            <CrossItems repeatList={this.props.historyList} orderId={this.props.currentOrder.id} />
+              <CrossItems repeatList={this.props.historyList} orderId={this.props.currentOrder.id} />
             </div>
           </div>
         </div>

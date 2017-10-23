@@ -1,6 +1,8 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { updateOrderQuantity, removeItemFromOrder, saveToList } from '../store'
+import React from 'react';
+import { connect } from 'react-redux';
+import { updateOrderQuantity, removeItemFromOrder, saveToList, setCurrentOrder } from '../store';
+import { Link } from 'react-router-dom';
+
 
 function ProductItem(props) {
 
@@ -9,7 +11,7 @@ function ProductItem(props) {
   return (
     <li className="list-group-item">
       <div className="row">
-        <div className="col-lg-3"><img src={item.product.pictureUrl} /></div>
+        <Link to={`/product/${item.product.id}`}><div className="col-lg-3"><img src={item.product.pictureUrl} /></div></Link>
         <div className="col-lg-5">
           {item.product.name}<br></br>
           color: {item.color}<br></br>
@@ -17,7 +19,10 @@ function ProductItem(props) {
           <span>In Stock</span><br></br>
           <div className="row">
             <div className="col-lg-4 cart-action" onClick={props.removeItemList}><a>Remove from Cart</a></div>
-            <div className="col-lg-4 cart-action" onClick={props.moveToSaveList}><a>Saved for later</a></div>
+            {
+              props.currentOrder.id !== 'temp' &&
+              <div className="col-lg-4 cart-action" onClick={props.moveToSaveList}><a>Saved for later</a></div>
+            }
           </div>
         </div>
         <div className="col-lg-2">$ {item.product.price}</div>
@@ -42,19 +47,38 @@ const mapToDispatch = (dispatch, ownProps) => {
 
   return {
     changeQuantity(evt) {
-      // if not a member, the id will be undefined
-      // if not a member, update the order on the front end
-      const thunk = updateOrderQuantity(orderId, id, evt.target.value)
-      dispatch(thunk)
+      if (ownProps.order.id !== 'temp') {
+        const thunk = updateOrderQuantity(orderId, id, evt.target.value)
+        dispatch(thunk)
+      }
+      else {
+        ownProps.order.lineitems.map( lineitem => {
+          if (ownProps.item.product.id === lineitem.productId * 1) {
+            lineitem.quantity = evt.target.value;
+            return lineitem;
+          }
+          else {
+            return lineitem;
+          }
+        })
+        const updatedOrder = Object.assign({}, ownProps.order);
+        dispatch(setCurrentOrder(updatedOrder));
+      }
     },
     removeItemList() {
-      // if not a member, the id will be undefined
-      // if not a memeber, update the order on the front end
-      const thunk = removeItemFromOrder(id, orderId)
-      dispatch(thunk)
+      if (ownProps.order.id !== 'temp') {
+        const thunk = removeItemFromOrder(id, orderId)
+        dispatch(thunk)
+      }
+      else {
+        ownProps.order.lineitems = ownProps.order.lineitems.filter(lineitem => {
+          return ownProps.item.product.id !== lineitem.productId * 1;
+        })
+        const updatedOrder = Object.assign({}, ownProps.order);
+        dispatch(setCurrentOrder(updatedOrder));
+      }
     },
     moveToSaveList() {
-      // not showing move to save list for non-member
       const thunk = saveToList(product)
       dispatch(thunk)
       const thunk2 = removeItemFromOrder(id, orderId)

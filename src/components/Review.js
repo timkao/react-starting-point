@@ -28,7 +28,7 @@ class Review extends Component{
 				</div>
 
 				<div className="row">
-					<ReviewForm/>
+					<ReviewForm productId={this.props.productId}/>
 				</div>
 
 				<div className="row">

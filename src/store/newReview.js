@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {fetchReviews, getReviews, reviewsReducer} from './reviews'
 const CREATE_REVIEW_TITLE = 'CREATE_REVIEW_TITLE'
 const CREATE_REVIEW_CONTENT = 'CREATE_REVIEW_CONTENT'
 
@@ -13,12 +14,13 @@ export function createReviewContent(content){
 	return action
 }
 
-export function postReview(student){
+export function postReview(review, productId){
+	
 	return function thunk (dispatch) {
-		return axios.post('/api/students', student)
+		return axios.post('/api/reviews', review)
 			.then(res => res.data)
-			.then(student => {
-				const action = getStudent(student[0])
+			.then(review => {
+				const action = fetchReviews(productId)
 				dispatch(action)
 			})
 	}
