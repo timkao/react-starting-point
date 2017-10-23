@@ -2,12 +2,12 @@
   "name": "profs-react-demo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "postinstall": "npm run webpack",
     "webpack": "./node_modules/webpack/bin/webpack.js",
     "test": "mocha",
-    "start:dev": "npm run webpack -- -w & DATABASE_URL=postgres://localhost/graceshopper nodemon --ignore src/ --ignore dist/ server.js"
+    "start:dev": "npm run webpack -- -w & nodemon --ignore /dist server.js"
   },
   "keywords": [],
   "author": "",
