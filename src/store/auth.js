@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { keyinPassword } from './'
+import { keyinPassword, getCurrentUser } from './'
 //import db from '../../db'
 
 const KEYIN_EMAIL = 'USER_EMAIL';
@@ -18,6 +18,7 @@ export const signupUser = (signupData, history) => {
       dispatch(keyinEmail(''));
       dispatch(keyinPassword(''));
       if (typeof result.data !== 'string') {
+        dispatch(getCurrentUser(result.data));
         history.push('/');
       }
       else {
@@ -37,6 +38,7 @@ export const loginUser = (loginData, history) => {
       dispatch(keyinEmail(''));
       dispatch(keyinPassword(''));
       if (typeof result.data !== 'string') {
+        dispatch(getCurrentUser(result.data));
         history.push('/');
       }
       else {

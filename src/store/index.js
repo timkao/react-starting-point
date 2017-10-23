@@ -11,6 +11,7 @@ import crossList from './crossPurchase';
 import historyList from './historyPurchase';
 import product from './product';
 import categories from './categories';
+import currentUser from './currentUser';
 
 
 const reducer = combineReducers(
@@ -23,7 +24,8 @@ const reducer = combineReducers(
     crossList,
     historyList,
     categories,
-    product
+    product,
+    currentUser
 	}
 );
 
@@ -46,3 +48,4 @@ export * from './crossPurchase';
 export * from './historyPurchase';
 export * from './product';
 export * from './categories';
+export * from './currentUser';

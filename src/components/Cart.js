@@ -74,6 +74,9 @@ class Cart extends Component {
           {
             this.props.currentOrder.id !== 'temp' && <div className="row list-wrapper">
               {
+                savedProducts.length === 0 && <div className="col-lg-12">List is Empty</div>
+              }
+              {
                 <ul id="savedList" className="list-group">
                   {
                     savedProducts.map( (product, i) => {

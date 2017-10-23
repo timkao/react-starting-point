@@ -16,9 +16,6 @@ export default class Main extends Component {
 	componentDidMount(){
 		const categoriesThunk = fetchCategories();
 		store.dispatch(categoriesThunk);
-		// store.dispatch(getCurrentOrder());
-		// store.dispatch(fetchSaveProducts());
-		// store.dispatch(fetchHistoryPurchases());
 	}
 	render(){
 		return(

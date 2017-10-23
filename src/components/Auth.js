@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { keyinEmail, keyinPassword, signupUser, loginUser, authGoogle } from '../store'
+import { keyinEmail, keyinPassword, signupUser, loginUser, authGoogle, fetchCurrentUser } from '../store'
 
 function Auth(props) {
 
@@ -51,11 +51,13 @@ const mapToDispatch = (dispatch, ownProps) => {
       const thunk = ownProps.location.pathname === '/signup'
       ? signupUser(userInfo, ownProps.history) : loginUser(userInfo, ownProps.history);
       dispatch(thunk);
+      // dispatch(fetchCurrentUser());
     },
     signInGoogle(evt) {
       evt.preventDefault()
       const thunk = authGoogle()
       dispatch(thunk)
+      // dispatch(fetchCurrentUser());
     }
   }
 }

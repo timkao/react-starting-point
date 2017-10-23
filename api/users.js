@@ -78,7 +78,7 @@ router.put('/savelist/:productId', (req, res, next) => {
 			.then(user => {
 				res.send(user.savedList)
 			})
-			.catch(next)
+			.catch(next);
 	}
 	else {
 		res.send('not member');
@@ -98,9 +98,9 @@ router.get('/history', (req, res, next) => {
 			}
 		})
 			.then(user => {
-				res.send(user.orders)
+				res.send(user.orders);
 			})
-			.catch(next)
+			.catch(next);
 	}
 	else {
 		res.send('not memeber');
@@ -108,19 +108,28 @@ router.get('/history', (req, res, next) => {
 })
 
 
-// someone might not have any order....
 router.put('/:userId', (req, res, next) => {
 	User.findById(req.params.userId, {
 		include: [Order]
 	})
 		.then(user => {
 			user.userType = 'admin'
-			return user.save()
+			return user.save();
 		})
 		.then(user => {
-			res.send(user)
+			res.send(user);
 		})
-		.catch(next)
+		.catch(next);
 });
+
+router.get('/currentUser', (req, res, next) => {
+	if (req.session.userId) {
+		User.findById(req.session.userId)
+		.then( user => {
+			res.send(user);
+		})
+		.catch(next);
+	}
+})
 
 module.exports = router;

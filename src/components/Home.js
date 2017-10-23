@@ -5,12 +5,6 @@ import store, { getCurrentOrder, fetchSaveProducts, fetchHistoryPurchases } from
 
 class Home extends Component {
 
-	componentDidMount() {
-		store.dispatch(getCurrentOrder());
-		store.dispatch(fetchSaveProducts());
-		store.dispatch(fetchHistoryPurchases());
-	}
-
 	render() {
 		return (
 			<section id='home'>
