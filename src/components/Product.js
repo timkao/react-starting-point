@@ -7,11 +7,12 @@ import store, {fetchProduct, addItemToOrder, getCurrentOrder} from '../store';
 class Product extends Component{
 	constructor(props){
 		super(props);
-		this.state = {sizes:[], colorClicked:false, selectedColor:'', selectedSize:''}
+		this.state = {sizes:[], colorClicked:false, selectedColor:'', selectedSize:'', imgSwitchState: false}
 		this.getSizes = this.getSizes.bind(this)
 		this.renderSizes = this.renderSizes.bind(this)
 		this.addItemToCart = this.addItemToCart.bind(this)
 		this.setSize = this.setSize.bind(this)
+		this.imgSwitch = this.imgSwitch.bind(this)
 	}
 
 	componentDidMount(props){
@@ -41,6 +42,11 @@ class Product extends Component{
 
 	setSize(e){
 		this.setState({selectedSize: e.target.id})
+	}
+
+	imgSwitch(e){
+		
+		this.setState({imgSwitchState: this.state.imgSwitchState?false:true})
 	}
 
 	addItemToCart(productId, orderId) {
@@ -110,9 +116,14 @@ class Product extends Component{
 				</div>
 				<div className='row'>
 					<div className='col-md-9'>
-						<img src={product.pictureUrl}/>
-
+						<div className='row'>
+							<img className="mainImg" src={state.imgSwitchState?product.pictureUrl2:product.pictureUrl}/>
+						</div>
+						<div className='row'>
+							<img className="bottomImg" onClick={this.imgSwitch} src={state.imgSwitchState?product.pictureUrl:product.pictureUrl2}/>
+						</div>
 					</div>
+
 					<div className='col-md-3'>
 						<h2>{product.name}</h2>
 						<h3>Price ${product.price}.00</h3>
