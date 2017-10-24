@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../store';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, withRouter } from 'react-router-dom';
 import BarChart from './BarChart';
 import faker from 'faker';
 import ProductForm from './ProductForm';
@@ -51,7 +51,7 @@ class AdminP extends Component {
                       Price: $ {product.price}
                     </div>
                     <div className="col-lg-3">
-                      <button className="btn btn-default"><Link to={`/Admin/editProduct/${product.id}`}>edit</Link></button>
+                    <Link to={`/Admin/editProduct/${product.id}`}><button className="btn btn-default">edit</button></Link>
                       <button className="btn btn-danger">delete</button>
                     </div>
                   </div>

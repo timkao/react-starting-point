@@ -17,9 +17,11 @@ class BarChart extends Component {
 
     const begin = this.props.data;
     const end = nextProps.data;
+    const newlabels = nextProps.labels;
+    this.setState({labels: newlabels});
 
     d3.selectAll("rect").transition().tween("attr.scale", null);
-    d3.selectAll("rect").transition().duration(600).ease(d3.easeLinear).tween("attr.scale", () => {
+    d3.selectAll("rect").transition().duration(1000).ease(d3.easeLinear).tween("attr.scale", () => {
 
       // set interpolator
       const interpolators = end.map((endpoint, index) => {

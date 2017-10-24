@@ -194,3 +194,7 @@ h4 {
 #admin-product {
   margin-top: 10vh;
 }
+
+.rectangle:hover {
+  cursor: pointer;
+}

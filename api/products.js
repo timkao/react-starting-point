@@ -7,7 +7,7 @@ router.get('/', (req, res, next) => {
     })
     .then(products => {
         res.send(products)
-    })  
+    })
     .catch(next)
 })
 
@@ -27,8 +27,13 @@ router.post('/', (req, res, next) => {
 
 router.put('/:productId', (req, res, next) => {
     Product.findById(req.params.productId*1)
-    .then(product => {
-        product.update(req.body)
+    .then( product => {
+        product.name = req.body.name;
+        product.price = req.body.price;
+        return product.save()
+    })
+    .then( updatedProduct => {
+        res.send(updatedProduct);
     })
     .catch(next)
 })

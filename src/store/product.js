@@ -1,4 +1,5 @@
-import axios from 'axios'
+import axios from 'axios';
+import { fetchProducts } from './';
 // action
 const GET_PRODUCT = 'GET_PRODUCT'
 
@@ -18,6 +19,17 @@ export function fetchProduct(productId){
         const action = getProduct(product)
         dispatch(action)
       })
+  }
+}
+
+export function updateProduct(id, info) {
+  return function(dispatch) {
+    axios.put(`/api/products/${id}`, info)
+    .then( result => result.data)
+    .then( product => {
+      const thunk = fetchProducts();
+      dispatch(thunk);
+    })
   }
 }
 
