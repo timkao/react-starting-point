@@ -60,7 +60,7 @@ class ReviewForm extends Component{
 									<div className="col-md-3 rateCircle" key={rate}>
 										<span  key={rate} >
 											<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" onClick={()=>this.setRate(rate)}>
-											    <circle id={rate} cx="13" cy="13" r="12" fill="#FFFFB2" strokeWidth={this.state.clickedRate==rate?3:1} stroke="black" width="20" />
+											    <circle id={rate} cx="13" cy="13" r="12" fill="#F7BC47" strokeWidth={this.state.clickedRate==rate?3:1} stroke="black" width="20" />
 											    <text x="13" y="13" textAnchor="middle" alignmentBaseline="middle">{rate}</text>
 											</svg>
 										</span>

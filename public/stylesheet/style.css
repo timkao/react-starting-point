@@ -4,6 +4,10 @@ body {
   font-size: 12px;
 }
 
+body .navbar{
+  font-size: 17px;
+}
+
 .mainImg{
   position: absolute;
   top: 30px;
@@ -69,6 +73,13 @@ img {
   border-bottom-color: #ffe157;
 }
 
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+      background: #EC96A1;
+      color:#ffffff;
+ }
+
 .li.inactive{
   
 }
@@ -110,6 +121,7 @@ img {
   text-transform:lowercase;
   vertical-align:top;
   margin-right: 4px;
+  margin-top: 4px;
 }
 
 .clicked_btn{
@@ -118,6 +130,9 @@ img {
 
 .single_btn{
   margin-top: 12px;
+  background-color: #c0e99b;
+  position:relative;
+  left:20%;
 }
 
 .centeredHeader{
@@ -136,7 +151,7 @@ img {
 
 .reviewButton{
   position:relative;
-   left:50%;
+  left:50%;
 }
 
 #titleInput{

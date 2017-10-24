@@ -38,14 +38,14 @@ class Navbar extends Component{
 			        }) }
 			          </ul>
 			        </li>
-							<li><Link to='/Admin'>Admin</Link></li>
+					<li onClick={this.handleClick} className={this.props.navbarActive=="admin"?"active":"inactive"}><Link to='/Admin' id='admin'>Admin</Link></li>
 			      </ul>
 
 			      <ul className="nav navbar-nav navbar-right">
-			        <li><Link to="/signup">Sign up</Link></li>
-			        <li><Link to="/login">Log in</Link></li>
-							<li onClick={this.props.leaveApp}><Link to="/">Log out</Link></li>
-			        <li><Link to="/cart">Cart</Link></li>
+			        <li onClick={this.handleClick} className={this.props.navbarActive=="signup"?"active":"inactive"}><Link to="/signup" id='signup'>Sign up</Link></li>
+			        <li onClick={this.handleClick} className={this.props.navbarActive=="login"?"active":"inactive"}><Link to="/login" id='login'>Log in</Link></li>
+					<li onClick={this.props.leaveApp}><Link to="/">Log out</Link></li>
+			        <li onClick={this.handleClick} className={this.props.navbarActive=="cart"?"active":"inactive"}><Link to="/cart" id='cart'>Cart</Link></li>
 			      </ul>
 
 			  </div>
