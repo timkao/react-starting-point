@@ -38,9 +38,9 @@ class Cart extends Component {
       <div className="row">
         <div className="col-lg-10">
           <div className="row">
-            <div className="col-lg-8">Shopping Cart</div>
-            <div className="col-lg-2">Price</div>
-            <div className="col-lg-2"><div className="pull-right">Quantity</div></div>
+            <div className="col-lg-8 cart-titles">Shopping Cart</div>
+            <div className="col-lg-2 cart-titles">Price</div>
+            <div className="col-lg-2"><div className="pull-right cart-titles">Quantity</div></div>
           </div>
           <div className="row list-wrapper">
             {
@@ -61,14 +61,14 @@ class Cart extends Component {
           <div className="row">
             <div className="col-lg-12">
               <div className="pull-right">
-                {subtotalMessage}<span>$ {totalValue}</span>
+                <span className="cart-titles">{subtotalMessage}</span><span className="sum">$ {totalValue}</span>
               </div>
             </div>
           </div>
           {
             this.props.currentOrder.id !== 'temp' && <div className="row">
-              <div className="col-lg-8">{`Saved for Later ( ${savedProducts.length} item(s) )`}</div>
-              <div className="col-lg-2">Price</div>
+              <div className="col-lg-8 cart-titles">{`Saved for Later ( ${savedProducts.length} item(s) )`}</div>
+              <div className="col-lg-2 cart-titles">Price</div>
             </div>
           }
           {
@@ -91,7 +91,7 @@ class Cart extends Component {
           }
           {
             items[0] && <div id="cross-list-title" className="row">
-              <div className="col-lg-8">People Also Buy</div>
+              <div className="col-lg-8 cart-titles">People Also Buy</div>
             </div>
           }
           <div className="row">
@@ -103,13 +103,13 @@ class Cart extends Component {
         <div className="col-lg-2">
           <div className="row">
             <div className="col-lg-12">
-              {subtotalMessage}<br></br><span>$ {totalValue}</span><br></br>
+              <span className="cart-titles">{subtotalMessage}</span><br></br><span className="sum">$ {totalValue}</span><br></br>
               <Link to="/checkout"><button className="btn btn-default">Proceed To Checkout</button></Link>
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-12">
-              Buy it Again<br></br>
+            <div id="repeat-list" className="col-lg-12">
+              <span className="cart-titles">Buy it Again</span><br></br>
               <CrossItems repeatList={this.props.historyList} orderId={this.props.currentOrder.id} />
             </div>
           </div>
