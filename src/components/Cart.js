@@ -35,6 +35,7 @@ class Cart extends Component {
     const savedProducts = this.props.savedProducts || []
 
     return (
+      <div id="cart-wrapper">
       <div className="row">
         <div className="col-lg-10">
           <div className="row">
@@ -114,6 +115,7 @@ class Cart extends Component {
             </div>
           </div>
         </div>
+      </div>
       </div>
     )
   }

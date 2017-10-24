@@ -46,7 +46,7 @@ class Checkout extends Component {
 
 	handleSubmit(evt) {
     evt.preventDefault();
-   	
+
    	if (this.props.currentOrder.userId){
    		axios.put(`/api/orders/${this.props.currentOrder.id}`,
    			{
@@ -90,7 +90,7 @@ class Checkout extends Component {
 			})
 			.then(() => this.props.history.push('/receipt'))
    	}
-   	
+
   }
   handleChangeName(evt){this.setState({name: evt.target.value})}
   handleChangeEmail(evt){this.setState({email: evt.target.value})}
@@ -112,7 +112,7 @@ class Checkout extends Component {
 // const items = this.props.currentOrder.lineitems || [];
 // {console.log('itemsssss'+JSON.stringify(items))}
 		return (
-			<div>  
+			<div className="container">
 				<form onSubmit={ this.handleSubmit }>
 					<div>
 	        	<hr />
@@ -139,7 +139,7 @@ class Checkout extends Component {
 	        <div>
 		        <label>Billing Address1:</label>
 		        <div><input name="billingAddress1" type="text" onChange={this.handleChangeBillingAddress1} /></div>
-	        </div>       
+	        </div>
 	        <div>
 		        <label>Billing Address2:</label>
 		        <div><input name="billingAddress2" type="text" onChange={this.handleChangeBillingAddress2} /></div>
@@ -156,13 +156,13 @@ class Checkout extends Component {
 		        <label>Billing Zip:</label>
 		        <div><input type="text" name="billingZip" onChange={this.handleChangeBillingZip} /></div>
 	        </div>
-	        
+
 	        <div>
 	        	<hr />
 	        	Shipping Information
 	        	<hr />
 	        </div>
-	        
+
 	        <div>
 		        <label>Shipping Address1:</label>
 		        <div><input type="text" name="shippingAddress1" onChange={this.handleChangeShippingAddress1}  /></div>

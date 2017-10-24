@@ -36,6 +36,7 @@ export default class Main extends Component {
 							<Route exact path="/checkout" component={Checkout} />
 							<Route exact path="/receipt" component={Receipt} />
 							<Route path="/admin" component={Admin} />
+							<Route component={Home} />
 						</Switch>
 					</div>
 				</div>

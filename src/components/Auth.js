@@ -5,21 +5,27 @@ import { keyinEmail, keyinPassword, signupUser, loginUser, authGoogle, fetchCurr
 function Auth(props) {
 
   const { emailInput, handleChange, passwordInput, submitUser, leaveApp, signInGoogle } = props
-  const authPath = props.location.pathname === '/signup' ? 'sign up' : 'log in'
+  const authPath = props.location.pathname === '/signup' ? 'Sign Up' : 'Log In'
 
   return (
-    <div className="row">
-      <div className="col-lg-6">
-        <form onSubmit={submitUser}>
-          <label>Email: </label>
-          <input name="email" type="email" onChange={handleChange} value={emailInput} /><br></br>
-          <label>Password: </label>
-          <input name="password" type="password" onChange={handleChange} value={passwordInput} /><br></br>
-          <button className="btn btn-default">{authPath}</button>
-        </form>
-      </div>
-      <div className="col-lg-6">
-        <a href='/auth/google' className="btn btn-primary">{authPath} with Google</a>
+    <div id="auth">
+      <div className="row">
+        <div className="col-lg-3">
+          <form onSubmit={submitUser}>
+            <div className="form-group">
+              <label>Email: </label>
+              <input name="email" type="email" onChange={handleChange} value={emailInput} className="form-control" />
+            </div>
+            <div className="form-group">
+              <label>Password: </label>
+              <input name="password" type="password" className="form-control" onChange={handleChange} value={passwordInput} />
+            </div>
+            <button className="btn btn-default">{authPath}</button>
+            <span className="pull-right">
+            <a href='/auth/google' >{authPath} with Google</a>
+            </span>
+          </form>
+        </div>
       </div>
     </div>
   )
@@ -49,7 +55,7 @@ const mapToDispatch = (dispatch, ownProps) => {
         password: evt.target.password.value
       };
       const thunk = ownProps.location.pathname === '/signup'
-      ? signupUser(userInfo, ownProps.history) : loginUser(userInfo, ownProps.history);
+        ? signupUser(userInfo, ownProps.history) : loginUser(userInfo, ownProps.history);
       dispatch(thunk);
       // dispatch(fetchCurrentUser());
     },

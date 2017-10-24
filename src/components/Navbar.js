@@ -52,7 +52,7 @@ class Navbar extends Component{
 			        </li>
 
 							{
-								showAdmin && <li onClick={this.handleClick} className={this.props.navbarActive=="admin"?"active":"inactive"}><Link to='/Admin' id='admin'>Admin</Link></li>
+								this.props.currentUser.userType === 'admin' && <li onClick={this.handleClick} className={this.props.navbarActive=="admin"?"active":"inactive"}><Link to='/Admin' id='admin'>Admin</Link></li>
 							}
 
 			      </ul>

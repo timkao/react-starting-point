@@ -17,7 +17,7 @@ body .navbar{
   left: 50px;
   height: 300px;
   width: auto;
-  
+
 }
 
 .bottomImg{
@@ -77,15 +77,15 @@ img {
   border-bottom-color: #ffe157;
 }
 
-.navbar-default .navbar-nav > .active > a, 
-.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
       background: #EC96A1;
       color:#ffffff;
  }
 
 .li.inactive{
-  
+
 }
 
 .rectangle{
@@ -189,10 +189,10 @@ h4 {
   clear: both;
 }
 .slide1 {
-  background-image: url(https://wallpaperscraft.com/image/yeezy_boost_350_adidas_sneakers_102932_1920x1080.jpg);  
+  background-image: url(https://wallpaperscraft.com/image/yeezy_boost_350_adidas_sneakers_102932_1920x1080.jpg);
   background-color: #eeeee4;
   background-position: 185% 50%;
-  background-size: 85%;  
+  background-size: 85%;
 }
 .slide2 {
   background-image: url(https://images.nike.com/is/image/DotCom/PDP_HERO_ZOOM/904651_500_A_PREM/free-tr7-womens-training-shoe.jpg);
@@ -213,7 +213,7 @@ h4 {
   position: absolute;
   opacity:0;
   z-index: 0;
-  transition: all .5s linear;  
+  transition: all .5s linear;
 }
 #home .hero.activeSlide {
   opacity: 1;
@@ -263,7 +263,7 @@ h4 {
   transition: all .075s linear;
 }
 .dot:hover {
-  background-color: black;  
+  background-color: black;
   cursor: pointer;
   transition: all .075s linear;
 }
@@ -311,7 +311,7 @@ h4 {
 }
 
 .cart-titles {
-  font-size: 1.8vh;
+  font-size: 2.5vh;
   font-style: bold;
 }
 
@@ -320,6 +320,22 @@ h4 {
 }
 
 .sum {
-  font-size: 2vh;
+  font-size: 2.5vh;
   color: red;
 }
+
+#auth {
+  background-image: url('/public/product_images/auth-background.jpg');
+  height: 100%;
+}
+
+#auth form {
+  margin-left: 3vh;
+  margin-top: 3vh;
+}
+
+#cart-wrapper {
+  margin-top: 3vh;
+  margin-left: 3vh;
+}
+
