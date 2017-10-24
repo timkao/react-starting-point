@@ -62,6 +62,10 @@ img {
   border-bottom-color: #ffe157;
 }
 
+.li.inactive{
+  
+}
+
 .rectangle{
     width:20px;
     height:20px;

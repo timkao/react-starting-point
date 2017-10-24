@@ -14,6 +14,7 @@ import categories from './categories';
 import reviews from './reviews';
 import {newReviewTitleReducer as newReviewTitle, newReviewContentReducer as newReviewContent} from './newReview';
 import currentUser from './currentUser';
+import navbarActive from './navbar'
 
 
 const reducer = combineReducers(
@@ -30,7 +31,8 @@ const reducer = combineReducers(
     reviews,
     newReviewTitle,
     newReviewContent,
-    currentUser
+    currentUser,
+    navbarActive
 
 	}
 );
@@ -57,3 +59,4 @@ export * from './categories';
 export * from './reviews';
 export * from './newReview';
 export * from './currentUser';
+export * from './navbar';
