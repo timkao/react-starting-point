@@ -5,13 +5,20 @@ body {
 }
 
 .mainImg{
-  height: 60%;
-  width:70%;
+  position: absolute;
+  top: 30px;
+  left: 50px;
+  height: 300px;
+  width: auto;
+  
 }
 
 .bottomImg{
-  height: 25%;
-  width: 25%;
+  position: absolute;
+  top: 350px;
+  left: 50px;
+  height: 100px;
+  width: auto;
 }
 
 .wrapper {
