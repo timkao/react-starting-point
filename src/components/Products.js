@@ -26,7 +26,6 @@ export default class Products extends Component {
         axios.get(`/api/categories/${this.props.match.params.categoryName}`)
         .then(res => res.data)
         .then(category => {
-            console.log(category);
             this.originalProducts = category[0].products;
             this.setState({
                 products: category[0].products
@@ -37,9 +36,12 @@ export default class Products extends Component {
         axios.get(`/api/categories/${newProps.match.params.categoryName}`)
         .then(res => res.data)
         .then(category => {
-            console.log(category);
+            this.originalProducts = category[0].products;
             this.setState({
-                products: category[0].products
+                products: category[0].products,
+                selectedColors: [],
+                selectedSizes: [],
+                selectedPrices: []
             })
         })
     }

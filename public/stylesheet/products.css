@@ -59,6 +59,15 @@
     background-image: url('https://feetz.com/img/home/loaFFFer-home-banner.jpg');
     background-position: 0% 65%;
 }
+.categoryHero.Kids {
+  background-image: url('http://cdn.skim.gs/images/v1/msi/grtdqevmvpoxm4zap8uv/please-people-teach-your-kids-to-tie-their-shoes');
+}
+.Kids .heroText {
+  text-align: left!important;
+}
+.Kids .heroText h2 {
+  color:black;
+}
 .colorTile, .colorTileFilter {
     width:18px;
     height:18px;
@@ -69,7 +78,7 @@
     transition: all .075s linear;
 }
 .filters {
-    margin:2em 0;
+    padding:2em 0;
 }
 .colorTileFilter:hover, .sizeTileFilter:hover {
     cursor: pointer;

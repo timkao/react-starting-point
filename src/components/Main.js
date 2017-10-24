@@ -24,7 +24,7 @@ export default class Main extends Component {
 		return(
 				<div>
 					<Navbar />
-					<div className="container">
+					<div>
 						<Switch>
 							<Route exact path="/" component={Home} />
 							<Route exact path="/categories/:categoryName" component={Products} />

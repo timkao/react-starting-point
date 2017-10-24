@@ -21,6 +21,12 @@ class Product extends Component{
 		store.dispatch(productThunk)
 		const orderThunk = getCurrentOrder();
 		store.dispatch(orderThunk);
+		console.log(orderThunk)
+		this.setState({
+			sizes: this.props.sizes.sort((a,b)=>{
+				return Number(a) > Number(b)
+			})
+		})
 	}
 
 	getSizes(e){
@@ -31,11 +37,10 @@ class Product extends Component{
 			return obj[color]
 		})
 		colorObj = colorObj[0]
-		let sizes = Object.keys(colorObj[color]).filter(key => {
-			return colorObj[color][key] != '0'
-
+		let sizes = this.props.product.sizes.sort((a,b)=>{
+			return Number(a) > Number(b)
 		})
-
+		console.log('yo: '+sizes)
 		this.setState({sizes, colorClicked:true, selectedColor:color})
 
 	}
@@ -69,7 +74,9 @@ class Product extends Component{
 
 		let oneColor = inventory[0] || {'fake_key': 'fake_val'}
 		let oneColorKey = Object.keys(oneColor)[0] || 'fake_key'
-		let allSizes = Object.keys(oneColor[oneColorKey])
+		let allSizes = Object.keys(oneColor[oneColorKey]).sort((a,b)=>{
+			return Number(a) > Number(b)
+		})
 
 		if(this.state.colorClicked){
 
@@ -107,7 +114,6 @@ class Product extends Component{
 		let oneColor = inventory[0] || {'fake_key': 'fake_val'}
 		let oneColorKey = Object.keys(oneColor)[0] || 'fake_key'
 		let allSizes = Object.keys(oneColor[oneColorKey])
-		console.log(this.state)
 		const order = this.props.currentOrder;
 		const state = this.state
 		return(
