@@ -48,7 +48,7 @@ router.put('/savelist', (req, res, next) => {
 			.catch(next)
 	}
 	else {
-		res.send('not member');
+		res.sendStatus(204);
 	}
 })
 
@@ -62,7 +62,7 @@ router.get('/savelist', (req, res, next) => {
 			.catch(next)
 	}
 	else {
-		res.send('not member');
+		res.sendStatus(204);
 	}
 })
 
@@ -81,7 +81,7 @@ router.put('/savelist/:productId', (req, res, next) => {
 			.catch(next);
 	}
 	else {
-		res.send('not member');
+		res.sendStatus(204);
 	}
 })
 
@@ -103,7 +103,7 @@ router.get('/history', (req, res, next) => {
 			.catch(next);
 	}
 	else {
-		res.send('not memeber');
+		res.send([]);
 	}
 })
 

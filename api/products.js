@@ -41,8 +41,10 @@ router.put('/:productId', (req, res, next) => {
 router.delete('/:productId', (req, res, next) => {
     Product.findById(req.params.productId * 1)
     .then( product => {
-        product.destroy()
-        res.sendStatus(204)
+        return product.destroy()
+    })
+    .then( () => {
+        res.sendStatus(204);
     })
     .catch(next)
 })
