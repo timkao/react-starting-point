@@ -66,7 +66,7 @@ class Checkout extends Component {
 					paymentMethod: this.state.paymentMethod,
 					status:'Placed'
    			})
-   		.then(() => this.props.history.push('/reciept'))
+   		.then(() => this.props.history.push('/receipt'))
    	}
    	else{
    		axios.post('/api/orders/',
@@ -88,7 +88,7 @@ class Checkout extends Component {
 				status:'Placed',
 				lineitems: this.props.currentOrder.lineitems
 			})
-			.then(() => this.props.history.push('/reciept'))
+			.then(() => this.props.history.push('/receipt'))
    	}
    	
   }
