@@ -60,7 +60,7 @@ img {
     width:20px;
     height:20px;
     outline: black solid;
-    outline-width: 1px;
+    /*outline-width: 1px;*/
     float:left;
     /*clear:both;*/
     margin-right: 8px;
@@ -93,6 +93,10 @@ img {
   text-transform:lowercase;
   vertical-align:top;
   margin-right: 4px;
+}
+
+.clicked_btn{
+  background-color: #f2f2f2;
 }
 
 .single_btn{

@@ -23,7 +23,7 @@ class Product extends Component{
 	}
 
 	getSizes(e){
-		console.log(e.target.id)
+		
 		let color = e.target.id
 		let inventory = this.props.product.inventory || []
 		let colorObj = inventory.filter((obj)=> {
@@ -55,6 +55,7 @@ class Product extends Component{
 	renderSizes(){
 		//getting at allSizes off of first entry in inventory for now.
 		//should.. be combining all of them to make a superlist within this product
+		
 		const product=this.props.product
 		const inventory = product.inventory || []
 		let intermediary = inventory.map(obj=>{return(Object.keys(obj))})
@@ -69,7 +70,7 @@ class Product extends Component{
 			return (
 				this.state.sizes.map(size=>{
 					return(
-						<div className="btn" key={`size_${size}`} id={size} onClick={this.setSize}>
+						<div className={this.state.selectedSize==size?"btn clicked_btn":"btn"} key={`size_${size}`} id={size} onClick={this.setSize}>
 						<span className="btn__label" id={size}>{size}</span>
 						</div>
 						)
@@ -120,10 +121,15 @@ class Product extends Component{
 						<div className='colorRects'>
 						{colors.map(color => {
 							var rectStyle = {
-								backgroundColor: color
+								backgroundColor: color,
+								outlineWidth: '1px'
+							}
+							var activeRectStyle = {
+								backgroundColor: color,
+								outlineWidth: '3px'
 							}
 							return(<div key={color} >
-									<div id={color} style={rectStyle} onClick={this.getSizes} className="rectangle"></div>
+									<div id={color} style={this.state.selectedColor==color?activeRectStyle:rectStyle} onClick={this.getSizes} className="rectangle"></div>
 								</div>)
 						})}
 						</div>
