@@ -327,6 +327,8 @@ h4 {
 #auth {
   background-image: url('/public/product_images/auth-background.jpg');
   height: 100%;
+  background-repeat:no-repeat;
+  background-size:cover;
 }
 
 #auth form {
