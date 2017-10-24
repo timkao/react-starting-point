@@ -22,9 +22,9 @@ class Review extends Component{
 			<div>
 				<div className="row">
 					<hr/>
-					<div className="col-md-9">
-						<h2 className="centeredHeader">Reviews</h2>
-					</div>
+					
+						<h2 className="centeredHeader">&#9733;&#9733;&#9733;Reviews&#9733;&#9733;&#9733;</h2>
+					
 				</div>
 
 				<div className="row">

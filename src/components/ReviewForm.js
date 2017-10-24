@@ -23,7 +23,8 @@ class ReviewForm extends Component{
 			content: e.target.contentInput.value, 
 			rating: this.state.clickedRate,
 			productId: this.props.productId*1,
-			userId: 1
+			userId: this.props.currentUser.id*1
+			// userId: 1
 		}, this.props.productId))
 		store.dispatch(createReviewTitle(''))
 		store.dispatch(createReviewContent(''))
@@ -31,8 +32,7 @@ class ReviewForm extends Component{
 		}
 
 	render(){
-		// console.log(this.props)
-		// console.log(this.state)
+
 		const {handleChange, titleInput, contentInput} = this.props
 	
 		return(
@@ -58,10 +58,10 @@ class ReviewForm extends Component{
 
 								return(
 									<div className="col-md-3 rateCircle" key={rate}>
-										<span onClick={()=>this.setRate(rate)} key={rate} >
-											<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30">
-											    <circle id={rate} cx="13" cy="13" r="10" fill="none" strokeWidth={this.state.clickedRate==rate?3:1} stroke="black" width="20" />
-											    <text x="9" y="18" >{rate}</text>
+										<span  key={rate} >
+											<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" onClick={()=>this.setRate(rate)}>
+											    <circle id={rate} cx="13" cy="13" r="12" fill="#FFFFB2" strokeWidth={this.state.clickedRate==rate?3:1} stroke="black" width="20" />
+											    <text x="13" y="13" textAnchor="middle" alignmentBaseline="middle">{rate}</text>
 											</svg>
 										</span>
 									</div>
@@ -100,14 +100,13 @@ const mapToState = (state, ownProps) => {
 		titleInput: state.titleInput,
 		contentInput: state.contentInput,
 		clickedRate: state.clickedRate,
-		productId: ownProps.productId
+		productId: ownProps.productId,
+		currentUser: state.currentUser
 
 	}
 }
 
 const mapToDispatch = (dispatch, ownProps) => {
-	console.log('look here')
-	// console.log(this.location)
 
 	return {
 		handleChange(e){
