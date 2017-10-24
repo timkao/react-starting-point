@@ -18,13 +18,13 @@ class Navbar extends Component{
     render(){
 			console.log(this.props.navbarActive)
 			console.log(this.props.currentUser);
-			let showAdmin;
-			if (this.props.currentUser.userType &&  this.props.currentUser.userType === 'admin') {
-				showAdmin = true;
-			}
-			else {
-				showAdmin = false;
-			}
+			// let showAdmin;
+			// if (this.props.currentUser.userType &&  this.props.currentUser.userType === 'admin') {
+			// 	showAdmin = true;
+			// }
+			// else {
+			// 	showAdmin = false;
+			// }
     	const more_cats = this.props.categories.filter(cat => cat.name!='Men' && cat.name != 'Women' && cat.name!= 'Kids')
 		return(
 			<nav className="navbar navbar-default">
@@ -47,7 +47,7 @@ class Navbar extends Component{
 			          </ul>
 			        </li>
 							{
-								showAdmin && <li><Link to='/Admin'>Admin</Link></li>
+								this.props.currentUser.userType === 'admin' && <li><Link to='/Admin'>Admin</Link></li>
 							}
 			      </ul>
 
@@ -83,7 +83,7 @@ const mapToDispatch = (dispatch) => {
 			dispatch(getSavedProducts([]));
 			dispatch(getHistoryPurchases([]));
 			dispatch(getCurrentOrder());
-			dispatch(getCurrentUser());
+			dispatch(getCurrentUser({}));
     	},
 
 	}
