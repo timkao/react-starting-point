@@ -8,6 +8,7 @@ import store, {fetchCategories, getCurrentOrder, fetchSaveProducts, fetchHistory
 import Auth from './Auth';
 import Cart from './Cart';
 import Checkout from './Checkout';
+import Receipt from './Receipt';
 import Admin from './AdminProduct';
 import Products from './Products';
 import Review from './Review'
@@ -33,6 +34,7 @@ export default class Main extends Component {
 							<Route exact path="/reviews/:productId" component={Review} />
 							<Route exact path="/cart" component={Cart} />
 							<Route exact path="/checkout" component={Checkout} />
+							<Route exact path="/receipt" component={Receipt} />
 							<Route path="/admin" component={Admin} />
 						</Switch>
 					</div>
