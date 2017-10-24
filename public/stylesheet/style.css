@@ -4,8 +4,14 @@ body {
   font-size: 12px;
 }
 
-img {
-  width: 100%;
+.mainImg{
+  height: 60%;
+  width:70%;
+}
+
+.bottomImg{
+  height: 25%;
+  width: 25%;
 }
 
 .wrapper {
