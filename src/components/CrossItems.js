@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCrossPurchase, addItemToOrder } from '../store';
+import { fetchCrossPurchase, addItemToOrder, fetchProduct } from '../store';
 import { Link } from 'react-router-dom';
-
+import store from '../';
 
 class CrossItems extends Component {
 
@@ -13,6 +13,10 @@ class CrossItems extends Component {
   componentDidMount() {
     this.props.pullList(this.props.id)
   }
+
+  // componentWillReceiveProps(nextProps) {
+  //   this.props.pullList(nextProps.id)
+  // }
 
   render() {
     let items = [];

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Review from './Review';
-import store, { fetchProduct, addItemToOrder, getCurrentOrder } from '../store';
+import store, { fetchProduct, addItemToOrder, getCurrentOrder, setNavbarActive } from '../store';
 import CrossItems from './CrossItems';
 
 
@@ -15,6 +15,8 @@ class Product extends Component {
 		this.addItemToCart = this.addItemToCart.bind(this)
 		this.setSize = this.setSize.bind(this)
 		this.imgSwitch = this.imgSwitch.bind(this)
+		this.setActiveNav = this.setActiveNav.bind(this)
+
 	}
 
 	componentDidMount(props) {
@@ -29,15 +31,17 @@ class Product extends Component {
 				return Number(a) > Number(b)
 			})
 		})
+
 	}
 
-	// componentWillReceiveProps(nextProps) {
-	// 	console.log(nextProps);
-	// 	if (nextProps.productId * 1 !== this.props.productId * 1) {
-	// 	const productThunk = fetchProduct(nextProps.productId)
-	// 	store.dispatch(productThunk)
-	// 	}
-	// }
+	componentWillReceiveProps(nextProps) {
+		console.log(nextProps);
+		if (nextProps.productId * 1 !== this.props.productId * 1) {
+			const productThunk = fetchProduct(nextProps.productId)
+			store.dispatch(productThunk)
+		}
+
+	}
 
 	getSizes(e) {
 
@@ -116,6 +120,11 @@ class Product extends Component {
 
 	}
 
+	setActiveNav(){
+
+		store.dispatch(setNavbarActive(''))
+	}
+
 	render() {
 		const product = this.props.product
 		const inventory = product.inventory || []
@@ -127,6 +136,7 @@ class Product extends Component {
 		const order = this.props.currentOrder;
 		const state = this.state
 		//console.log(this.props);
+		this.setActiveNav()
 		return (
 			<div className="container">
 				<div className='row'>
@@ -185,7 +195,8 @@ const mapToState = (state, ownProps) => {
 	return {
 		productId: ownProps.match.params.productId,
 		product: state.product,
-		currentOrder: state.currentOrder
+		currentOrder: state.currentOrder,
+		navbarActive: state.navbarActive,
 	}
 }
 
