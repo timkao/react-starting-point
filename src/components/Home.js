@@ -12,30 +12,30 @@ class Home extends Component {
 		}
 		this.dotClick = this.dotClick.bind(this);
 		this.arrowClick = this.arrowClick.bind(this);
-		this.startTimer = this.startTimer.bind(this);
+		// this.startTimer = this.startTimer.bind(this);
 	}
 	dotClick(e){
 		this.setState({
 			currentSlide: e.target.dataset.value
 		})
 	}
-	startTimer(){
-		window.setInterval(()=>{
-			if(this.state.currentSlide === '3'){
-				this.setState({
-					currentSlide: '1'
-				})
-			}
-			else {
-				this.setState({
-					currentSlide: ((this.state.currentSlide*1)+1).toString()
-				})
-			}
-		}, 6500)
-	}
-	componentDidMount(){
-		this.startTimer();
-	}
+	// startTimer(){
+	// 	window.setInterval(()=>{
+	// 		if(this.state.currentSlide === '3'){
+	// 			this.setState({
+	// 				currentSlide: '1'
+	// 			})
+	// 		}
+	// 		else {
+	// 			this.setState({
+	// 				currentSlide: ((this.state.currentSlide*1)+1).toString()
+	// 			})
+	// 		}
+	// 	}, 6500)
+	// }
+	// componentDidMount(){
+	// 	this.startTimer();
+	// }
 	arrowClick(e){
  		if(e.target.className.indexOf('left') > 0){
 			if(this.state.currentSlide === '1'){

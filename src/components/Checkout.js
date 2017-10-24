@@ -187,7 +187,6 @@ class Checkout extends Component {
 		        <button type="submit" name="submitOrder"  >Save</button>
 	        </div>
 		    </form>
-		    {console.log(this.props.currentOrder)}
 		  </div>
 		)
 	}
