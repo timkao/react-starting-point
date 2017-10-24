@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchProducts } from '../store';
-import { Link, Route, withRouter } from 'react-router-dom';
+import { fetchProducts, removeProduct } from '../store';
+import { Link, Route } from 'react-router-dom';
 import BarChart from './BarChart';
 import faker from 'faker';
 import ProductForm from './ProductForm';
@@ -25,8 +25,6 @@ class AdminP extends Component {
       priceData.push(product.price);
       labelData.push(product.name);
     })
-
-
 
     return (
       <div>
@@ -52,7 +50,7 @@ class AdminP extends Component {
                     </div>
                     <div className="col-lg-3">
                     <Link to={`/Admin/editProduct/${product.id}`}><button className="btn btn-default">edit</button></Link>
-                      <button className="btn btn-danger">delete</button>
+                      <button onClick={(evt) => {this.props.handleDelete(evt, product.id)}} className="btn btn-danger">delete</button>
                     </div>
                   </div>
                 )
@@ -81,6 +79,11 @@ const mapToDispatch = (dispatch, ownProps) => {
   return {
     getAllProducts() {
       const thunk = fetchProducts()
+      dispatch(thunk);
+    },
+    handleDelete(evt, id) {
+      evt.preventDefault();
+      const thunk = removeProduct(id);
       dispatch(thunk);
     }
   }

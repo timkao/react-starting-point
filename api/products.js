@@ -26,7 +26,7 @@ router.post('/', (req, res, next) => {
 })
 
 router.put('/:productId', (req, res, next) => {
-    Product.findById(req.params.productId*1)
+    Product.findById(req.params.productId * 1)
     .then( product => {
         product.name = req.body.name;
         product.price = req.body.price;
@@ -39,8 +39,8 @@ router.put('/:productId', (req, res, next) => {
 })
 
 router.delete('/:productId', (req, res, next) => {
-    Product.findById(req.params.productId*1)
-    .then(product => {
+    Product.findById(req.params.productId * 1)
+    .then( product => {
         product.destroy()
         res.sendStatus(204)
     })

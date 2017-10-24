@@ -33,6 +33,16 @@ export function updateProduct(id, info) {
   }
 }
 
+export function removeProduct(id) {
+  return function(dispatch) {
+    axios.delete(`/api/products/${id}`)
+    .then( () => {
+      const thunk = fetchProducts();
+      dispatch(thunk);
+    })
+  }
+}
+
 // reducer
 const productReducer = (state = {}, action) => {
   switch (action.type) {
