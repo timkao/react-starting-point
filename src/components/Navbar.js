@@ -11,8 +11,12 @@ class Navbar extends Component{
 	}
 
 	handleClick(e){
-
-    		store.dispatch(setNavbarActive(e.target.id))
+			if(e.target.id == 'logo'){
+				store.dispatch(setNavbarActive(''))
+			}
+			else {
+				store.dispatch(setNavbarActive(e.target.id))
+			}
     }
 
     render(){
@@ -28,8 +32,8 @@ class Navbar extends Component{
     	const more_cats = this.props.categories.filter(cat => cat.name!='Men' && cat.name != 'Women' && cat.name!= 'Kids')
 		return(
 			<nav className="navbar navbar-default">
-			  <div className="container-fluid">
-			      <a className="navbar-brand" href="#">Mayo Jar</a>
+			  <div className="wrapper">
+			      <a onClick={this.handleClick} className="navbar-brand" id='logo' href="#">Mayo Jar</a>
 
 			      <ul className="nav navbar-nav">
 			        <li onClick={this.handleClick} className={this.props.navbarActive=="Men"?"active":"inactive"}><Link to='/categories/Men' id="Men">Men</Link></li>

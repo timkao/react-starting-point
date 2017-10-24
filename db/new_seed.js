@@ -8,7 +8,7 @@ const numberOfFakeOrder = 15
 const numberOfFakeLineItem = 50
 const numberOfBeginReview = 10
 const shoeColors = ['red','green','blue','yellow','white', 'black'];
-const sizeArray = ['8.0', '8.5','9.0', '9.5','10.0', '10.5','11.0', '11.5','12.0'];
+const sizeArray = [8.0, 8.5,9.0, 9.5,10.0, 10.5,11.0, 11.5,12.0];
 
 const seed = () => {
   const products = []
@@ -42,22 +42,50 @@ const seed = () => {
 	let menC, womenC, kidsC, sockC, accessoriesC, allProducts, allUsers, allOrders, allLineItems, tim, tom, david, product1;
 
 	for (var i = 0; i < numberOfBeginProduct; i++) {
+		let colorA = [];
+		let sizeA = [];
+		const randomColors = [shoeColors[Math.floor((Math.random() * 6))], shoeColors[Math.floor((Math.random() * 6))], shoeColors[Math.floor((Math.random() * 6))], shoeColors[Math.floor((Math.random() * 6))], shoeColors[Math.floor((Math.random() * 6))]]
+		const randomSize = [sizeArray[Math.floor((Math.random() * 9))], sizeArray[Math.floor((Math.random() * 9))], sizeArray[Math.floor((Math.random() * 9))], sizeArray[Math.floor((Math.random() * 9))], sizeArray[Math.floor((Math.random() * 9))], sizeArray[Math.floor((Math.random() * 9))]];
+		randomColors.forEach((e)=>{
+			if(!colorA.includes(e)){
+				colorA.push(e)
+			}
+			else {
+				let newC = e;
+				while(colorA.includes(newC)){
+					newC = shoeColors[Math.floor((Math.random() * 6))]
+				}
+				colorA.push(newC)
+			}
+		})
+		randomSize.forEach((e)=>{
+			if(!sizeA.includes(e)){
+				sizeA.push(e)
+			}
+			else {
+				let newS = e;
+				while(sizeA.includes(newS)){
+					newS = sizeArray[Math.floor((Math.random() * 6))]
+				}
+				sizeA.push(newS)
+			}
+		})
+		colorA = colorA.sort();
+		sizeA = sizeA.sort();
 		products.push(Product.create({
 			name: faker.random.word(),
 			price: faker.commerce.price(),
 			description: faker.lorem.paragraph(),
 			pictureUrl: productImagesF[i],
 			pictureUrl2: productImagesT[i],
-			colors: [shoeColors[Math.floor((Math.random() * 6))], shoeColors[Math.floor((Math.random() * 6))], shoeColors[Math.floor((Math.random() * 6))]],
-			sizes: [sizeArray[Math.floor((Math.random() * 9))], sizeArray[Math.floor((Math.random() * 9))], sizeArray[Math.floor((Math.random() * 9))], sizeArray[Math.floor((Math.random() * 9))], sizeArray[Math.floor((Math.random() * 9))]],
+			colors: colorA,
+			sizes: sizeA,
 			inventory: [
-				{ "red": { "8.0": 20, "8.5": 10, "9.0": 4, "9.5": 10, "10": 10, "10.0": 12, "11.5": 10, "12.0": 3 } },
-				{ "blue": { "8.0": 20, "8.5": 10, "9.0": 4, "9.5": 10, "10": 10, "10.0": 12, "11.5": 10, "12.0": 3 } },
-				{ "green": { "8.0": 20, "8.5": 10, "9.0": 4, "9.5": 10, "10": 10, "10.0": 12, "11.5": 10, "12.0": 3 } },
-				{ "yellow": { "8.0": 20, "8.5": 10, "9.0": 4, "9.5": 10, "10": 10, "10.0": 12, "11.5": 10, "12.0": 3 } },
-				{ "white": { "8.0": 20, "8.5": 10, "9.0": 4, "9.5": 10, "10": 10, "10.0": 12, "11.5": 10, "12.0": 3 } },
-				{ "black": { "8.0": 20, "8.5": 10, "9.0": 4, "9.5": 10, "10": 10, "10.0": 12, "11.5": 10, "12.0": 3 } }
-			]
+				{ [colorA[0]]: { [sizeA[0]]:12 ,[sizeA[1]]: 20, [sizeA[2]]: 10, [sizeA[3]]: 4, [sizeA[4]]: 10, [sizeA[5]]: 10} },
+				{ [colorA[1]]: { [sizeA[0]]:12 ,[sizeA[1]]: 20, [sizeA[2]]: 10, [sizeA[3]]: 4, [sizeA[4]]: 10, [sizeA[5]]: 10} },
+				{ [colorA[2]]: { [sizeA[0]]:12 ,[sizeA[1]]: 20, [sizeA[2]]: 10, [sizeA[3]]: 4, [sizeA[4]]: 10, [sizeA[5]]: 10} },
+				{ [colorA[3]]: { [sizeA[0]]:12 ,[sizeA[1]]: 20, [sizeA[2]]: 10, [sizeA[3]]: 4, [sizeA[4]]: 10, [sizeA[5]]: 10} },
+				{ [colorA[4]]: { [sizeA[0]]:12 ,[sizeA[1]]: 20, [sizeA[2]]: 10, [sizeA[3]]: 4, [sizeA[4]]: 10, [sizeA[5]]: 10} }			]
 		}))
 	}
 
