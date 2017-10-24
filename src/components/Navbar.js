@@ -9,14 +9,22 @@ class Navbar extends Component{
 		// this.state = {}
 		this.handleClick = this.handleClick.bind(this)
 	}
-	
+
 	handleClick(e){
-			
+
     		store.dispatch(setNavbarActive(e.target.id))
     }
-    
+
     render(){
-    	console.log(this.props.navbarActive)
+			console.log(this.props.navbarActive)
+			console.log(this.props.currentUser);
+			let showAdmin;
+			if (this.props.currentUser.userType &&  this.props.currentUser.userType === 'admin') {
+				showAdmin = true;
+			}
+			else {
+				showAdmin = false;
+			}
     	const more_cats = this.props.categories.filter(cat => cat.name!='Men' && cat.name != 'Women' && cat.name!= 'Kids')
 		return(
 			<nav className="navbar navbar-default">
@@ -38,7 +46,9 @@ class Navbar extends Component{
 			        }) }
 			          </ul>
 			        </li>
-							<li><Link to='/Admin'>Admin</Link></li>
+							{
+								showAdmin && <li><Link to='/Admin'>Admin</Link></li>
+							}
 			      </ul>
 
 			      <ul className="nav navbar-nav navbar-right">
@@ -59,8 +69,8 @@ const mapToState = (state) => {
 	return {
 		products: state.products,
 		categories: state.categories,
-		navbarActive: state.navbarActive
-
+		navbarActive: state.navbarActive,
+		currentUser: state.currentUser
 	}
 }
 
