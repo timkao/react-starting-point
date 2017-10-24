@@ -80,7 +80,7 @@ const seed = () => {
 		city: faker.address.city(),
 		state: faker.address.state(),
 		zip: faker.address.zipCode(),
-		UserType: "admin"
+		userType: "admin"
 	}))
 
 	users.push(User.create({
@@ -162,7 +162,7 @@ const seed = () => {
 			]
 			return Promise.all(relationships)
 		})
-		
+
 		.then(() => {
 			return Promise.all(users)
 		})
@@ -211,7 +211,7 @@ const seed = () => {
 
 
 			]
-			return Promise.all(relationships)	
+			return Promise.all(relationships)
 		})
 		.then(() => {
 			return Promise.all(lineItems)
