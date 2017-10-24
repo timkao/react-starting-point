@@ -31,13 +31,13 @@ class Product extends Component {
 		})
 	}
 
-	componentWillReceiveProps(nextProps) {
-		console.log(nextProps);
-		if (nextProps.productId * 1 !== this.props.productId * 1) {
-		const productThunk = fetchProduct(nextProps.productId)
-		store.dispatch(productThunk)
-		}
-	}
+	// componentWillReceiveProps(nextProps) {
+	// 	console.log(nextProps);
+	// 	if (nextProps.productId * 1 !== this.props.productId * 1) {
+	// 	const productThunk = fetchProduct(nextProps.productId)
+	// 	store.dispatch(productThunk)
+	// 	}
+	// }
 
 	getSizes(e) {
 
